@@ -1,0 +1,113 @@
+PASS BNS is installed
+PASS actual BNS inventory screen is open
+PASS main-grid source is eligible
+PASS BNS main-grid pickup updates carried stack immediately
+PASS BNS main grid to cursor has animated travel
+PASS BNS main grid to cursor has one render owner
+PASS BNS main grid to cursor uses animated overlay rendering
+PASS BNS grid-to-grid placement updates immediately
+PASS BNS cursor to main grid has animated travel
+PASS BNS cursor to main grid has one render owner
+PASS BNS cursor to main grid uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS grid placement survives native render has animated travel
+PASS BNS grid placement survives native render has one render owner
+PASS BNS grid placement survives native render uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS main-grid to hotbar state
+PASS BNS main grid to hotbar has animated travel
+PASS BNS main grid to hotbar has one render owner
+PASS BNS main grid to hotbar uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS hotbar movement survives native render has animated travel
+PASS BNS hotbar movement survives native render has one render owner
+PASS BNS hotbar movement survives native render uses animated overlay rendering
+PASS BNS hotbar to main-grid state
+PASS BNS hotbar to main grid has animated travel
+PASS BNS hotbar to main grid has one render owner
+PASS BNS hotbar to main grid uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS grid movement survives native render has animated travel
+PASS BNS grid movement survives native render has one render owner
+PASS BNS grid movement survives native render uses animated overlay rendering
+PASS BNS acknowledged page changes layout revision
+PASS BNS page change releases movement without fake transfers
+PASS BNS return page does not infer acquisition
+PASS GL state clean: inventory
+PASS BNS main-grid quick-move reaches chest immediately
+PASS BNS main grid to chest has animated travel
+PASS BNS main grid to chest has one render owner
+PASS BNS main grid to chest uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS chest movement survives native render has animated travel
+PASS BNS chest movement survives native render has one render owner
+PASS BNS chest movement survives native render uses animated overlay rendering
+PASS GL state clean: inventory
+PASS chest to cursor has animated travel
+PASS chest to cursor has one render owner
+PASS chest to cursor uses animated overlay rendering
+PASS chest-to-BNS-main-grid placement state
+PASS chest cursor to BNS main grid has animated travel
+PASS chest cursor to BNS main grid has one render owner
+PASS chest cursor to BNS main grid uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS destination movement survives native render has animated travel
+PASS BNS destination movement survives native render has one render owner
+PASS BNS destination movement survives native render uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS completed movement releases ownership
+PASS BNS destination regains normal rendering
+PASS BNS close releases all ownership
+PASS stowed storage has an explicit arrival point
+PASS hidden destination is not reported as a visible slot
+PASS stowed quick-move removes chest source immediately
+PASS stowed merge reaches 64
+PASS stowed overflow receives remaining 20
+PASS chest to stowed split conserves moved quantity
+PASS chest to stowed split has a departing representation
+PASS chest to stowed split uses confirmed hidden storage
+PASS chest to stowed split targets the bottom grid edge
+PASS chest to stowed split has visible travel
+PASS chest to stowed split uses confirmed hidden storage
+PASS chest to stowed split targets the bottom grid edge
+PASS chest to stowed split has visible travel
+PASS GL state clean: inventory
+PASS stowed split survives actual render conserves moved quantity
+PASS stowed split survives actual render has a departing representation
+PASS stowed split survives actual render uses confirmed hidden storage
+PASS stowed split survives actual render targets the bottom grid edge
+PASS stowed split survives actual render has visible travel
+PASS stowed split survives actual render uses confirmed hidden storage
+PASS stowed split survives actual render targets the bottom grid edge
+PASS stowed split survives actual render has visible travel
+PASS GL state clean: inventory
+PASS page replacement cancels active stowed transfers
+PASS visible stowed slots are excluded from hidden destinations
+PASS scrolled stowed destination becomes a normal visible slot
+PASS BNS stow-main-grid transaction succeeds
+PASS stow-main-grid releases source immediately
+PASS main grid to stowed conserves moved quantity
+PASS main grid to stowed has a departing representation
+PASS main grid to stowed uses confirmed hidden storage
+PASS main grid to stowed targets the bottom grid edge
+PASS main grid to stowed has visible travel
+PASS GL state clean: inventory
+PASS main-grid stow survives actual render conserves moved quantity
+PASS main-grid stow survives actual render has a departing representation
+PASS main-grid stow survives actual render uses confirmed hidden storage
+PASS main-grid stow survives actual render targets the bottom grid edge
+PASS main-grid stow survives actual render has visible travel
+PASS GL state clean: inventory
+PASS GL state clean: inventory
+PASS stowed item fades near grid edge
+PASS fading stowed diamond remains visible in the actual framebuffer
+PASS GL state clean: inventory
+PASS stowed arrival releases animation
+PASS reduced motion avoids off-page travel
+PASS stowed movement before close conserves moved quantity
+PASS stowed movement before close has a departing representation
+PASS stowed movement before close uses confirmed hidden storage
+PASS stowed movement before close targets the bottom grid edge
+PASS stowed movement before close has visible travel
+PASS close cancels stowed travel
+PASS validation completed

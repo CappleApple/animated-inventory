@@ -1,0 +1,7 @@
+PASS clean test build before initial GitHub publication, 2026-09-09.
+PASS 92 unit tests; zero failures and errors.
+PASS production metadata version 1.0.6, author CappleApple, repository and issue URLs.
+PASS 57 production classes under com/cappleapple/animatedinventory.
+PASS validation sources and optional-mod implementations absent from both release jars.
+b5cf11bdefc5d4fe311f73497b618eda2da38baf6c3afff0bbac16f0f2e939a9  animatedinventory-1.0.6-sources.jar
+aed72e393cc892d68ada9073f04db0de3e8d4b5194ceb58cdb2302f4f15ad1d3  animatedinventory-1.0.6.jar

@@ -1,0 +1,8 @@
+PASS real server opens storage
+PASS authoritative BNS baseline installed
+PASS server storage stack synchronized
+PASS actual TrashSlot widget is showing: StorageScreen
+PASS independent TrashSlot aliases real menu slot zero
+PASS real source retains diamonds while transfer acknowledgement is pending
+PASS actual TrashSlot is empty before pending render
+FAIL java.lang.AssertionError: empty TrashSlot never borrows pending source diamonds

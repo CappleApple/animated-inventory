@@ -1,0 +1,8 @@
+     Mod List:
+		Animated Inventory 1.0.0 (animatedinventory)
+[09Sep2026 09:48:16.523] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (0.397s)! For help, type "help"
+[09Sep2026 09:48:18.506] [Server thread/INFO] [com.cappleapple.animatedinventory.validation.ServerValidation/]: AI_SERVER_VALIDATION PASSED
+[09Sep2026 09:48:18.557] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[09Sep2026 09:48:18.917] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[09Sep2026 09:48:18.917] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[09Sep2026 09:48:18.918] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved

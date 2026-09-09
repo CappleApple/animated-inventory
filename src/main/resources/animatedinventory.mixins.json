@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.cappleapple.animatedinventory.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["ContainerScreenMixin", "ContainerScreenAccess", "HotbarMixin", "CraftingResultMixin", "ClientPacketListenerMixin"],
+  "injectors": {"defaultRequire": 1}
+}

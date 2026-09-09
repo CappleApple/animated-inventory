@@ -1,0 +1,212 @@
+PASS BNS screen replacement is active
+PASS BNS volatile projection is excluded from ownership
+PASS snapshot created: inventory
+PASS GL state clean: inventory
+PASS pickup state immediate: inventory
+PASS GL state clean: inventory
+PASS partial merge immediate: inventory
+PASS GL state clean: inventory
+PASS GL state clean: inventory
+PASS resize renews owner: inventory
+PASS resize clears ownership: inventory
+PASS screen removal clears animations: inventory
+PASS return refreshes snapshot: inventory
+PASS GL state clean: inventory
+PASS closed screen releases ownership: inventory
+PASS snapshot created: chest
+PASS GL state clean: chest
+PASS pickup state immediate: chest
+PASS GL state clean: chest
+PASS partial merge immediate: chest
+PASS GL state clean: chest
+PASS GL state clean: chest
+PASS resize renews owner: chest
+PASS resize clears ownership: chest
+PASS native quick-move splits 12/20: chest
+PASS GL state clean: chest
+PASS EMI public API opens a recipe screen
+PASS recipe viewer opened: dev.emi.emi.screen.RecipeScreen
+PASS screen removal clears animations: chest
+PASS return refreshes snapshot: chest
+PASS GL state clean: chest
+PASS closed screen releases ownership: chest
+PASS snapshot created: double_chest
+PASS GL state clean: double_chest
+PASS pickup state immediate: double_chest
+PASS GL state clean: double_chest
+PASS partial merge immediate: double_chest
+PASS GL state clean: double_chest
+PASS GL state clean: double_chest
+PASS resize renews owner: double_chest
+PASS resize clears ownership: double_chest
+PASS native quick-move splits 12/20: double_chest
+PASS GL state clean: double_chest
+PASS screen removal clears animations: double_chest
+PASS return refreshes snapshot: double_chest
+PASS GL state clean: double_chest
+PASS closed screen releases ownership: double_chest
+PASS snapshot created: furnace
+PASS GL state clean: furnace
+PASS pickup state immediate: furnace
+PASS GL state clean: furnace
+PASS partial merge immediate: furnace
+PASS GL state clean: furnace
+PASS GL state clean: furnace
+PASS resize renews owner: furnace
+PASS resize clears ownership: furnace
+PASS screen removal clears animations: furnace
+PASS return refreshes snapshot: furnace
+PASS GL state clean: furnace
+PASS closed screen releases ownership: furnace
+PASS snapshot created: crafting_table
+PASS GL state clean: crafting_table
+PASS pickup state immediate: crafting_table
+PASS GL state clean: crafting_table
+PASS partial merge immediate: crafting_table
+PASS GL state clean: crafting_table
+PASS GL state clean: crafting_table
+PASS resize renews owner: crafting_table
+PASS resize clears ownership: crafting_table
+PASS screen removal clears animations: crafting_table
+PASS return refreshes snapshot: crafting_table
+PASS GL state clean: crafting_table
+PASS closed screen releases ownership: crafting_table
+PASS snapshot created: hopper
+PASS GL state clean: hopper
+PASS pickup state immediate: hopper
+PASS GL state clean: hopper
+PASS partial merge immediate: hopper
+PASS GL state clean: hopper
+PASS GL state clean: hopper
+PASS resize renews owner: hopper
+PASS resize clears ownership: hopper
+PASS screen removal clears animations: hopper
+PASS return refreshes snapshot: hopper
+PASS GL state clean: hopper
+PASS closed screen releases ownership: hopper
+PASS snapshot created: barrel
+PASS GL state clean: barrel
+PASS pickup state immediate: barrel
+PASS GL state clean: barrel
+PASS partial merge immediate: barrel
+PASS GL state clean: barrel
+PASS GL state clean: barrel
+PASS resize renews owner: barrel
+PASS resize clears ownership: barrel
+PASS screen removal clears animations: barrel
+PASS return refreshes snapshot: barrel
+PASS GL state clean: barrel
+PASS closed screen releases ownership: barrel
+PASS snapshot created: shulker_box
+PASS GL state clean: shulker_box
+PASS pickup state immediate: shulker_box
+PASS GL state clean: shulker_box
+PASS partial merge immediate: shulker_box
+PASS GL state clean: shulker_box
+PASS GL state clean: shulker_box
+PASS resize renews owner: shulker_box
+PASS resize clears ownership: shulker_box
+PASS screen removal clears animations: shulker_box
+PASS return refreshes snapshot: shulker_box
+PASS GL state clean: shulker_box
+PASS closed screen releases ownership: shulker_box
+PASS snapshot created: beacon
+PASS GL state clean: beacon
+PASS pickup state immediate: beacon
+PASS GL state clean: beacon
+PASS partial merge immediate: beacon
+PASS GL state clean: beacon
+PASS GL state clean: beacon
+PASS resize renews owner: beacon
+PASS resize clears ownership: beacon
+PASS screen removal clears animations: beacon
+PASS return refreshes snapshot: beacon
+PASS GL state clean: beacon
+PASS closed screen releases ownership: beacon
+PASS snapshot created: anvil
+PASS GL state clean: anvil
+PASS pickup state immediate: anvil
+PASS GL state clean: anvil
+PASS partial merge immediate: anvil
+PASS GL state clean: anvil
+PASS GL state clean: anvil
+PASS resize renews owner: anvil
+PASS resize clears ownership: anvil
+PASS screen removal clears animations: anvil
+PASS return refreshes snapshot: anvil
+PASS GL state clean: anvil
+PASS closed screen releases ownership: anvil
+PASS snapshot created: smithing_table
+PASS GL state clean: smithing_table
+PASS pickup state immediate: smithing_table
+PASS GL state clean: smithing_table
+PASS partial merge immediate: smithing_table
+PASS GL state clean: smithing_table
+PASS GL state clean: smithing_table
+PASS resize renews owner: smithing_table
+PASS resize clears ownership: smithing_table
+PASS screen removal clears animations: smithing_table
+PASS return refreshes snapshot: smithing_table
+PASS GL state clean: smithing_table
+PASS closed screen releases ownership: smithing_table
+PASS snapshot created: enchanting_table
+PASS GL state clean: enchanting_table
+PASS pickup state immediate: enchanting_table
+PASS GL state clean: enchanting_table
+PASS partial merge immediate: enchanting_table
+PASS GL state clean: enchanting_table
+PASS GL state clean: enchanting_table
+PASS resize renews owner: enchanting_table
+PASS resize clears ownership: enchanting_table
+PASS screen removal clears animations: enchanting_table
+PASS return refreshes snapshot: enchanting_table
+PASS GL state clean: enchanting_table
+PASS closed screen releases ownership: enchanting_table
+PASS snapshot created: merchant
+PASS GL state clean: merchant
+PASS pickup state immediate: merchant
+PASS GL state clean: merchant
+PASS partial merge immediate: merchant
+PASS GL state clean: merchant
+PASS GL state clean: merchant
+PASS resize renews owner: merchant
+PASS resize clears ownership: merchant
+PASS screen removal clears animations: merchant
+PASS return refreshes snapshot: merchant
+PASS GL state clean: merchant
+PASS closed screen releases ownership: merchant
+PASS snapshot created: horse
+PASS GL state clean: horse
+PASS pickup state immediate: horse
+PASS GL state clean: horse
+PASS partial merge immediate: horse
+PASS GL state clean: horse
+PASS GL state clean: horse
+PASS resize renews owner: horse
+PASS resize clears ownership: horse
+PASS screen removal clears animations: horse
+PASS return refreshes snapshot: horse
+PASS GL state clean: horse
+PASS closed screen releases ownership: horse
+PASS snapshot created: creative
+PASS GL state clean: creative
+PASS GL state clean: creative
+PASS resize renews owner: creative
+PASS resize clears ownership: creative
+PASS screen removal clears animations: creative
+PASS return refreshes snapshot: creative
+PASS GL state clean: creative
+PASS closed screen releases ownership: creative
+PASS custom provider selected
+PASS custom logical reflow animates
+PASS logical and animated coordinates differ during reflow
+PASS GL state clean: custom-api
+PASS GL state clean: custom-api
+PASS custom animation completes
+PASS custom view regains normal ownership
+PASS reduced motion caps duration
+PASS GL state clean: custom-api
+PASS removed custom screen queries are empty
+PASS config screen releases inventory animations
+PASS GL state clean: custom-api
+PASS all container scenarios completed

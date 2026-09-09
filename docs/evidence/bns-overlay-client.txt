@@ -1,0 +1,61 @@
+PASS BNS is installed
+PASS actual BNS inventory screen is open
+PASS main-grid source is eligible
+PASS BNS main-grid pickup updates carried stack immediately
+PASS BNS main grid to cursor has animated travel
+PASS BNS main grid to cursor has one render owner
+PASS BNS main grid to cursor uses animated overlay rendering
+PASS BNS grid-to-grid placement updates immediately
+PASS BNS cursor to main grid has animated travel
+PASS BNS cursor to main grid has one render owner
+PASS BNS cursor to main grid uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS grid placement survives native render has animated travel
+PASS BNS grid placement survives native render has one render owner
+PASS BNS grid placement survives native render uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS main-grid to hotbar state
+PASS BNS main grid to hotbar has animated travel
+PASS BNS main grid to hotbar has one render owner
+PASS BNS main grid to hotbar uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS hotbar movement survives native render has animated travel
+PASS BNS hotbar movement survives native render has one render owner
+PASS BNS hotbar movement survives native render uses animated overlay rendering
+PASS BNS hotbar to main-grid state
+PASS BNS hotbar to main grid has animated travel
+PASS BNS hotbar to main grid has one render owner
+PASS BNS hotbar to main grid uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS grid movement survives native render has animated travel
+PASS BNS grid movement survives native render has one render owner
+PASS BNS grid movement survives native render uses animated overlay rendering
+PASS BNS acknowledged page changes layout revision
+PASS BNS page change releases movement without fake transfers
+PASS BNS return page does not infer acquisition
+PASS GL state clean: inventory
+PASS BNS main-grid quick-move reaches chest immediately
+PASS BNS main grid to chest has animated travel
+PASS BNS main grid to chest has one render owner
+PASS BNS main grid to chest uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS chest movement survives native render has animated travel
+PASS BNS chest movement survives native render has one render owner
+PASS BNS chest movement survives native render uses animated overlay rendering
+PASS GL state clean: inventory
+PASS chest to cursor has animated travel
+PASS chest to cursor has one render owner
+PASS chest to cursor uses animated overlay rendering
+PASS chest-to-BNS-main-grid placement state
+PASS chest cursor to BNS main grid has animated travel
+PASS chest cursor to BNS main grid has one render owner
+PASS chest cursor to BNS main grid uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS destination movement survives native render has animated travel
+PASS BNS destination movement survives native render has one render owner
+PASS BNS destination movement survives native render uses animated overlay rendering
+PASS GL state clean: inventory
+PASS BNS completed movement releases ownership
+PASS BNS destination regains normal rendering
+PASS BNS close releases all ownership
+PASS validation completed

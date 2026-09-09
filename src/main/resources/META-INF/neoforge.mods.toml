@@ -1,0 +1,33 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+issueTrackerURL="https://github.com/CappleApple/animated-inventory/issues"
+
+[[mods]]
+modId="animatedinventory"
+version="${version}"
+displayName="Animated Inventory"
+displayURL="https://github.com/CappleApple/animated-inventory"
+authors="CappleApple"
+description='''An independently developed, client-side inventory animation system.'''
+
+[[dependencies.animatedinventory]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.244,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.animatedinventory]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.21.2)"
+ordering="NONE"
+side="CLIENT"
+
+[[mixins]]
+config="animatedinventory.mixins.json"
+
+[[mixins]]
+config="animatedinventory.sophisticated.mixins.json"
+requiredMods=["sophisticatedcore"]
