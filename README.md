@@ -1,65 +1,105 @@
 # Animated Inventory
 
-By [CappleApple](https://github.com/CappleApple).
+Animated Inventory makes item movement in Minecraft inventories visible instead of instantaneous.
 
-[Download the latest release](https://github.com/CappleApple/animated-inventory/releases/latest) | [Report an issue](https://github.com/CappleApple/animated-inventory/issues)
+When an item is picked up, shift-clicked, merged, split, crafted, sorted, equipped, or moved between containers, the mod animates a visual copy from the source to the destination while the real inventory state continues to use Minecraft's normal menus.
 
-An independently developed inventory animation system for **Minecraft 1.21.1 / NeoForge 21.1.244+**, written from scratch under `com.cappleapple.animatedinventory`. MIT licensed. Install `animatedinventory-1.0.6.jar` in the client's `mods` directory. A server installation and networking channel are not required.
+It is a client-side NeoForge 1.21.1 mod. A server installation is not required.
 
-Animated Inventory animates visual representations after inventory state changes. It never postpones inventory transactions, replaces inventory contents, or simulates clicks.
+## Features
 
-## Implemented
+- Animated pickup, placement, quick-move, merges, splits, swaps, sorting, equipment changes, and external inventory updates.
+- Crafting ingredients travel into the crafted item for 2x2 and 3x3 recipes, including shift crafting and returned containers.
+- Linear, smooth, arc, spring, and snap-smooth movement styles with configurable easing.
+- Cursor movement can either follow the cursor or travel toward a fixed pickup/drop point.
+- Smooth hotbar selection movement, including rapid retargeting.
+- Fade, scale, fade+scale, and slide effects when container screens open or close.
+- Configurable animation speed and reduced-motion mode.
+- A provider API for custom screens or inventories that do not use ordinary Minecraft `Slot` positions.
 
-- Count-aware movement for pickup, placement, quick move, merges, splits, swaps, sorting, equipment and external inventory updates.
-- Consumed ingredients flow into the crafted item in 2x2 and 3x3 grids, including shift-click crafting and recipes with returned containers.
-- Linear, smooth, arc, spring and snap-smooth trajectories; eleven reusable easing functions.
-- Cursor pickup with fixed or following destination; composable hover, press and merge emphasis.
-- Smooth hotbar selection, including continuous retargeting during rapid changes.
-- **Vanilla white slot highlights render behind the item and its decorations.** Logical hover, clicks and tooltips keep their normal coordinates.
-- Opening and closing effects: fade, scale, combined fade/scale and slide. Closing retains an image rather than a removed Screen.
-- A screen-space provider API with arbitrary logical IDs, destination queries, clipping, explicit transactions and layout reflow.
-- Animation ownership with partial-count suppression, caps, interruption policies and safe cancellation.
-- Client configuration, global speed, reduced motion and NeoForge's built-in Minecraft-style configuration screen.
-- Sophisticated Backpacks/Storage movement, large-stack rendering, scrolling and crafting-upgrade ingredient flow.
-- Optional BNS, Inventory Particles and recipe-viewer compatibility policies, plus diagnostic bounds and metrics.
+The animation is presentation only. Click targets, tooltips, and the actual inventory/menu logic stay at their normal logical positions.
 
-JEI/EMI recipe filling animates ingredients from their visible source slots or BNS stash, including when returning from a recipe viewer. BNS quick transfers wait for authoritative destination updates before animating, avoiding an intermediate inventory-slot hop.
+## Compatibility
 
-## Build and run
+Animated Inventory has dedicated handling for a few inventory mods where the visible slot layout does not map cleanly to vanilla menus.
 
-Use JDK 21:
+### Bundled Not Siloed
+
+The normal BNS player grid animates through its real slot renderer. Transfers to off-page stowed storage travel toward the appropriate edge/column and fade out; retrieving a stowed item enters from the lower edge.
+
+BNS's aggregate search renderer stays under BNS control rather than being forced through Animated Inventory's normal slot path.
+
+### Sophisticated Backpacks / Storage
+
+Normal backpack/storage transfers, scrolling, large-stack displays, upgrade slots, and crafting-upgrade ingredient flow are supported through an optional adapter.
+
+### JEI / EMI
+
+Recipe filling can animate ingredients from the slots or BNS storage they actually came from. The recipe viewer itself is not replaced.
+
+### Inventory Particles
+
+The two mods can coexist. Animated Inventory avoids taking over effects that Inventory Particles needs to render itself, especially for partial transfers where both systems would otherwise try to own the same visual item.
+
+See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the exact compatibility behavior and known limits.
+
+## Configuration
+
+Use:
+
+**Mods → Animated Inventory → Config**
+
+or edit:
+
+```text
+config/animatedinventory-client.toml
+```
+
+The configuration covers animation duration, trajectory/easing, screen effects, hover/press/merge emphasis, hotbar motion, reduced motion, compatibility behavior, and debug options.
+
+Full reference: [docs/CONFIG.md](docs/CONFIG.md).
+
+## Resources
+
+Animated Inventory does not replace Minecraft's item models or add a custom GUI skin.
+
+Moving items still use their normal models, glint, durability/count decorations, resource-pack overrides, hotbar selection sprite, and slot highlighting.
+
+## API
+
+Mods with custom inventory layouts can provide logical item positions through the screen-space provider API rather than pretending to have vanilla slots.
+
+The API supports destination queries, clipping, explicit transactions, layout reflow, and custom logical IDs.
+
+See [docs/API.md](docs/API.md) for examples.
+
+## Documentation
+
+- [Configuration](docs/CONFIG.md)
+- [Integration API](docs/API.md)
+- [Compatibility notes](docs/COMPATIBILITY.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Testing and QA](docs/VALIDATION.md)
+
+## Requirements
+
+- Minecraft 1.21.1
+- NeoForge 21.1.244 or newer compatible 21.1 build
+- Java 21 for development
+
+Install the mod in the **client's** `mods` directory.
+
+## Building
 
 ```powershell
 .\gradlew.bat test build
 .\gradlew.bat runClient
 ```
 
-The installable jar is `build/libs/animatedinventory-1.0.6.jar`. The companion sources jar is for developers.
+The release jar is written to `build/libs/`.
 
-```powershell
-.\gradlew.bat runClient -PclientValidation
-```
+The optional client-validation source set uses disposable development worlds and is not included in published artifacts.
 
-The optional validation source set creates its own flat world in `run-validation`, exercises container screen and menu fixtures, records screenshots and assertions, then shuts down. It is excluded from both published artifacts.
+## License
 
-## Configuration and integration
-
-Use **Mods → Animated Inventory → Config**, or edit `config/animatedinventory-client.toml`.
-
-- [Complete configuration reference](docs/CONFIG.md)
-- [Architecture and render hooks](docs/ARCHITECTURE.md)
-- [Integration API and example provider](docs/API.md)
-- [Compatibility and safe fallbacks](docs/COMPATIBILITY.md)
-- [Validation evidence and remaining manual checks](docs/VALIDATION.md)
-
-BNS's normal main inventory grid animates through the native Slot renderer, including transfers within the grid and to/from the hotbar or containers. Transfers into off-page stowed slots move toward the corresponding grid edge and destination column, then fade out. Items retrieved from the stash rise from the lower grid edge, including category changes and sorting. Page changes reset old animations. Its separate aggregate search renderer retains normal BNS rendering; see the compatibility document.
-
-Sophisticated Backpacks and Storage share an optional adapter for their custom screen and additional upgrade slots. Normal transfers animate while preserving native count labels. Visible crafting-upgrade ingredients flow toward the taken product; filtering and scrolling reset old geometry, and ghost filters retain normal rendering.
-
-With Inventory Particles, complete moves transform the existing native render. Known-source partial transfers and double-click collection use separate model copies, and offscreen screen effects are disabled to preserve particle rendering assumptions. Particle origins remain logical unless an effects integration queries this mod's coordinate API.
-
-Screen image effects are intentionally limited to vanilla container screen classes. Custom screens continue normal rendering and can use the provider API. Built-in recipe-book widgets and third-party overlays outside the base container render remain stationary.
-
-## Resources
-
-The mod introduces no custom GUI textures. Item models, glint, durability/count decorations, the hotbar selection sprite and slot highlighting use Minecraft/NeoForge rendering. Existing resource-pack overrides continue to apply.
+Animated Inventory is available under the MIT License.
