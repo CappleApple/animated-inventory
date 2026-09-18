@@ -102,4 +102,4 @@ The optional client-validation source set uses disposable development worlds and
 
 ## License
 
-Animated Inventory is available under the MIT License.
+Animated Inventory is licensed under [CC BY-NC-SA 4.0 with a Modpack/Server Exception](LICENSE). Modpacks and Minecraft servers, including monetized ones, may use it under the additional permission in the LICENSE.
