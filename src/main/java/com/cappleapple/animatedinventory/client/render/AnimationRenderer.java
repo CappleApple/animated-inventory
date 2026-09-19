@@ -8,7 +8,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+
 
 public final class AnimationRenderer {
     public static void render(GuiGraphics graphics, ClientRuntime runtime) {
@@ -48,8 +48,7 @@ public final class AnimationRenderer {
             view.animatedinventory$drawStack(graphics, x, y, stack, false, null); return;
         }
         graphics.renderItem(stack, x, y);
-        var font = IClientItemExtensions.of(stack).getFont(stack, IClientItemExtensions.FontContext.ITEM_COUNT);
-        graphics.renderItemDecorations(font == null ? Minecraft.getInstance().font : font, stack, x, y);
+        graphics.renderItemDecorations(Minecraft.getInstance().font, stack, x, y);
     }
     private AnimationRenderer() { }
 }

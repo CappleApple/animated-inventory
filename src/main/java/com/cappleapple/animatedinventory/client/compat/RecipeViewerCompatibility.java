@@ -1,12 +1,12 @@
 package com.cappleapple.animatedinventory.client.compat;
 
-import net.neoforged.fml.ModList;
+import net.fabricmc.loader.api.FabricLoader;
 
 /** No viewer classes are linked. All screen init/return flows use the same fresh-owner lifecycle. */
 public final class RecipeViewerCompatibility {
     public static String detected() {
-        return (ModList.get().isLoaded("jei") ? "JEI " : "") + (ModList.get().isLoaded("emi") ? "EMI " : "")
-                + (ModList.get().isLoaded("roughlyenoughitems") ? "REI " : "");
+        return (FabricLoader.getInstance().isModLoaded("jei") ? "JEI " : "") + (FabricLoader.getInstance().isModLoaded("emi") ? "EMI " : "")
+                + (FabricLoader.getInstance().isModLoaded("roughlyenoughitems") ? "REI " : "");
     }
     private RecipeViewerCompatibility() { }
 }

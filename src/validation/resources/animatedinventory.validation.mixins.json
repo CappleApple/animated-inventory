@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.cappleapple.animatedinventory.validation.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ValidationMixin",
+    "HiddenWindowMixin",
+    "SyntheticMenuMixin",
+    "NoMouseCaptureMixin",
+    "ValidationRenderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "server": [
+    "ServerValidationMixin"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "animatedinventory",
+  "version": "${version}",
+  "name": "Animated Inventory",
+  "description": "Client-side inventory movement, slot emphasis, hotbar and screen animations.",
+  "authors": [
+    "CappleApple"
+  ],
+  "license": "CC-BY-NC-SA-4.0",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.cappleapple.animatedinventory.AnimatedInventory"
+    ]
+  },
+  "mixins": [
+    "animatedinventory.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {}
+}

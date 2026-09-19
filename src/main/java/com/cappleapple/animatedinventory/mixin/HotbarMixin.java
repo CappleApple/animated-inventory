@@ -11,6 +11,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Gui.class)
 abstract class HotbarMixin {
+    @org.spongepowered.asm.mixin.injection.Inject(method = "render", at = @At("TAIL"))
+    private void animatedinventory$hud(GuiGraphics graphics, net.minecraft.client.DeltaTracker delta, org.spongepowered.asm.mixin.injection.callback.CallbackInfo ci) {
+        com.cappleapple.animatedinventory.client.ClientRuntime.INSTANCE.hud(graphics);
+    }
+
     /** Translate only the existing selection sprite; no duplicated hotbar or input interception. */
     @WrapOperation(method = "renderItemHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
     private void animatedinventory$selection(GuiGraphics graphics, ResourceLocation sprite, int x, int y, int width, int height, Operation<Void> original) {

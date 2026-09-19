@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "animatedinventory_validation",
+  "version": "1",
+  "name": "Animated Inventory Validation",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.cappleapple.animatedinventory.validation.ClientSmoke"
+    ]
+  },
+  "mixins": [
+    "animatedinventory.validation.mixins.json"
+  ]
+}

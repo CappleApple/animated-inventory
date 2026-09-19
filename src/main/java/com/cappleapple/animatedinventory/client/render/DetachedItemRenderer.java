@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+
 
 /** Draws a departing representation through the model renderer, without replaying a GUI item interaction/render entry. */
 public final class DetachedItemRenderer {
@@ -29,8 +29,7 @@ public final class DetachedItemRenderer {
             if (flat) Lighting.setupFor3DItems();
             graphics.pose().popPose();
         }
-        var font = IClientItemExtensions.of(stack).getFont(stack, IClientItemExtensions.FontContext.ITEM_COUNT);
-        graphics.renderItemDecorations(font == null ? client.font : font, stack, x, y);
+        graphics.renderItemDecorations(client.font, stack, x, y);
     }
     private DetachedItemRenderer() { }
 }

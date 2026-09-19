@@ -18,26 +18,19 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractContainerScreen.class)
 abstract class ContainerScreenMixin {
-    @Shadow protected abstract void renderSlotHighlight(GuiGraphics graphics, Slot slot, int mouseX, int mouseY, float partialTick);
 
-    /** Draw vanilla's own highlight before the native item/decorators, with unchanged logical hit testing. */
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;)V"))
-    private void animatedinventory$highlightBehindItem(AbstractContainerScreen<?> screen, GuiGraphics graphics, Slot slot,
-                                                        Operation<Void> original, @Local(argsOnly = true, ordinal = 0) int mouseX,
-                                                        @Local(argsOnly = true, ordinal = 1) int mouseY, @Local(argsOnly = true) float partialTick) {
-        if (ClientRuntime.INSTANCE.enabled() && ((ContainerScreenAccess)screen).animatedinventory$isHovering(slot, mouseX, mouseY)) {
-            renderSlotHighlight(graphics, slot, mouseX, mouseY, partialTick);
-            graphics.flush();
+    private void animatedinventory$highlightBehind(AbstractContainerScreen<?> screen, GuiGraphics graphics, Slot slot, Operation<Void> original,
+            @Local(argsOnly = true, ordinal = 0) int x, @Local(argsOnly = true, ordinal = 1) int y) {
+        if (ClientRuntime.INSTANCE.enabled() && slot.isHighlightable() && ((ContainerScreenAccess)screen).animatedinventory$isHovering(slot, x, y)) {
+            AbstractContainerScreen.renderSlotHighlight(graphics, slot.x, slot.y, 0); graphics.flush();
         }
         original.call(screen, graphics, slot);
     }
-
-    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotHighlight(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;IIF)V"))
-    private void animatedinventory$alreadyDrewHighlight(AbstractContainerScreen<?> screen, GuiGraphics graphics, Slot slot,
-                                                       int mouseX, int mouseY, float partialTick, Operation<Void> original) {
-        if (!ClientRuntime.INSTANCE.enabled()) original.call(screen, graphics, slot, mouseX, mouseY, partialTick);
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotHighlight(Lnet/minecraft/client/gui/GuiGraphics;III)V"))
+    private void animatedinventory$highlightOnce(GuiGraphics graphics, int x, int y, int z, Operation<Void> original) {
+        if (!ClientRuntime.INSTANCE.enabled()) original.call(graphics, x, y, z);
     }
-
     /** Custom overrides that bypass the base slot renderer never acquire suppression ownership. */
     @WrapMethod(method = "renderSlot")
     private void animatedinventory$observeNativeSlot(GuiGraphics graphics, Slot slot, Operation<Void> original) {
@@ -66,32 +59,48 @@ abstract class ContainerScreenMixin {
     private ItemStack animatedinventory$pendingStack(Slot slot, Operation<ItemStack> original) {
         return ClientRuntime.INSTANCE.pendingStack((AbstractContainerScreen<?>)(Object)this, slot, original.call(slot));
     }
-    /** Keep native quick-craft previews, slot subclasses, item models, and decorators in their owning path. */
-    @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotContents(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/inventory/Slot;Ljava/lang/String;)V"))
-    private void animatedinventory$slot(AbstractContainerScreen<?> screen, GuiGraphics graphics, ItemStack stack,
-                                         Slot slot, String count, Operation<Void> original) {
+    @org.spongepowered.asm.mixin.Unique private ItemStack animatedinventory$rendered;
+    @org.spongepowered.asm.mixin.Unique private boolean animatedinventory$preview;
+    @WrapOperation(method = "renderSlot", at = { @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderItem(Lnet/minecraft/world/item/ItemStack;III)V"), @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderFakeItem(Lnet/minecraft/world/item/ItemStack;III)V") })
+    private void animatedinventory$item(GuiGraphics graphics, ItemStack stack, int x, int y, int seed, Operation<Void> original, @Local(argsOnly = true) Slot slot, @Local String count) {
+        var screen = (AbstractContainerScreen<?>)(Object)this;
         var runtime = ClientRuntime.INSTANCE;
-        if (!runtime.canAnimateSlot(screen, slot)) { original.call(screen, graphics, stack, slot, count); return; }
-        String id = VanillaInventoryProvider.id(slot);
-        // Vanilla drag-distribution preview quantities have separate ownership; never suppress those.
-        boolean preview = count != null || !ItemStack.matches(stack, slot.getItem());
-        ItemStack rendered = preview ? stack : runtime.normalStack(screen, id, stack);
-        long now = System.nanoTime();
-        Bounds logical = Bounds.item(screen.getGuiLeft() + slot.x, screen.getGuiTop() + slot.y);
-        double scale = runtime.emphasis.scale(id, logical.contains(runtime.mouseX, runtime.mouseY), now);
-        ItemAnimation inline = preview ? null : runtime.animations.destination(id, now);
+        animatedinventory$preview = count != null || !ItemStack.matches(stack, slot.getItem());
+        animatedinventory$rendered = runtime.canAnimateSlot(screen, slot) && !animatedinventory$preview
+                ? runtime.normalStack(screen, VanillaInventoryProvider.id(slot), stack) : stack;
+        animatedinventory$pose(graphics, slot);
+        try { original.call(graphics, animatedinventory$rendered, x, y, seed); }
+        finally { graphics.flush(); graphics.pose().popPose(); }
+    }
+    @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V"))
+    private void animatedinventory$decorations(GuiGraphics graphics, net.minecraft.client.gui.Font font, ItemStack stack, int x, int y, String count, Operation<Void> original, @Local(argsOnly = true) Slot slot) {
+        animatedinventory$pose(graphics, slot);
+        try { original.call(graphics, font, animatedinventory$rendered == null ? stack : animatedinventory$rendered, x, y, count); }
+        finally { graphics.flush(); graphics.pose().popPose(); animatedinventory$rendered = null; }
+    }
+    @org.spongepowered.asm.mixin.Unique private void animatedinventory$pose(GuiGraphics graphics, Slot slot) {
         graphics.pose().pushPose();
-        try {
-            if (inline != null && inline.inline) {
-                Bounds visual = inline.bounds(now);
-                graphics.pose().translate(visual.x() - logical.x(), visual.y() - logical.y(), 0);
-                scale *= inline.scale(now);
-            }
-            graphics.pose().translate(slot.x + 8, slot.y + 8, scale > 1 ? ClientConfig.HOVER_Z.get() : 0);
-            graphics.pose().scale((float)scale, (float)scale, 1);
-            graphics.pose().translate(-slot.x - 8, -slot.y - 8, 0);
-            original.call(screen, graphics, rendered, slot, count);
-        } finally { graphics.flush(); graphics.pose().popPose(); }
+        var screen = (AbstractContainerScreen<?>)(Object)this;
+        var runtime = ClientRuntime.INSTANCE;
+        if (!runtime.canAnimateSlot(screen, slot)) return;
+        var access = (ContainerScreenAccess)screen;
+        String id = VanillaInventoryProvider.id(slot);
+        Bounds logical = Bounds.item(access.animatedinventory$left() + slot.x, access.animatedinventory$top() + slot.y);
+        long now = System.nanoTime();
+        double scale = runtime.emphasis.scale(id, logical.contains(runtime.mouseX, runtime.mouseY), now);
+        ItemAnimation inline = animatedinventory$preview ? null : runtime.animations.destination(id, now);
+        if (inline != null && inline.inline) {
+            Bounds visual = inline.bounds(now);
+            graphics.pose().translate(visual.x() - logical.x(), visual.y() - logical.y(), 0);
+            scale *= inline.scale(now);
+        }
+        graphics.pose().translate(slot.x + 8, slot.y + 8, scale > 1 ? ClientConfig.HOVER_Z.get() : 0);
+        graphics.pose().scale((float)scale, (float)scale, 1);
+        graphics.pose().translate(-slot.x - 8, -slot.y - 8, 0);
+    }
+    @org.spongepowered.asm.mixin.injection.Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderLabels(Lnet/minecraft/client/gui/GuiGraphics;II)V", shift = At.Shift.AFTER))
+    private void animatedinventory$foreground(GuiGraphics graphics, int x, int y, float partialTick, org.spongepowered.asm.mixin.injection.callback.CallbackInfo ci) {
+        ClientRuntime.INSTANCE.foreground((AbstractContainerScreen<?>)(Object)this, graphics);
     }
     @WrapMethod(method = "renderFloatingItem")
     private void animatedinventory$cursor(GuiGraphics graphics, ItemStack stack, int x, int y, String count, Operation<Void> original) {
@@ -106,7 +115,7 @@ abstract class ContainerScreenMixin {
         try {
             if (animation != null && animation.inline) {
                 Bounds b = animation.bounds(System.nanoTime());
-                graphics.pose().translate(b.x() - x - screen.getGuiLeft(), b.y() - y - screen.getGuiTop(), 0);
+                graphics.pose().translate(b.x() - x - ((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen).animatedinventory$left(), b.y() - y - ((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen).animatedinventory$top(), 0);
             }
             original.call(graphics, rendered, x, y, count);
         } finally { graphics.flush(); graphics.pose().popPose(); }

@@ -1,0 +1,5 @@
+PASS client entrypoint and mixin targets loaded
+PASS detached item opacity and GPU texture compositor
+PASS native container render and inferred item transfer
+PASS configuration screen rendered
+PASS complete
