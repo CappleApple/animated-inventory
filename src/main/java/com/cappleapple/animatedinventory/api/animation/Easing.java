@@ -6,7 +6,7 @@ public enum Easing {
     EASE_IN_OUT_CUBIC, EASE_OUT_QUART, EASE_OUT_QUINT, BACK_OUT, SMOOTHSTEP, SMOOTHERSTEP;
 
     public double apply(double progress) {
-        double t = Math.clamp(progress, 0, 1);
+        double t = net.minecraft.util.Mth.clamp(progress, 0, 1);
         double u = 1 - t;
         return switch (this) {
             case LINEAR -> t;

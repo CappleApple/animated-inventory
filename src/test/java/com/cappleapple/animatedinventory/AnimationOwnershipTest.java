@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnimationOwnershipTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { TestBootstrap.initialize(); }
     static ItemTransition transition(int count, Bounds clip) {
         return new ItemTransition(TransitionType.MERGE, "a", "b", new ItemStack(Items.IRON_INGOT, count), Bounds.item(0, 0), Bounds.item(50, 0), clip, null);
     }
@@ -54,7 +54,7 @@ class AnimationOwnershipTest {
         var options = new AnimationOptions(100, Easing.LINEAR, MovementStyle.LINEAR, 0, 1, 1, 1, 1, 0, 0, 150, true);
         manager.add(1, "tx", t, options, 0, 100, 128, false, t.source());
         manager.update(50, Bounds.item(100, 80), a -> fail());
-        assertEquals(Bounds.item(50, 40), manager.active().getFirst().bounds(50));
+        assertEquals(Bounds.item(50, 40), manager.active().get(0).bounds(50));
         List<Long> completed = new ArrayList<>(); manager.update(100, Bounds.item(100, 80), a -> completed.add(a.handle));
         assertEquals(1, completed.size()); assertTrue(manager.active().isEmpty());
     }

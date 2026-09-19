@@ -20,14 +20,14 @@ public final class ItemAnimation {
         this.options = options; this.source = source; this.destination = transition.destination();
         this.start = start; this.duration = duration; this.inline = inline;
     }
-    public double progress(long now) { return Math.clamp((double)(now - start) / duration, 0, 1); }
+    public double progress(long now) { return net.minecraft.util.Mth.clamp((double)(now - start) / duration, 0, 1); }
     public boolean finished(long now) { return now - start >= duration; }
     public Bounds bounds(long now) { return options.style().sample(source, destination, progress(now), options.easing(), options.arcHeight()); }
     public double scale(long now) { return channel(options.startScale(), options.endScale(), now); }
     public double alpha(long now) {
-        double edgeFade = (transition.type() == TransitionType.STOW || transition.type() == TransitionType.CRAFT) ? 1 - Math.clamp((progress(now) - .65) / .35, 0, 1) : 1;
-        double arrivalFade = transition.type() == TransitionType.RETRIEVE ? Math.clamp(progress(now) / .25, 0, 1) : 1;
-        return Math.clamp(channel(options.startAlpha(), options.endAlpha(), now), 0, 1) * edgeFade * arrivalFade;
+        double edgeFade = (transition.type() == TransitionType.STOW || transition.type() == TransitionType.CRAFT) ? 1 - net.minecraft.util.Mth.clamp((progress(now) - .65) / .35, 0, 1) : 1;
+        double arrivalFade = transition.type() == TransitionType.RETRIEVE ? net.minecraft.util.Mth.clamp(progress(now) / .25, 0, 1) : 1;
+        return net.minecraft.util.Mth.clamp(channel(options.startAlpha(), options.endAlpha(), now), 0, 1) * edgeFade * arrivalFade;
     }
     public double rotation(long now) { return channel(options.startRotation(), options.endRotation(), now); }
     private double channel(double from, double to, long now) { return from + (to - from) * options.easing().apply(progress(now)); }

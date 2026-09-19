@@ -50,7 +50,7 @@ public final class CraftingFlow {
             for (int i = 0; i < grouped.size(); i++) {
                 Consumption existing = grouped.get(i);
                 if (existing.sourceId().equals(c.sourceId()) && existing.resultId().equals(c.resultId())
-                        && ItemStack.isSameItemSameComponents(existing.ingredient(), c.ingredient())) { found = i; break; }
+                        && ItemStack.isSameItemSameTags(existing.ingredient(), c.ingredient())) { found = i; break; }
             }
             if (found < 0) grouped.add(c);
             else {
@@ -66,7 +66,7 @@ public final class CraftingFlow {
             if (source == null || result == null || !source.visible() || !source.mayAnimate() || c.ingredient().isEmpty()) continue;
             ItemTransition productMove = ordinary.transitions().stream()
                     .filter(t -> c.resultId().equals(t.sourceId()) && t.destinationId() != null
-                            && ItemStack.isSameItemSameComponents(t.stack(), c.product()))
+                            && ItemStack.isSameItemSameTags(t.stack(), c.product()))
                     .max(Comparator.comparingInt(t -> "cursor".equals(t.destinationId()) ? Integer.MAX_VALUE : t.stack().getCount()))
                     .orElse(null);
             String destinationId = productMove == null ? c.resultId() : productMove.destinationId();
@@ -77,7 +77,7 @@ public final class CraftingFlow {
         return new InventoryVisualTransaction(after.owner(), id, quick, transitions);
     }
     private static boolean matching(ItemStack stack, VisualItem item) {
-        return item != null && ItemStack.isSameItemSameComponents(stack, item.stack());
+        return item != null && ItemStack.isSameItemSameTags(stack, item.stack());
     }
     private static VisualItem withCount(VisualItem item, int count) {
         return new VisualItem(item.id(), item.stack().copyWithCount(count), item.bounds(), item.region(), item.visible(),

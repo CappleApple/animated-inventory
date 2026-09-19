@@ -5,7 +5,6 @@ import com.cappleapple.animatedinventory.api.inventory.*;
 import com.cappleapple.animatedinventory.client.transaction.TransactionInference;
 import net.minecraft.SharedConstants;
 import net.minecraft.server.Bootstrap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import org.junit.jupiter.api.*;
@@ -13,7 +12,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionInferenceTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { TestBootstrap.initialize(); }
     static VisualItem item(String id, Item type, int count, int x) { return new VisualItem(id, new ItemStack(type, count), Bounds.item(x, 0), "test"); }
     static InventoryVisualSnapshot snapshot(VisualItem... items) { return InventoryVisualSnapshot.of(1, "test", 1, false, List.of(items)); }
     static InventoryVisualTransaction compare(InventoryVisualSnapshot before, InventoryVisualSnapshot after) {
@@ -30,13 +29,13 @@ class TransactionInferenceTest {
     }
     @Test void partialMoveLeavesSourceRemainder() {
         var tx = compare(snapshot(item("a", Items.DIAMOND, 64, 0)), snapshot(item("a", Items.DIAMOND, 60, 0), item("b", Items.DIAMOND, 4, 20)));
-        assertEquals(1, tx.transitions().size()); assertEquals(4, tx.transitions().getFirst().stack().getCount());
+        assertEquals(1, tx.transitions().size()); assertEquals(4, tx.transitions().get(0).stack().getCount());
     }
     @Test void rightClickHalfPickupAndSinglePlacement() {
         var tx = compare(snapshot(item("a", Items.APPLE, 9, 0)), snapshot(item("a", Items.APPLE, 4, 0), item("cursor", Items.APPLE, 5, 50)));
-        assertEquals(5, tx.transitions().getFirst().stack().getCount());
+        assertEquals(5, tx.transitions().get(0).stack().getCount());
         var placement = compare(snapshot(item("cursor", Items.APPLE, 5, 50)), snapshot(item("cursor", Items.APPLE, 4, 50), item("b", Items.APPLE, 1, 80)));
-        assertEquals(1, placement.transitions().getFirst().stack().getCount());
+        assertEquals(1, placement.transitions().get(0).stack().getCount());
     }
     @Test void dragDistributionConservesMovedQuantity() {
         var tx = compare(snapshot(item("cursor", Items.APPLE, 12, 0)), snapshot(item("cursor", Items.APPLE, 3, 0),
@@ -53,17 +52,17 @@ class TransactionInferenceTest {
     @Test void identicalStacksStayWithTheirLogicalIdentity() {
         var tx = compare(snapshot(item("keep", Items.APPLE, 10, 0), item("move", Items.APPLE, 10, 20)),
                 snapshot(item("keep", Items.APPLE, 10, 0), item("new", Items.APPLE, 10, 40)));
-        assertEquals(1, tx.transitions().size()); assertEquals("move", tx.transitions().getFirst().sourceId());
+        assertEquals(1, tx.transitions().size()); assertEquals("move", tx.transitions().get(0).sourceId());
     }
     @Test void renamedComponentsDoNotMatch() {
         VisualItem old = item("a", Items.APPLE, 3, 0);
-        ItemStack named = new ItemStack(Items.APPLE, 3); named.set(DataComponents.CUSTOM_NAME, Component.literal("Special"));
+        ItemStack named = new ItemStack(Items.APPLE, 3); named.setHoverName(Component.literal("Special"));
         var tx = compare(snapshot(old), snapshot(new VisualItem("b", named, Bounds.item(20, 0), "test")));
         assertEquals(Set.of(TransitionType.APPEAR, TransitionType.DISAPPEAR), new HashSet<>(tx.transitions().stream().map(ItemTransition::type).toList()));
     }
     @Test void viewReflowIsDistinctFromInventoryMutation() {
         var tx = compare(snapshot(item("logical", Items.APPLE, 8, 0)), snapshot(item("logical", Items.APPLE, 8, 80)));
-        assertEquals(TransitionType.LAYOUT_REFLOW, tx.transitions().getFirst().type());
+        assertEquals(TransitionType.LAYOUT_REFLOW, tx.transitions().get(0).type());
     }
     @Test void movingTheCursorDoesNotInferLayoutReflow() {
         assertTrue(compare(snapshot(item("cursor", Items.APPLE, 3, 0)), snapshot(item("cursor", Items.APPLE, 3, 80))).transitions().isEmpty());
@@ -84,11 +83,11 @@ class TransactionInferenceTest {
     }
     @Test void equipmentClassificationUsesProviderMetadata() {
         var equipment = new VisualItem("custom-equipment", new ItemStack(Items.DIAMOND_HELMET), Bounds.item(40, 0), "equipment", true, true, true, null, null, null, null);
-        assertEquals(TransitionType.EQUIP, compare(snapshot(item("bag", Items.DIAMOND_HELMET, 1, 0)), snapshot(equipment)).transitions().getFirst().type());
-        assertEquals(TransitionType.UNEQUIP, compare(snapshot(equipment), snapshot(item("bag", Items.DIAMOND_HELMET, 1, 0))).transitions().getFirst().type());
+        assertEquals(TransitionType.EQUIP, compare(snapshot(item("bag", Items.DIAMOND_HELMET, 1, 0)), snapshot(equipment)).transitions().get(0).type());
+        assertEquals(TransitionType.UNEQUIP, compare(snapshot(equipment), snapshot(item("bag", Items.DIAMOND_HELMET, 1, 0))).transitions().get(0).type());
     }
     @Test void countOnlyChangeIsEmphasis() {
-        assertEquals(TransitionType.COUNT_CHANGE, compare(snapshot(item("a", Items.APPLE, 5, 0)), snapshot(item("a", Items.APPLE, 7, 0))).transitions().getFirst().type());
+        assertEquals(TransitionType.COUNT_CHANGE, compare(snapshot(item("a", Items.APPLE, 5, 0)), snapshot(item("a", Items.APPLE, 7, 0))).transitions().get(0).type());
     }
     @Test void duplicateIdsAreRejected() {
         assertThrows(IllegalArgumentException.class, () -> snapshot(item("a", Items.APPLE, 1, 0), item("a", Items.APPLE, 2, 30)));

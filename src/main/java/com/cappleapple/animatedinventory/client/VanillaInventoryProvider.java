@@ -35,7 +35,7 @@ public final class VanillaInventoryProvider implements InventoryViewProvider {
         for (Slot slot : slots(container)) if (eligible(screen, slot)) hash = hash * 31 + stackHash(slot.getItem());
         return (hash * 31 + stackHash(container.getMenu().getCarried())) * 31 + BundledCompatibility.contentsRevision();
     }
-    private static long stackHash(ItemStack stack) { return (long)ItemStack.hashItemAndComponents(stack) * 31 + stack.getCount(); }
+    private static long stackHash(ItemStack stack) { return (long)java.util.Objects.hash(stack.getItem(), stack.getTag()) * 31 + stack.getCount(); }
     public static long layout(AbstractContainerScreen<?> screen) {
         long hash = System.identityHashCode(screen.getMenu());
         hash = hash * 31 + screen.width; hash = hash * 31 + screen.height;

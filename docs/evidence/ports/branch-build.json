@@ -1,0 +1,11 @@
+{
+  "file": "animatedinventory-forge-1.20.1-1.1.jar",
+  "sha256": "657e38cf9fca51479b673f9881ff92de875c95ac61c158c7a33fff9acea5fd5a",
+  "tests": {
+    "tests": 95,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "root_build": "passed"
+}

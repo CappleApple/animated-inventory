@@ -1,7 +1,7 @@
 package com.cappleapple.animatedinventory.client.compat.inventoryparticles;
 
 import com.cappleapple.animatedinventory.client.ClientConfig;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 /** No undocumented particle hooks, fake input, or extra particle render invocations. */
 public final class InventoryParticlesCompatibility {

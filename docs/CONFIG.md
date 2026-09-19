@@ -1,6 +1,6 @@
 # Client configuration
 
-File: `config/animatedinventory-client.toml`. Use Mods -> Animated Inventory -> Config for the built-in NeoForge configuration screen. It uses native Minecraft controls, adds no GUI library dependency, and exposes all registered fields. There is no embedded animation preview in this first version.
+File: `config/animatedinventory-client.toml`. Open **Mods → Animated Inventory → Config** for the built-in Forge configuration screen. It uses native Minecraft controls and exposes all registered fields.
 
 Durations are in milliseconds. Every duration is divided by `animation_speed_multiplier`: 0.5 is half speed and 2.0 is double speed. Reduced motion removes movement/overshoot and uses short fades (up to 60 ms); hover and emphasis scaling are reduced. The particle-safe inline path uses emphasis instead of additional fades.
 

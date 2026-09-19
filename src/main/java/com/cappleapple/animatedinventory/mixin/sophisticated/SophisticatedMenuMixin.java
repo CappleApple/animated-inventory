@@ -10,7 +10,6 @@ import java.util.AbstractList;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
-import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 
 @Pseudo
@@ -25,7 +24,7 @@ abstract class SophisticatedMenuMixin implements SophisticatedMenu {
     @Override public long animatedinventory$permissionsRevision() { return animatedinventory$permissionsRevision; }
     @Inject(method = "updateAdditionalSlotInfo", at = @At("TAIL"))
     private void animatedinventory$permissionsChanged(Set<Integer> inaccessible, Set<Integer> noOverlay,
-            Map<Integer, Integer> limits, Set<Integer> infinite, Map<Integer, Holder<Item>> filters, CallbackInfo ci) {
+            Map<Integer, Integer> limits, Set<Integer> infinite, Map<Integer, Item> filters, CallbackInfo ci) {
         // Core resends this packet after ordinary contents changes too. Identical permissions are not a new layout.
         List<Object> next = List.of(Set.copyOf(inaccessible), Set.copyOf(noOverlay), Map.copyOf(limits),
                 Set.copyOf(infinite), Map.copyOf(filters));

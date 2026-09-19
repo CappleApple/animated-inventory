@@ -1,0 +1,15 @@
+PASS validation window stays hidden
+PASS Sophisticated screen adapter applies
+PASS Sophisticated menu adapter applies
+PASS initial synchronized contents do not animate arrivals
+PASS initial snapshot captures synchronized stack
+PASS pickup state remains immediate
+PASS pickup creates cursor animation
+PASS partial merge preserves vanilla quantities
+PASS native slot rendering and compositor remain enabled
+PASS quick move preserves vanilla transfer
+PASS quick move creates visual transition
+PASS resize renews animation ownership
+PASS resize clears stale visual ownership
+PASS Forge config screen opens and renders
+PASS validation completed

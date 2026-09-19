@@ -1,87 +1,124 @@
 plugins {
     id 'java-library'
-    id 'net.neoforged.moddev' version '2.0.143'
+    id 'net.minecraftforge.gradle' version '6.0.54'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
-
 group = 'com.cappleapple.animatedinventory'
 version = mod_version
-base.archivesName = 'animatedinventory'
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
-    withSourcesJar()
-}
-
-neoForge {
-    version = neo_version
+base.archivesName = 'animatedinventory-forge-1.20.1'
+java { toolchain.languageVersion = JavaLanguageVersion.of(17); withSourcesJar() }
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
     runs {
-        client {
-            client()
-            gameDirectory = file('run-client')
+        configureEach {
+            workingDirectory project.file('run-' + name)
+            property 'forge.logging.console.level', 'info'
+            jvmArgs '-Xmx2G', '-XX:ActiveProcessorCount=2'
+            mods { animatedinventory { source sourceSets.main } }
         }
-        server {
-            server()
-            gameDirectory = file('run-server')
-            programArgument '--nogui'
-        }
-    }
-    mods {
-        animatedinventory { sourceSet sourceSets.main }
-    }
-    unitTest {
-        enable()
-        testedMod = mods.animatedinventory
+        client { }
+        server { args '--nogui' }
     }
 }
-
-repositories { mavenCentral() }
+mixin {
+    add sourceSets.main, 'animatedinventory.refmap.json'
+    config 'animatedinventory.mixins.json'
+    config 'animatedinventory.sophisticated.mixins.json'
+}
+repositories {
+    mavenCentral()
+    maven { url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+}
+jarJar.enable()
 dependencies {
+    minecraft "net.minecraftforge:forge:1.20.1-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    compileOnly(annotationProcessor('io.github.llamalad7:mixinextras-common:0.5.0'))
+    implementation(jarJar('io.github.llamalad7:mixinextras-forge:0.5.0')) { jarJar.ranged(it, '[0.5.0,0.6)') }
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
-tasks.named('test', Test) { useJUnitPlatform() }
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('test', Test) { useJUnitPlatform() }
 tasks.named('processResources') {
     inputs.property 'version', project.version
-    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
 }
-tasks.named('jar') { from('LICENSE') }
+tasks.named('jar') {
+    archiveClassifier = 'slim'
+    from('LICENSE')
+    manifest.attributes('MixinConfigs': 'animatedinventory.mixins.json,animatedinventory.sophisticated.mixins.json')
+    finalizedBy 'reobfJar'
+}
+tasks.named('jarJar') {
+    archiveClassifier = ''
+    from('LICENSE')
+    manifest.attributes('MixinConfigs': 'animatedinventory.mixins.json,animatedinventory.sophisticated.mixins.json')
+}
+reobf { jarJar {} }
+tasks.named('jarJar').configure { finalizedBy 'reobfJarJar' }
+tasks.named('build').configure { dependsOn 'jarJar' }
 
-// Opt-in fixtures run only in development; neither source nor binary jar includes them.
+// Opt-in validation code is never packaged in distribution jars.
 sourceSets {
     validation {
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
         runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
     }
 }
+configurations.validationAnnotationProcessor.extendsFrom(configurations.annotationProcessor)
 if (project.hasProperty('clientValidation') || project.hasProperty('serverValidation')) {
-    neoForge.mods.animatedinventory.sourceSet(sourceSets.validation)
+    minecraft.runs.configureEach { mods.animatedinventory.source sourceSets.validation }
 }
 if (project.hasProperty('serverValidation')) {
-    if (project.hasProperty('sophisticatedValidation')) neoForge.runs.server.gameDirectory = file('run-server-sophisticated')
-    neoForge.runs.server.systemProperty 'animatedinventory.serverValidation', 'true'
+    minecraft.runs.server.property 'animatedinventory.serverValidation', 'true'
+    minecraft.runs.server.workingDirectory project.file('run-validation-server')
 }
 if (project.hasProperty('clientValidation')) {
-    neoForge.runs.client {
-        systemProperty 'animatedinventory.validation', 'true'
-        if (project.hasProperty('initialContentsValidation')) systemProperty 'animatedinventory.initialContentsValidation', 'true'
-        if (project.hasProperty('bnsValidation')) systemProperty 'animatedinventory.bnsValidation', 'true'
-        if (project.hasProperty('sophisticatedValidation')) systemProperty 'animatedinventory.sophisticatedValidation', 'true'
-        if (project.hasProperty('transferValidation')) systemProperty 'animatedinventory.transferValidation', 'true'
-        if (project.hasProperty('stashValidation')) systemProperty 'animatedinventory.stashValidation', 'true'
-        if (project.hasProperty('trashValidation')) systemProperty 'animatedinventory.trashValidation', 'true'
-        if (project.hasProperty('craftingValidation')) systemProperty 'animatedinventory.craftingValidation', 'true'
-        if (project.hasProperty('configValidation')) systemProperty 'animatedinventory.configValidation', 'true'
-        gameDirectory = file(project.hasProperty('trashValidation') ? 'run-validation-trash' : project.hasProperty('jeiValidation') ? 'run-validation-recipe-jei' : project.hasProperty('sophisticatedValidation') ? (project.hasProperty('compatValidation') ? 'run-validation-sophisticated-compat' : 'run-validation-sophisticated') : project.hasProperty('configValidation') ? 'run-validation-config' : project.hasProperty('compatValidation') ? 'run-validation-compat' : project.hasProperty('bnsValidation') ? 'run-validation-bns' : project.hasProperty('craftingValidation') ? 'run-validation-crafting' : 'run-validation')
-    }
-    def validationReport = file((project.hasProperty('trashValidation') ? 'run-validation-trash' : project.hasProperty('jeiValidation') ? 'run-validation-recipe-jei' : project.hasProperty('sophisticatedValidation') ? (project.hasProperty('compatValidation') ? 'run-validation-sophisticated-compat' : 'run-validation-sophisticated') : project.hasProperty('configValidation') ? 'run-validation-config' : project.hasProperty('compatValidation') ? 'run-validation-compat' : project.hasProperty('bnsValidation') ? 'run-validation-bns' : project.hasProperty('craftingValidation') ? 'run-validation-crafting' : 'run-validation') + '/validation/results.txt')
-    tasks.named('runClient').configure {
-        doFirst { if (validationReport.exists()) validationReport.delete() }
+    minecraft.runs.client.property 'animatedinventory.clientValidation', 'true'
+    minecraft.runs.client.workingDirectory project.file('run-validation-client')
+    minecraft.runs.client.args '--mixin', 'animatedinventory.validation.mixins.json'
+}
+
+
+if (project.hasProperty('clientValidation')) {
+    tasks.matching { it.name == 'runClient' }.configureEach {
+        doFirst {
+            def directory = file('run-validation-client')
+            new File(directory, 'config').mkdirs()
+            new File(directory, 'config/fml.toml').text = 'earlyWindowControl=false\n'
+            new File(directory, 'options.txt').text = 'soundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nrenderDistance:2\nsimulationDistance:5\n'
+            new File(directory, 'client-validation.txt').delete()
+        }
         doLast {
-            if (!validationReport.exists() || validationReport.text.contains('FAIL ')
-                    || !validationReport.text.contains('PASS validation completed')) {
-                throw new GradleException('Client validation did not pass; inspect the validation results and client log.')
-            }
+            def report = file('run-validation-client/client-validation.txt')
+            if (!report.exists() || report.text.contains('FAIL ') || !report.text.contains('PASS validation completed'))
+                throw new GradleException('Client validation failed; inspect run-validation-client logs and report.')
         }
     }
+}
+if (project.hasProperty('serverValidation')) {
+    tasks.matching { it.name == 'runServer' }.configureEach {
+        doFirst {
+            def directory = file('run-validation-server')
+            directory.mkdirs()
+            new File(directory, 'eula.txt').text = 'eula=true\n'
+            new File(directory, 'server.properties').text = 'level-name=validation-world\nlevel-type=minecraft:flat\ngenerate-structures=false\nonline-mode=false\nserver-port=25911\nview-distance=2\nsimulation-distance=2\nmax-tick-time=120000\n'
+            new File(directory, 'server-validation.txt').delete()
+        }
+        doLast {
+            def report = file('run-validation-server/server-validation.txt')
+            if (!report.exists() || !report.text.startsWith('PASS '))
+                throw new GradleException('Server validation failed; inspect run-validation-server logs and report.')
+        }
+    }
+}
+
+
+
+if (project.hasProperty('sophisticatedValidation')) {
+    dependencies { runtimeOnly fg.deobf('maven.modrinth:sophisticated-core:1Xl7lP0L') }
+    minecraft.runs.client.property 'animatedinventory.sophisticatedValidation', 'true'
 }

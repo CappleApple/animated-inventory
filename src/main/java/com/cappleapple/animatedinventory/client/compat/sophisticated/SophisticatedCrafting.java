@@ -15,7 +15,7 @@ public final class SophisticatedCrafting {
         private long productCount(InventoryVisualSnapshot snapshot, ItemStack product) {
             return snapshot.items().values().stream().filter(item -> !item.id().equals(resultId) && !inputs.contains(item.id())
                     && item.mayAnimate() && (item.visible() || item.offscreenDestination())
-                    && ItemStack.isSameItemSameComponents(product, item.stack())).mapToLong(item -> item.stack().getCount()).sum();
+                    && ItemStack.isSameItemSameTags(product, item.stack())).mapToLong(item -> item.stack().getCount()).sum();
         }
         public List<CraftingFlow.Consumption> observe(InventoryVisualSnapshot after) {
             if (before.owner() != after.owner() || before.layoutRevision() != after.layoutRevision()

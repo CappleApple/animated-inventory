@@ -1,6 +1,6 @@
 package com.cappleapple.animatedinventory.client.compat;
 
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 /** No viewer classes are linked. All screen init/return flows use the same fresh-owner lifecycle. */
 public final class RecipeViewerCompatibility {

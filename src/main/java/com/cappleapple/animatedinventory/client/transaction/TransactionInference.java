@@ -77,7 +77,7 @@ public final class TransactionInference {
     }
     private static boolean eligible(VisualItem item) { return item != null && item.visible() && item.mayAnimate() && !item.stack().isEmpty(); }
     private static boolean compatible(VisualItem a, VisualItem b) {
-        return a != null && b != null && ItemStack.isSameItemSameComponents(a.stack(), b.stack());
+        return a != null && b != null && ItemStack.isSameItemSameTags(a.stack(), b.stack());
     }
     private static ItemTransition transition(TransitionType type, VisualItem from, VisualItem to, int count) {
         VisualItem item = to == null ? from : to;

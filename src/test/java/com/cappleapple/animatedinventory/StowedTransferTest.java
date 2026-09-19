@@ -7,7 +7,6 @@ import com.cappleapple.animatedinventory.client.compat.bundlednotsiloed.StowedSl
 import com.cappleapple.animatedinventory.client.transaction.TransactionInference;
 import net.minecraft.SharedConstants;
 import net.minecraft.server.Bootstrap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import org.junit.jupiter.api.*;
@@ -15,7 +14,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StowedTransferTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { TestBootstrap.initialize(); }
     private static final Bounds EDGE = Bounds.item(46, 84);
     private static VisualItem visible(int count) {
         return new VisualItem("source", new ItemStack(Items.APPLE, count), Bounds.item(10, 10), "container");
@@ -32,16 +31,16 @@ class StowedTransferTest {
     @Test void visibleTransferReachesExplicitHiddenArrivalPoint() {
         var tx = compare(snapshot(visible(16)), snapshot(stowed("hidden", 16)));
         assertEquals(1, tx.size());
-        assertEquals(TransitionType.STOW, tx.getFirst().type());
-        assertEquals(EDGE, tx.getFirst().destination());
-        assertEquals("source", tx.getFirst().sourceId());
-        assertEquals("hidden", tx.getFirst().destinationId());
+        assertEquals(TransitionType.STOW, tx.get(0).type());
+        assertEquals(EDGE, tx.get(0).destination());
+        assertEquals("source", tx.get(0).sourceId());
+        assertEquals("hidden", tx.get(0).destinationId());
     }
     @Test void stowedMergeUsesOnlyTheIncreasedQuantity() {
         var tx = compare(snapshot(visible(12), stowed("hidden", 52)), snapshot(stowed("hidden", 64)));
         assertEquals(1, tx.size());
-        assertEquals(12, tx.getFirst().stack().getCount());
-        assertEquals(TransitionType.STOW, tx.getFirst().type());
+        assertEquals(12, tx.get(0).stack().getCount());
+        assertEquals(TransitionType.STOW, tx.get(0).type());
     }
     @Test void splitBetweenTwoStowedSlotsPreservesTheVisibleRemainder() {
         var tx = compare(snapshot(visible(40), stowed("a", 52)),
@@ -58,11 +57,11 @@ class StowedTransferTest {
     }
     @Test void removalWithoutStorageIncreaseIsNotReportedAsStow() {
         var tx = compare(snapshot(visible(16), stowed("hidden", 32)), snapshot(stowed("hidden", 32)));
-        assertEquals(TransitionType.DISAPPEAR, tx.getFirst().type());
+        assertEquals(TransitionType.DISAPPEAR, tx.get(0).type());
     }
     @Test void changedComponentsDoNotMatchHiddenStorage() {
         var target = stowed("hidden", 16);
-        target.stack().set(DataComponents.CUSTOM_NAME, Component.literal("Different"));
+        target.stack().setHoverName(Component.literal("Different"));
         var tx = compare(snapshot(visible(16)), snapshot(target));
         assertTrue(tx.stream().noneMatch(t -> t.type() == TransitionType.STOW));
     }
@@ -84,7 +83,7 @@ class StowedTransferTest {
         assertEquals(Bounds.item(136, 236), StowedSlotGeometry.destination(90002, 9, Bounds.item(100, 200), 18, 18));
     }
     @Test void stowStaysOpaqueUntilApproachThenDisappearsAtEdge() {
-        var t = compare(snapshot(visible(16)), snapshot(stowed("hidden", 16))).getFirst();
+        var t = compare(snapshot(visible(16)), snapshot(stowed("hidden", 16))).get(0);
         var a = new ItemAnimation(1, 1, "tx", t, AnimationOptions.move(100, Easing.LINEAR, MovementStyle.LINEAR),
                 t.source(), 0, 100, false);
         assertEquals(1, a.alpha(50));

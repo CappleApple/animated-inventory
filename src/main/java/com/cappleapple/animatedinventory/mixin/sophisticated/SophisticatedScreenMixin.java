@@ -23,7 +23,7 @@ abstract class SophisticatedScreenMixin extends AbstractContainerScreen<Abstract
     protected SophisticatedScreenMixin(AbstractContainerMenu menu, Inventory inventory, Component title) { super(menu, inventory, title); }
     @Shadow private int getNumberOfVisibleRows() { throw new AssertionError(); }
     @Shadow public abstract int getSlotsOnLine();
-    @Shadow protected abstract boolean isHovering(Slot slot, double mouseX, double mouseY);
+    @Shadow(aliases = {"m_97774_"}) protected abstract boolean isHovering(Slot slot, double mouseX, double mouseY);
     @Shadow private boolean isStorageSlotRenderReplaced(int index) { throw new AssertionError(); }
 
     @Unique private static final ClassValue<Boolean> animatedinventory$filterTypes = new ClassValue<>() {
@@ -51,7 +51,7 @@ abstract class SophisticatedScreenMixin extends AbstractContainerScreen<Abstract
     @Invoker("renderStack")
     public abstract void animatedinventory$drawStack(GuiGraphics graphics, int x, int y, ItemStack stack, boolean preview, String count);
 
-    @WrapMethod(method = "slotClicked")
+    @WrapMethod(method = {"slotClicked", "m_6597_"})
     private void animatedinventory$transaction(Slot slot, int index, int button, ClickType type, Operation<Void> original) {
         var runtime = ClientRuntime.INSTANCE;
         runtime.beforeInteraction(this, slot, type);
@@ -59,19 +59,19 @@ abstract class SophisticatedScreenMixin extends AbstractContainerScreen<Abstract
         runtime.afterInteraction();
     }
 
-    @WrapMethod(method = "renderSlot")
+    @WrapMethod(method = {"renderSlot", "m_280092_"})
     private void animatedinventory$observe(GuiGraphics graphics, Slot slot, Operation<Void> original) {
         ClientRuntime.INSTANCE.observeNativeSlot(this, slot);
         original.call(graphics, slot);
     }
 
-    @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/world/inventory/Slot;getItem()Lnet/minecraft/world/item/ItemStack;"))
+    @WrapOperation(method = {"renderSlot", "m_280092_"}, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/world/inventory/Slot;getItem()Lnet/minecraft/world/item/ItemStack;", remap = true))
     private ItemStack animatedinventory$pendingStack(Slot slot, Operation<ItemStack> original) {
         return ClientRuntime.INSTANCE.pendingStack(this, slot, original.call(slot));
     }
 
-    @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE",
+    @WrapOperation(method = {"renderSlot", "m_280092_"}, at = @At(value = "INVOKE",
             target = "Lnet/p3pp3rf1y/sophisticatedcore/client/gui/StorageScreenBase;renderStack(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/item/ItemStack;ZLjava/lang/String;)V"))
     private void animatedinventory$item(@Coerce Object screen, GuiGraphics graphics, int x, int y, ItemStack stack,
             boolean preview, String count, Operation<Void> original, @Local(argsOnly = true) Slot slot) {
@@ -100,7 +100,7 @@ abstract class SophisticatedScreenMixin extends AbstractContainerScreen<Abstract
     }
 
     @WrapOperation(method = {"renderSuper", "renderUpgradeSlots",
-            "renderStorageInventorySlots(Lnet/minecraft/client/gui/GuiGraphics;IIZ)V"},
+            "renderStorageInventorySlots(Lnet/minecraft/client/gui/GuiGraphics;IIZ)V"}, require = 0,
             at = @At(value = "INVOKE", target = "Lnet/p3pp3rf1y/sophisticatedcore/client/gui/StorageScreenBase;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;)V"))
     private void animatedinventory$highlightBehind(@Coerce Object screen, GuiGraphics graphics, Slot slot, Operation<Void> original,
             @Local(argsOnly = true, ordinal = 0) int mouseX, @Local(argsOnly = true, ordinal = 1) int mouseY) {
@@ -109,6 +109,14 @@ abstract class SophisticatedScreenMixin extends AbstractContainerScreen<Abstract
             graphics.flush();
         }
         original.call(screen, graphics, slot);
+    }
+
+    @WrapOperation(method = {"renderSuper", "renderUpgradeSlots",
+            "renderStorageInventorySlots(Lnet/minecraft/client/gui/GuiGraphics;IIZ)V"}, require = 0,
+            at = @At(value = "INVOKE", target = "Lnet/p3pp3rf1y/sophisticatedcore/client/gui/StorageScreenBase;m_280092_(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;)V"))
+    private void animatedinventory$productionHighlightBehind(@Coerce Object screen, GuiGraphics graphics, Slot slot, Operation<Void> original,
+            @Local(argsOnly = true, ordinal = 0) int mouseX, @Local(argsOnly = true, ordinal = 1) int mouseY) {
+        animatedinventory$highlightBehind(screen, graphics, slot, original, mouseX, mouseY);
     }
 
     @WrapOperation(method = {"renderSuper", "renderUpgradeSlots",
