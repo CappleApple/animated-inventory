@@ -1,0 +1,11 @@
+PASS integrated server and inventory screen opened
+PASS native slot ownership observed
+PASS pickup state remains immediate
+PASS pickup animation created by actual slot click
+PASS pickup frame rendered without failure
+PASS partial merge preserves counts
+PASS merge animation created
+PASS merge and item-opacity frames rendered without failure
+PASS screen close replay rendered without failure
+PASS screen reopen rendered without failure
+PASS complete

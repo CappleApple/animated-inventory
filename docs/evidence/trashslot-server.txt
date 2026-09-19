@@ -1,7 +1,0 @@
-PASS dedicated server reached 40 ticks without loading client entrypoint or client mixins.
-[14:11:51] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.292s)! For help, type "help"
-[14:11:53] [Server thread/INFO] [co.ca.an.va.ServerValidation/]: AI_SERVER_VALIDATION PASSED
-[14:11:53] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
-[14:11:53] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
-[14:11:53] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
-BUILD SUCCESSFUL in 12s

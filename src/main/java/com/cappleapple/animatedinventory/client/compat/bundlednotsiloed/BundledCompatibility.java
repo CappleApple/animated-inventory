@@ -10,8 +10,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.attachment.AttachmentType;
+import com.cappleapple.animatedinventory.client.Platform;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.Supplier;
@@ -22,16 +21,16 @@ public final class BundledCompatibility {
         private static final Projection NONE = new Projection(0, false, false, List.of());
     }
     private static boolean present;
-    private static Supplier<AttachmentType<Object>> attachment;
+    private static Supplier<?> attachment;
     private static Method inventoryWindow, active, identityView, logicalSlots, inventory, revision, extent, syntheticStack, clientSync, serverRevision;
 
     @SuppressWarnings("unchecked")
     public static void initialize() {
-        present = ModList.get().isLoaded("bundlednotsiloed");
+        present = Platform.isLoaded("bundlednotsiloed");
         if (!present) return;
         try {
             // All members are public. No compile-time optional dependency or private screen access.
-            attachment = (Supplier<AttachmentType<Object>>)Class.forName(
+            attachment = (Supplier<?>)Class.forName(
                     "com.cappleapple.bundlednotsiloed.data.ModAttachments").getField("PLAYER_DATA").get(null);
             inventoryWindow = Class.forName("com.cappleapple.bundlednotsiloed.data.PlayerInventoryData").getMethod("inventoryWindow");
             Class<?> window = inventoryWindow.getReturnType();
@@ -52,9 +51,9 @@ public final class BundledCompatibility {
     @SuppressWarnings("unchecked")
     public static Projection projection() {
         var player = Minecraft.getInstance().player;
-        if (!active() || attachment == null || player == null || !player.hasData(attachment)) return Projection.NONE;
+        if (!active() || attachment == null || player == null || !Platform.hasData(player, attachment)) return Projection.NONE;
         try {
-            Object window = inventoryWindow.invoke(player.getData(attachment));
+            Object window = inventoryWindow.invoke(Platform.getData(player, attachment));
             boolean identities = (boolean)identityView.invoke(window);
             List<Integer> slots = (List<Integer>)logicalSlots.invoke(window);
             // Acknowledging the same default page changes session state, not visible geometry.
@@ -73,14 +72,14 @@ public final class BundledCompatibility {
     /** Independent of client-predicted backend revisions; negative until a server baseline is installed. */
     public static long serverRevision() {
         var player = Minecraft.getInstance().player;
-        if (!active() || attachment == null || player == null || !player.hasData(attachment)) return -1;
-        try { return (long)serverRevision.invoke(clientSync.invoke(player.getData(attachment))); }
+        if (!active() || attachment == null || player == null || !Platform.hasData(player, attachment)) return -1;
+        try { return (long)serverRevision.invoke(clientSync.invoke(Platform.getData(player, attachment))); }
         catch (ReflectiveOperationException | RuntimeException error) { unavailable(error); return -1; }
     }
     private static Object storage() {
         var player = Minecraft.getInstance().player;
-        if (!active() || attachment == null || player == null || !player.hasData(attachment)) return null;
-        try { return inventory.invoke(player.getData(attachment)); }
+        if (!active() || attachment == null || player == null || !Platform.hasData(player, attachment)) return null;
+        try { return inventory.invoke(Platform.getData(player, attachment)); }
         catch (ReflectiveOperationException | RuntimeException error) { unavailable(error); return null; }
     }
     /** Only defensive reads; the real inventory and its normal rendering ownership remain untouched. */
@@ -100,7 +99,7 @@ public final class BundledCompatibility {
         }
         double dx = grid[1].x - grid[0].x, dy = grid[9].y - grid[0].y;
         if (dx <= 0 || dy <= 0) return;
-        Bounds origin = Bounds.item(screen.getGuiLeft() + grid[0].x, screen.getGuiTop() + grid[0].y);
+        Bounds origin = Bounds.item(((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen).animatedinventory$left() + grid[0].x, ((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen).animatedinventory$top() + grid[0].y);
         try {
             // Bound snapshot size and work independently of BNS's storage capacity.
             int count = (int)extent.invoke(storage);

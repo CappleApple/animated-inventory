@@ -18,6 +18,9 @@ public final class AnimatedInventory {
     public AnimatedInventory(ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         container.registerExtensionPoint(IConfigScreenFactory.class, (mc, parent) -> new ConfigurationScreen(container, parent));
+        Platform.install(id -> net.neoforged.fml.ModList.get().isLoaded(id));
+        Platform.installCountFont(stack -> net.neoforged.neoforge.client.extensions.common.IClientItemExtensions.of(stack)
+            .getFont(stack, net.neoforged.neoforge.client.extensions.common.IClientItemExtensions.FontContext.ITEM_COUNT));
         BundledCompatibility.initialize();
         InventoryParticlesCompatibility.initialize();
         ClientRuntime.INSTANCE.initialize();
