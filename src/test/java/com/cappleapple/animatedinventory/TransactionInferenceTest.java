@@ -13,7 +13,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionInferenceTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { com.cappleapple.animatedinventory.TestBootstrap.initialize(); }
     static VisualItem item(String id, Item type, int count, int x) { return new VisualItem(id, new ItemStack(type, count), Bounds.item(x, 0), "test"); }
     static InventoryVisualSnapshot snapshot(VisualItem... items) { return InventoryVisualSnapshot.of(1, "test", 1, false, List.of(items)); }
     static InventoryVisualTransaction compare(InventoryVisualSnapshot before, InventoryVisualSnapshot after) {

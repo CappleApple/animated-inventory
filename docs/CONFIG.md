@@ -1,6 +1,6 @@
 # Client configuration
 
-File: `config/animatedinventory-client.toml`. Use Mods -> Animated Inventory -> Config for the built-in NeoForge configuration screen. It uses native Minecraft controls, adds no GUI library dependency, and exposes all registered fields. There is no embedded animation preview in this first version.
+File: `config/animatedinventory-client.toml`. Open **Mods → Animated Inventory → Config** for the built-in NeoForge configuration screen. It uses native Minecraft controls and exposes all registered fields.
 
 Durations are in milliseconds. Every duration is divided by `animation_speed_multiplier`: 0.5 is half speed and 2.0 is double speed. Reduced motion removes movement/overshoot and uses short fades (up to 60 ms); hover and emphasis scaling are reduced. The particle-safe inline path uses emphasis instead of additional fades.
 
@@ -160,5 +160,7 @@ The following are the actual generated defaults, including supported enum values
 ```
 
 Changes apply to new animations. Disabling the master toggle releases active rendering ownership. Hover hitboxes and selected hotbar slots never change. Setting screen close to NONE avoids retaining/capturing a screen image after its entrance completes.
+
+`hover.slot_hover_raise_z` controls elevated rendering order in the extracted GUI. A positive value draws enlarged items and their decorations after ordinary slots; zero keeps them in the ordinary slot layer.
 
 Labels and tooltips are resource-pack overrideable at `assets/animatedinventory/lang/en_us.json`.

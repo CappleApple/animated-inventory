@@ -1,12 +1,12 @@
 package com.cappleapple.animatedinventory.client.compat;
 
-import net.neoforged.fml.ModList;
+import com.cappleapple.animatedinventory.client.Platform;
 
 /** No viewer classes are linked. All screen init/return flows use the same fresh-owner lifecycle. */
 public final class RecipeViewerCompatibility {
     public static String detected() {
-        return (ModList.get().isLoaded("jei") ? "JEI " : "") + (ModList.get().isLoaded("emi") ? "EMI " : "")
-                + (ModList.get().isLoaded("roughlyenoughitems") ? "REI " : "");
+        return (Platform.isLoaded("jei") ? "JEI " : "") + (Platform.isLoaded("emi") ? "EMI " : "")
+                + (Platform.isLoaded("roughlyenoughitems") ? "REI " : "");
     }
     private RecipeViewerCompatibility() { }
 }

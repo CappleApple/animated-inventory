@@ -1,3 +1,0 @@
-PASS GL state clean: custom-api
-PASS config categories are translated
-PASS config options are translated

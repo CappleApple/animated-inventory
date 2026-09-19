@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1 - 2026-09-19
+
+### Added
+
+- Ported Animated Inventory to Minecraft 26.3 NeoForge.
+
 ## 1.0.7 - 2026-09-18
 
 ### Fixed

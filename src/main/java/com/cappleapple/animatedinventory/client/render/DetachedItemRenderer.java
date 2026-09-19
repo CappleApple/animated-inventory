@@ -1,36 +1,22 @@
 package com.cappleapple.animatedinventory.client.render;
 
-import com.mojang.blaze3d.platform.Lighting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.item.TrackingItemStackRenderState;
+import net.minecraft.client.renderer.state.gui.GuiItemRenderState;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.joml.Matrix3x2f;
 
-/** Draws a departing representation through the model renderer, without replaying a GUI item interaction/render entry. */
+/** Extracts a departing model without replaying a GUI item interaction/render entry. */
 public final class DetachedItemRenderer {
-    public static void draw(GuiGraphics graphics, ItemStack stack, int x, int y) {
+    public static void draw(GuiGraphicsExtractor graphics, ItemStack stack, int x, int y) {
         if (stack.isEmpty()) return;
         var client = Minecraft.getInstance();
-        var renderer = client.getItemRenderer();
-        var model = renderer.getModel(stack, client.level, client.player, 0);
-        boolean flat = !model.usesBlockLight();
-        graphics.pose().pushPose();
-        try {
-            graphics.pose().translate(x + 8, y + 8, 150);
-            graphics.pose().scale(16, -16, 16);
-            if (flat) Lighting.setupForFlatItems();
-            renderer.render(stack, ItemDisplayContext.GUI, false, graphics.pose(), graphics.bufferSource(),
-                    LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, model);
-            graphics.flush();
-        } finally {
-            if (flat) Lighting.setupFor3DItems();
-            graphics.pose().popPose();
-        }
-        var font = IClientItemExtensions.of(stack).getFont(stack, IClientItemExtensions.FontContext.ITEM_COUNT);
-        graphics.renderItemDecorations(font == null ? client.font : font, stack, x, y);
+        var model = new TrackingItemStackRenderState();
+        client.getItemModelResolver().updateForTopItem(model, stack, ItemDisplayContext.GUI, client.level, client.player, 0);
+        TextureCompositor.state(graphics).addItem(new GuiItemRenderState(new Matrix3x2f(graphics.pose()), model, x, y, TextureCompositor.clip(graphics)));
+        graphics.itemDecorations(com.cappleapple.animatedinventory.client.Platform.countFont(stack), stack, x, y);
     }
     private DetachedItemRenderer() { }
 }

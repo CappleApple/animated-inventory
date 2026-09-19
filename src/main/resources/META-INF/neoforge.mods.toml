@@ -14,20 +14,16 @@ description='''An independently developed, client-side inventory animation syste
 [[dependencies.animatedinventory]]
 modId="neoforge"
 type="required"
-versionRange="[21.1.244,)"
+versionRange="[${neo_version},)"
 ordering="NONE"
 side="CLIENT"
 
 [[dependencies.animatedinventory]]
 modId="minecraft"
 type="required"
-versionRange="[1.21.1,1.21.2)"
+versionRange="[${minecraft_version}]"
 ordering="NONE"
 side="CLIENT"
 
 [[mixins]]
 config="animatedinventory.mixins.json"
-
-[[mixins]]
-config="animatedinventory.sophisticated.mixins.json"
-requiredMods=["sophisticatedcore"]

@@ -1,38 +1,21 @@
 plugins {
     id 'java-library'
-    id 'net.neoforged.moddev' version '2.0.143'
+    id 'net.neoforged.moddev' version '2.0.147'
 }
-
 group = 'com.cappleapple.animatedinventory'
 version = mod_version
-base.archivesName = 'animatedinventory'
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
-    withSourcesJar()
-}
+base.archivesName = "animatedinventory-neoforge-${minecraft_version}"
+java { toolchain.languageVersion = JavaLanguageVersion.of(25); withSourcesJar() }
 
 neoForge {
     version = neo_version
     runs {
-        client {
-            client()
-            gameDirectory = file('run-client')
-        }
-        server {
-            server()
-            gameDirectory = file('run-server')
-            programArgument '--nogui'
-        }
+        client { client(); gameDirectory = file('run-client') }
+        server { server(); gameDirectory = file('run-server'); programArgument '--nogui' }
     }
-    mods {
-        animatedinventory { sourceSet sourceSets.main }
-    }
-    unitTest {
-        enable()
-        testedMod = mods.animatedinventory
-    }
+    mods { animatedinventory { sourceSet sourceSets.main } }
+    unitTest { enable(); testedMod = mods.animatedinventory }
 }
-
 repositories { mavenCentral() }
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.11.4')
@@ -42,12 +25,13 @@ dependencies {
 tasks.named('test', Test) { useJUnitPlatform() }
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 tasks.named('processResources') {
-    inputs.property 'version', project.version
-    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+    inputs.properties(version: project.version, minecraft_version: minecraft_version, neo_version: neo_version)
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand(version: project.version, minecraft_version: minecraft_version, neo_version: neo_version)
+    }
 }
 tasks.named('jar') { from('LICENSE') }
 
-// Opt-in fixtures run only in development; neither source nor binary jar includes them.
 sourceSets {
     validation {
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
@@ -55,33 +39,41 @@ sourceSets {
     }
 }
 if (project.hasProperty('clientValidation') || project.hasProperty('serverValidation')) {
-    neoForge.mods.animatedinventory.sourceSet(sourceSets.validation)
-}
-if (project.hasProperty('serverValidation')) {
-    if (project.hasProperty('sophisticatedValidation')) neoForge.runs.server.gameDirectory = file('run-server-sophisticated')
-    neoForge.runs.server.systemProperty 'animatedinventory.serverValidation', 'true'
+    neoForge.mods { animatedinventory_validation { sourceSet sourceSets.validation } }
 }
 if (project.hasProperty('clientValidation')) {
-    neoForge.runs.client {
-        systemProperty 'animatedinventory.validation', 'true'
-        if (project.hasProperty('initialContentsValidation')) systemProperty 'animatedinventory.initialContentsValidation', 'true'
-        if (project.hasProperty('bnsValidation')) systemProperty 'animatedinventory.bnsValidation', 'true'
-        if (project.hasProperty('sophisticatedValidation')) systemProperty 'animatedinventory.sophisticatedValidation', 'true'
-        if (project.hasProperty('transferValidation')) systemProperty 'animatedinventory.transferValidation', 'true'
-        if (project.hasProperty('stashValidation')) systemProperty 'animatedinventory.stashValidation', 'true'
-        if (project.hasProperty('trashValidation')) systemProperty 'animatedinventory.trashValidation', 'true'
-        if (project.hasProperty('craftingValidation')) systemProperty 'animatedinventory.craftingValidation', 'true'
-        if (project.hasProperty('configValidation')) systemProperty 'animatedinventory.configValidation', 'true'
-        gameDirectory = file(project.hasProperty('trashValidation') ? 'run-validation-trash' : project.hasProperty('jeiValidation') ? 'run-validation-recipe-jei' : project.hasProperty('sophisticatedValidation') ? (project.hasProperty('compatValidation') ? 'run-validation-sophisticated-compat' : 'run-validation-sophisticated') : project.hasProperty('configValidation') ? 'run-validation-config' : project.hasProperty('compatValidation') ? 'run-validation-compat' : project.hasProperty('bnsValidation') ? 'run-validation-bns' : project.hasProperty('craftingValidation') ? 'run-validation-crafting' : 'run-validation')
-    }
-    def validationReport = file((project.hasProperty('trashValidation') ? 'run-validation-trash' : project.hasProperty('jeiValidation') ? 'run-validation-recipe-jei' : project.hasProperty('sophisticatedValidation') ? (project.hasProperty('compatValidation') ? 'run-validation-sophisticated-compat' : 'run-validation-sophisticated') : project.hasProperty('configValidation') ? 'run-validation-config' : project.hasProperty('compatValidation') ? 'run-validation-compat' : project.hasProperty('bnsValidation') ? 'run-validation-bns' : project.hasProperty('craftingValidation') ? 'run-validation-crafting' : 'run-validation') + '/validation/results.txt')
-    tasks.named('runClient').configure {
-        doFirst { if (validationReport.exists()) validationReport.delete() }
+    neoForge.runs.client { gameDirectory = file('run-validation'); systemProperty 'fml.earlyWindowControl', 'false' }
+
+    tasks.named('runClient') {
+        doFirst {
+            file('run-validation/config').mkdirs()
+            file('run-validation/config/fml.toml').text = 'earlyWindowControl=false\nmaxThreads=2\n'
+            file('run-validation/options.txt').text = 'soundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nmaxFps:30\n'
+            file('run-validation/validation.txt').delete()
+        }
         doLast {
-            if (!validationReport.exists() || validationReport.text.contains('FAIL ')
-                    || !validationReport.text.contains('PASS validation completed')) {
-                throw new GradleException('Client validation did not pass; inspect the validation results and client log.')
-            }
+            def report = file('run-validation/validation.txt')
+            if (!report.exists() || !report.text.contains('PASS complete') || report.text.contains('FAIL')) throw new GradleException('Client validation failed; inspect run-validation logs.')
         }
     }
 }
+if (project.hasProperty('serverValidation')) {
+    tasks.named('runServer') {
+        doFirst {
+            file('run-server').mkdirs()
+            file('run-server/eula.txt').text = 'eula=true\n'
+            file('run-server/server.properties').text = 'server-ip=127.0.0.1\nserver-port=0\nonline-mode=false\nlevel-type=minecraft:flat\nview-distance=2\nsimulation-distance=2\nmax-tick-time=0\n'
+            file('run-server/server-validation.txt').delete()
+        }
+        doLast {
+            def report = file('run-server/server-validation.txt')
+            if (!report.exists() || !report.text.contains('PASS')) throw new GradleException('Dedicated server validation failed.')
+        }
+    }
+}
+
+neoForge.runs.configureEach { jvmArgument '-Xmx2G'; jvmArgument '-XX:ActiveProcessorCount=2' }
+
+tasks.withType(Test).configureEach { maxHeapSize = '2G'; jvmArgs '-XX:ActiveProcessorCount=2' }
+
+if (project.hasProperty('captureValidation')) neoForge.runs.client { systemProperty 'animatedinventory.captureValidation', 'true' }
