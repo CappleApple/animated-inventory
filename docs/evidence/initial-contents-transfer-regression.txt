@@ -1,0 +1,142 @@
+PASS real server opens storage
+PASS authoritative BNS baseline installed
+PASS server storage stack synchronized
+PASS prediction creates no intermediate-slot flight
+PASS server routes new identity directly to hotbar: storage
+PASS synchronized movement slot:0 -> slot:54: storage active=[slot:0->slot:54]
+PASS synchronized movement retains quantity
+PASS hotbar arrival retains original container source
+PASS GL state clean: custom-api
+PASS BNS returns stack to real container: storage
+PASS synchronized movement slot:54 -> slot:0: storage active=[slot:54->slot:0]
+PASS synchronized movement retains quantity
+PASS GL state clean: custom-api
+PASS BNS main grid is server synchronized
+PASS pending transfer preserves original source visual
+PASS synchronized movement slot:27 -> slot:0: storage active=[slot:27->slot:0, slot:27->slot:1]
+PASS synchronized movement retains quantity
+PASS synchronized movement slot:27 -> slot:1: storage active=[slot:27->slot:0, slot:27->slot:1]
+PASS synchronized movement retains quantity
+PASS BNS main-grid quick move distributes exact quantities
+PASS partial destination retains its original 48 during incoming merge
+PASS GL state clean: custom-api
+PASS real pickup precedes double-click collection
+PASS double click collects to cursor capacity
+PASS every donor animates: storage count=3
+PASS donor quantities are 12, 16 and 20
+PASS multiple arrivals use detached model copies
+PASS GL state clean: custom-api
+PASS every donor animates: storage count=3
+PASS donor quantities are 12, 16 and 20
+PASS multiple arrivals use detached model copies
+PASS partial donor retains exact remainder
+PASS cursor keeps original 16 while all 48 incoming items travel
+PASS GL state clean: custom-api
+PASS synchronized container transfer reaches BNS stowed grid edge: storage
+PASS stowed transfer retains container source
+PASS GL state clean: custom-api
+PASS closing clears transfer ownership
+PASS real server opens backpack
+PASS authoritative BNS baseline installed
+PASS server storage stack synchronized
+PASS prediction creates no intermediate-slot flight
+PASS server routes new identity directly to hotbar: backpack
+PASS synchronized movement slot:0 -> slot:54: backpack active=[slot:0->slot:54]
+PASS synchronized movement retains quantity
+PASS hotbar arrival retains original container source
+PASS GL state clean: custom-api
+PASS BNS returns stack to real container: backpack
+PASS synchronized movement slot:54 -> slot:0: backpack active=[slot:54->slot:0]
+PASS synchronized movement retains quantity
+PASS GL state clean: custom-api
+PASS BNS main grid is server synchronized
+PASS pending transfer preserves original source visual
+PASS synchronized movement slot:27 -> slot:0: backpack active=[slot:27->slot:0, slot:27->slot:1]
+PASS synchronized movement retains quantity
+PASS synchronized movement slot:27 -> slot:1: backpack active=[slot:27->slot:0, slot:27->slot:1]
+PASS synchronized movement retains quantity
+PASS BNS main-grid quick move distributes exact quantities
+PASS partial destination retains its original 48 during incoming merge
+PASS GL state clean: custom-api
+PASS real pickup precedes double-click collection
+PASS double click collects to cursor capacity
+PASS every donor animates: backpack count=3
+PASS donor quantities are 12, 16 and 20
+PASS multiple arrivals use detached model copies
+PASS GL state clean: custom-api
+PASS every donor animates: backpack count=3
+PASS donor quantities are 12, 16 and 20
+PASS multiple arrivals use detached model copies
+PASS partial donor retains exact remainder
+PASS cursor keeps original 16 while all 48 incoming items travel
+PASS GL state clean: custom-api
+PASS synchronized container transfer reaches BNS stowed grid edge: backpack
+PASS stowed transfer retains container source
+PASS GL state clean: custom-api
+PASS closing clears transfer ownership
+PASS real server opens vanilla-chest
+PASS authoritative BNS baseline installed
+PASS server storage stack synchronized
+PASS prediction creates no intermediate-slot flight
+PASS server routes new identity directly to hotbar: vanilla-chest
+PASS synchronized movement slot:0 -> slot:54: vanilla-chest active=[slot:0->slot:54]
+PASS synchronized movement retains quantity
+PASS hotbar arrival retains original container source
+PASS GL state clean: custom-api
+PASS BNS returns stack to real container: vanilla-chest
+PASS synchronized movement slot:54 -> slot:0: vanilla-chest active=[slot:54->slot:0]
+PASS synchronized movement retains quantity
+PASS GL state clean: custom-api
+PASS BNS main grid is server synchronized
+PASS pending transfer preserves original source visual
+PASS synchronized movement slot:27 -> slot:0: vanilla-chest active=[slot:27->slot:0, slot:27->slot:1]
+PASS synchronized movement retains quantity
+PASS synchronized movement slot:27 -> slot:1: vanilla-chest active=[slot:27->slot:0, slot:27->slot:1]
+PASS synchronized movement retains quantity
+PASS BNS main-grid quick move distributes exact quantities
+PASS partial destination retains its original 48 during incoming merge
+PASS GL state clean: custom-api
+PASS real pickup precedes double-click collection
+PASS double click collects to cursor capacity
+PASS every donor animates: vanilla-chest count=3
+PASS donor quantities are 12, 16 and 20
+PASS multiple arrivals use detached model copies
+PASS GL state clean: custom-api
+PASS every donor animates: vanilla-chest count=3
+PASS donor quantities are 12, 16 and 20
+PASS multiple arrivals use detached model copies
+PASS partial donor retains exact remainder
+PASS cursor keeps original 16 while all 48 incoming items travel
+PASS GL state clean: custom-api
+PASS synchronized container transfer reaches BNS stowed grid edge: vanilla-chest
+PASS stowed transfer retains container source
+PASS GL state clean: custom-api
+PASS closing clears transfer ownership
+PASS category switch retrieves stashed gold
+PASS category switch also stows excluded apples
+PASS GL state clean: custom-api
+PASS sorting all items retrieves stashed apples
+PASS GL state clean: custom-api
+PASS real crafting screen open for recipe fill
+PASS stash recipe source tracked before viewer opens
+PASS real EMI recipe exists
+PASS actual recipe viewer opens: dev.emi.emi.screen.RecipeScreen
+PASS EMI real fill operation accepted
+PASS recipe ingredients travel from their sources: case 1 active=[slot:9->slot:3, slot:9->slot:1, bns:stowed:36->slot:4, bns:stowed:36->slot:2]
+PASS recipe fill attributes exact stashed ingredient count
+PASS recipe fill attributes exact visible ingredient count
+PASS recipe preview present without taking result
+PASS filling does not pretend to consume recipe
+PASS GL state clean: custom-api
+PASS real crafting screen open for recipe fill
+PASS stash recipe source tracked before viewer opens
+PASS real EMI recipe exists
+PASS actual recipe viewer opens: dev.emi.emi.screen.RecipeScreen
+PASS EMI real fill operation accepted
+PASS recipe ingredients travel from their sources: case 3 active=[slot:10->slot:7, slot:10->slot:8, slot:10->slot:4, bns:stowed:36->slot:9, bns:stowed:36->slot:6, bns:stowed:36->slot:1, bns:stowed:36->slot:2, bns:stowed:36->slot:3]
+PASS recipe fill attributes exact stashed ingredient count
+PASS recipe fill attributes exact visible ingredient count
+PASS recipe preview present without taking result
+PASS filling does not pretend to consume recipe
+PASS GL state clean: custom-api
+PASS validation completed

@@ -44,6 +44,9 @@ public final class ClientValidation {
         if (!Boolean.getBoolean("animatedinventory.validation") || done) return;
         var mc = Minecraft.getInstance();
         try {
+            mc.options.getSoundSourceOptionInstance(net.minecraft.sounds.SoundSource.MASTER).set(0.0);
+            mc.mouseHandler.releaseMouse();
+            GLFW.glfwHideWindow(mc.getWindow().getWindow());
             if (Boolean.getBoolean("animatedinventory.configValidation")) {
                 configTick(mc); return;
             }
@@ -59,6 +62,7 @@ public final class ClientValidation {
                 return;
             }
             if (mc.player == null || mc.level == null || mc.getOverlay() != null) return;
+            if (Boolean.getBoolean("animatedinventory.initialContentsValidation")) { InitialContentsValidation.tick(mc); return; }
             if (Boolean.getBoolean("animatedinventory.stashValidation")) { StashRecipeValidation.tick(mc); return; }
             if (Boolean.getBoolean("animatedinventory.transferValidation")) { TransferValidation.tick(mc); return; }
             if (Boolean.getBoolean("animatedinventory.sophisticatedValidation")) { SophisticatedValidation.tick(mc); return; }

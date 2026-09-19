@@ -166,6 +166,16 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
                 .findFirst().ifPresent(slot -> crafting.add(new CraftingFlow.Consumption(
                         VanillaInventoryProvider.id(slot), product.id(), removed, product.stack())));
     }
+    /** Called once per menu after its first complete server content update has been applied. */
+    public void initialContents(net.minecraft.world.inventory.AbstractContainerMenu menu) {
+        var mc = Minecraft.getInstance();
+        if (!mc.isSameThread() || !enabled() || provider != vanilla || mc.screen != activeScreen
+                || !(activeScreen instanceof AbstractContainerScreen<?> screen) || screen.getMenu() != menu
+                || pendingTransfer != null || lastInteraction != 0) return;
+        // Keep the screen opening effect, but never infer item arrivals from the empty opening menu.
+        // A transfer already requested by the player must retain its original comparison snapshot.
+        invalidate(screen, false);
+    }
     public void afterInteraction() { if (enabled() && provider != null) poll(true); }
     private void clickPre(ScreenEvent.MouseButtonPressed.Pre event) {
         if (event.getScreen() == activeScreen) {

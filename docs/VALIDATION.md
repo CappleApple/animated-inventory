@@ -4,6 +4,26 @@ This file describes the current test setup for Animated Inventory and the scenar
 
 Raw logs and screenshots are kept under `docs/evidence/` and `docs/images/` for debugging regressions. They are supporting artifacts, not a claim that every mod/menu combination has been exhaustively tested.
 
+## Opening contents - 1.0.7
+
+A controlled client regression delays a vanilla content packet until the empty chest slots have rendered, then delivers it through `ClientPacketListener.handleContainerContent`. The previous code fails because it creates an arrival transaction for the initial contents. With the fix, **18 assertions pass** across opening and reopening, full native stack visibility, unrelated menu synchronization, resizing, later full-content updates and pickup animations. The first populated-frame capture was inspected; remote multiplayer timing has not been manually tested.
+
+The existing integrated-server BNS/Sophisticated transfer and EMI recipe-fill suite passes **141 assertions**. All **92 unit tests** pass. The dedicated server reaches 40 ticks, saves and shuts down normally. The production JAR reports version 1.0.7 and excludes validation classes.
+
+- [Failing reproduction](evidence/initial-contents-before.txt)
+- [Opening-content regression](evidence/initial-contents-client.txt)
+- [BNS/Sophisticated transfer regression](evidence/initial-contents-transfer-regression.txt)
+- [Dedicated server gate](evidence/initial-contents-server.txt)
+- [Initial populated frame](images/initial-contents.png)
+
+```powershell
+.\gradlew.bat test build runClient -PclientValidation -PinitialContentsValidation
+.\gradlew.bat runClient -PclientValidation -PsophisticatedValidation -PcompatValidation -PtransferValidation
+.\gradlew.bat runServer -PserverValidation
+```
+
+The opening regression uses `run-validation` without optional mods. Client validation hides the window, mutes audio and releases the mouse. The combined run used BNS 1.4.5, Stacks Not Slots 1.0, Sophisticated Core 1.5.1.2341, Storage 1.5.91.2127, Backpacks 3.26.2.2141, Inventory Particles 3.0.0, MossyLib 1.5.0, EMI 1.1.24 and JEI 19.53.0.426.
+
 ## Automated tests
 
 Run with Java 21:

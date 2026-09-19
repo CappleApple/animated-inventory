@@ -64,6 +64,7 @@ if (project.hasProperty('serverValidation')) {
 if (project.hasProperty('clientValidation')) {
     neoForge.runs.client {
         systemProperty 'animatedinventory.validation', 'true'
+        if (project.hasProperty('initialContentsValidation')) systemProperty 'animatedinventory.initialContentsValidation', 'true'
         if (project.hasProperty('bnsValidation')) systemProperty 'animatedinventory.bnsValidation', 'true'
         if (project.hasProperty('sophisticatedValidation')) systemProperty 'animatedinventory.sophisticatedValidation', 'true'
         if (project.hasProperty('transferValidation')) systemProperty 'animatedinventory.transferValidation', 'true'
