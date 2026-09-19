@@ -22,8 +22,8 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.common.NeoForge;
+
+
 import java.util.*;
 
 public final class ClientRuntime implements AnimatedInventoryApi.Backend {
@@ -50,34 +50,26 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
 
     public void initialize() {
         AnimatedInventoryApi.install(this);
-        NeoForge.EVENT_BUS.addListener(this::tick);
-        NeoForge.EVENT_BUS.addListener(this::init);
-        NeoForge.EVENT_BUS.addListener(this::opening);
-        NeoForge.EVENT_BUS.addListener(this::closing);
-        NeoForge.EVENT_BUS.addListener(this::renderPre);
-        NeoForge.EVENT_BUS.addListener(this::foreground);
-        NeoForge.EVENT_BUS.addListener(this::hud);
-        NeoForge.EVENT_BUS.addListener(this::clickPre);
     }
     @Override public boolean enabled() { return ClientConfig.ENABLED.get() && !failed; }
     @Override public AutoCloseable register(InventoryViewProvider value) {
         Objects.requireNonNull(value);
         if (providers.stream().anyMatch(p -> p.id().equals(value.id()))) throw new IllegalArgumentException("Duplicate provider: " + value.id());
-        providers.addFirst(value);
+        providers.add(0, value);
         if (activeScreen != null) reset(activeScreen);
         return () -> { providers.remove(value); if (activeScreen != null) reset(activeScreen); };
     }
     @Override public long owner(Screen screen) { ensure(screen); return owner; }
-    private void init(ScreenEvent.Init.Post event) { reset(event.getScreen()); }
-    private void opening(ScreenEvent.Opening event) {
-        viewerOrigins.opening(event.getCurrentScreen(), event.getNewScreen(), provider == vanilla ? snapshot : null);
+    public void init(Screen screen) { reset(screen); }
+    public void opening(Screen current, Screen next) {
+        viewerOrigins.opening(current, next, provider == vanilla ? snapshot : null);
     }
-    private void closing(ScreenEvent.Closing event) {
-        if (event.getScreen() == activeScreen) {
+    public void closing(Screen screen) {
+        if (screen == activeScreen) {
             screens.close(); crafting.clear(); sophisticatedTake = null; pendingTransfer = null; animations.clear(); emphasis.clear(); snapshot = null; provider = null; activeScreen = null; owner++;
         }
     }
-    private void tick(ClientTickEvent.Post event) {
+    public void tick() {
         Screen screen = Minecraft.getInstance().screen;
         if (screen != activeScreen) reset(screen);
         boolean enabled = enabled();
@@ -177,9 +169,9 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
         invalidate(screen, false);
     }
     public void afterInteraction() { if (enabled() && provider != null) poll(true); }
-    private void clickPre(ScreenEvent.MouseButtonPressed.Pre event) {
-        if (event.getScreen() == activeScreen) {
-            mouseX = event.getMouseX(); mouseY = event.getMouseY();
+    public void clickPre(Screen screen, double x, double y) {
+        if (screen == activeScreen) {
+            mouseX = x; mouseY = y;
             if (snapshot != null && enabled()) snapshot.items().values().stream().filter(i -> i.mayAnimate() && i.bounds().contains(mouseX, mouseY))
                     .forEach(i -> emphasis.click(i.id(), System.nanoTime()));
         }
@@ -212,7 +204,7 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
                 boolean related = confirmedId != null || now - lastInteraction <= ClientConfig.CORRELATION_MS.get() * 1_000_000L;
                 String id = confirmedId != null ? confirmedId : related ? transactionId : "update-" + (++txSequence);
                 List<String> suppliedIds = after.items().values().stream().map(VisualItem::transactionId).filter(Objects::nonNull).distinct().limit(2).toList();
-                if (suppliedIds.size() == 1) id = suppliedIds.getFirst();
+                if (suppliedIds.size() == 1) id = suppliedIds.get(0);
                 comparisons++;
                 if (sophisticatedTake != null) crafting.addAll(sophisticatedTake.observe(after));
                 InventoryVisualTransaction transaction = CraftingFlow.compare(inference, snapshot, after, crafting, id, related && quickMove, ClientConfig.MAX.get());
@@ -224,12 +216,12 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             revision = nextRevision;
         } catch (RuntimeException | LinkageError error) { fail(error); }
     }
-    private void renderPre(ScreenEvent.Render.Pre event) {
-        if (event.getScreen() != Minecraft.getInstance().screen) return;
-        ensure(event.getScreen()); mouseX = event.getMouseX(); mouseY = event.getMouseY();
+    public void renderPre(Screen screen, double x, double y) {
+        if (screen != Minecraft.getInstance().screen) return;
+        ensure(screen); mouseX = x; mouseY = y;
         if (!enabled()) { animations.clear(); return; }
         // Slot coordinates are cheap to validate every frame; snapshots remain event/change driven.
-        if (provider == vanilla && snapshot != null && event.getScreen() instanceof AbstractContainerScreen<?> container
+        if (provider == vanilla && snapshot != null && screen instanceof AbstractContainerScreen<?> container
                 && VanillaInventoryProvider.layout(container) != snapshot.layoutRevision()) {
             animations.clear(); emphasis.clear(); screens.discardLive(); poll(true);
         }
@@ -237,21 +229,17 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             if (a.transition.type() == TransitionType.MERGE) emphasis.merge(a.transition.destinationId(), System.nanoTime());
         });
     }
-    private void foreground(ContainerScreenEvent.Render.Foreground event) {
-        if (event.getContainerScreen() != activeScreen) return;
-        GuiGraphics graphics = event.getGuiGraphics();
+    public void foreground(AbstractContainerScreen<?> screen, GuiGraphics graphics) {
+        if (screen != activeScreen) return;
+        var access = (com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen;
         if (enabled()) {
-            var screen = event.getContainerScreen();
             graphics.pose().pushPose();
-            try {
-                graphics.pose().translate(-screen.getGuiLeft(), -screen.getGuiTop(), 0);
-                AnimationRenderer.render(graphics, this);
-            } finally { graphics.pose().popPose(); }
+            try { graphics.pose().translate(-access.animatedinventory$left(), -access.animatedinventory$top(), 0); AnimationRenderer.render(graphics, this); }
+            finally { graphics.pose().popPose(); }
         }
-        // The base screen pose is translated by left/top here; composite in absolute GUI pixels.
-        screens.finish(graphics, event.getContainerScreen().getGuiLeft(), event.getContainerScreen().getGuiTop());
+        screens.finish(graphics, access.animatedinventory$left(), access.animatedinventory$top());
     }
-    private void hud(RenderGuiEvent.Post event) { screens.renderExit(event.getGuiGraphics()); }
+    public void hud(GuiGraphics graphics) { screens.renderExit(graphics); }
     @Override public List<Long> submit(Screen screen, InventoryVisualTransaction transaction) {
         ensure(screen);
         if (!enabled() || transaction.owner() != owner || provider == null) return List.of();
@@ -292,7 +280,7 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             if (provider == vanilla && (!retrieve && !nativeEndpoint(t.sourceId()) || !offscreen && !nativeEndpoint(t.destinationId()))) continue;
             if (offscreen && t.sourceId() == null) continue;
             if (t.destinationId() != null && (target == null || !target.visible() && !offscreen || !target.mayAnimate()
-                    || !craft && (!ItemStack.isSameItemSameComponents(target.stack(), t.stack()) || t.stack().getCount() > target.stack().getCount()))) continue;
+                    || !craft && (!ItemStack.isSameItemSameTags(target.stack(), t.stack()) || t.stack().getCount() > target.stack().getCount()))) continue;
             boolean nativeTransform = inline && !offscreen && !retrieve && !craft && target != null
                     && target.stack().getCount() == t.stack().getCount()
                     && destinationCounts.getOrDefault(t.destinationId(), 0L) == 1

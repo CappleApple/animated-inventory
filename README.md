@@ -1,105 +1,48 @@
 # Animated Inventory
 
-Animated Inventory makes item movement in Minecraft inventories visible instead of instantaneous.
+Animated Inventory animates item pickup, placement, quick move, merging, splitting and crafting while Minecraft's real menu state updates normally. It also animates hotbar selection, item emphasis and container screen transitions, with adjustable timing and reduced motion.
 
-When an item is picked up, shift-clicked, merged, split, crafted, sorted, equipped, or moved between containers, the mod animates a visual copy from the source to the destination while the real inventory state continues to use Minecraft's normal menus.
+This branch builds **version 1.1 for Minecraft 1.20.1 Fabric**. The original NeoForge 1.21.1 version remains on `main`.
 
-It is a client-side NeoForge 1.21.1 mod. A server installation is not required.
+## Installation
 
-## Features
-
-- Animated pickup, placement, quick-move, merges, splits, swaps, sorting, equipment changes, and external inventory updates.
-- Crafting ingredients travel into the crafted item for 2x2 and 3x3 recipes, including shift crafting and returned containers.
-- Linear, smooth, arc, spring, and snap-smooth movement styles with configurable easing.
-- Cursor movement can either follow the cursor or travel toward a fixed pickup/drop point.
-- Smooth hotbar selection movement, including rapid retargeting.
-- Fade, scale, fade+scale, and slide effects when container screens open or close.
-- Configurable animation speed and reduced-motion mode.
-- A provider API for custom screens or inventories that do not use ordinary Minecraft `Slot` positions.
-
-The animation is presentation only. Click targets, tooltips, and the actual inventory/menu logic stay at their normal logical positions.
-
-## Compatibility
-
-Animated Inventory has dedicated handling for a few inventory mods where the visible slot layout does not map cleanly to vanilla menus.
-
-### Bundled Not Siloed
-
-The normal BNS player grid animates through its real slot renderer. Transfers to off-page stowed storage travel toward the appropriate edge/column and fade out; retrieving a stowed item enters from the lower edge.
-
-BNS's aggregate search renderer stays under BNS control rather than being forced through Animated Inventory's normal slot path.
-
-### Sophisticated Backpacks / Storage
-
-Normal backpack/storage transfers, scrolling, large-stack displays, upgrade slots, and crafting-upgrade ingredient flow are supported through an optional adapter.
-
-### JEI / EMI
-
-Recipe filling can animate ingredients from the slots or BNS storage they actually came from. The recipe viewer itself is not replaced.
-
-### Inventory Particles
-
-The two mods can coexist. Animated Inventory avoids taking over effects that Inventory Particles needs to render itself, especially for partial transfers where both systems would otherwise try to own the same visual item.
-
-See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the exact compatibility behavior and known limits.
+Minecraft **1.20.1**, **Fabric 0.19.5**, and **Java 17**. Fabric API is not required. Install `animatedinventory-fabric-1.20.1-1.1.jar` in the client's `mods` directory. A server installation is not required.
 
 ## Configuration
 
-Use:
+Press **F8** to open the configuration editor, or edit `config/animatedinventory-client.json`. The JSON file uses nested objects for the same sections and keys as the original configuration. The NeoForge TOML file is not imported.
 
-**Mods → Animated Inventory → Config**
+See the [configuration reference](docs/CONFIG.md) for setting names, defaults and ranges. Animations change presentation; click targets and inventory logic retain their normal positions.
 
-or edit:
+Native rendering preserves item decorations and vanilla drag-preview quantities. Stack matching uses Minecraft 1.20.1 item tags.
 
-```text
-config/animatedinventory-client.toml
-```
+## Optional integrations
 
-The configuration covers animation duration, trajectory/easing, screen effects, hover/press/merge emphasis, hotbar motion, reduced motion, compatibility behavior, and debug options.
+The original Bundled Not Siloed adapter requires NeoForge player attachments and is disabled on Fabric. Its configuration switch is retained but cannot enable that adapter. The Sophisticated NeoForge renderer mixins are excluded; no Fabric-specific adapter has been validated. Generic native slots remain eligible for animation.
 
-Full reference: [docs/CONFIG.md](docs/CONFIG.md).
+Recipe-viewer request observation and Inventory Particles detection are retained as guarded optional code. Third-party viewer and storage gameplay has not been validated on this target.
 
-## Resources
-
-Animated Inventory does not replace Minecraft's item models or add a custom GUI skin.
-
-Moving items still use their normal models, glint, durability/count decorations, resource-pack overrides, hotbar selection sprite, and slot highlighting.
-
-## API
-
-Mods with custom inventory layouts can provide logical item positions through the screen-space provider API rather than pretending to have vanilla slots.
-
-The API supports destination queries, clipping, explicit transactions, layout reflow, and custom logical IDs.
-
-See [docs/API.md](docs/API.md) for examples.
-
-## Documentation
-
-- [Configuration](docs/CONFIG.md)
-- [Integration API](docs/API.md)
-- [Compatibility notes](docs/COMPATIBILITY.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Testing and QA](docs/VALIDATION.md)
-
-## Requirements
-
-- Minecraft 1.21.1
-- NeoForge 21.1.244 or newer compatible 21.1 build
-- Java 21 for development
-
-Install the mod in the **client's** `mods` directory.
+The JEI 1.20.1 packet discriminator is unit-tested without consuming the outgoing buffer. This checks request recognition, not a complete JEI crafting workflow.
 
 ## Building
 
+Use **JDK 21** to run the build. The wrapper pins **Gradle 8.14.3** and the build uses **Fabric Loom 1.11.8**. The Java toolchain compiles for Java 17.
+
 ```powershell
 .\gradlew.bat test build
-.\gradlew.bat runClient
 ```
 
-The release jar is written to `build/libs/`.
+The installable jar is `build/libs/animatedinventory-fabric-1.20.1-1.1.jar`. Source jars are for development.
 
-The optional client-validation source set uses disposable development worlds and is not included in published artifacts.
+## Validation
+
+```powershell
+.\gradlew.bat -PclientValidation runClient
+.\gradlew.bat -PserverValidation runServer
+```
+
+The opt-in runtime fixtures run hidden, mute master volume, disable mouse capture and exit automatically. They are excluded from release and source jars. See [completed validation and limits](docs/PORT_VALIDATION.md).
 
 ## License
 
-Animated Inventory is licensed under [CC BY-NC-SA 4.0 with a Modpack/Server Exception](LICENSE). Modpacks and Minecraft servers, including monetized ones, may use it under the additional permission in the LICENSE.
+[CC BY-NC-SA 4.0 with a Modpack/Server Exception](LICENSE). The additional permission allows use in Minecraft modpacks and servers, including monetized ones, subject to the license terms.

@@ -21,16 +21,16 @@ class SophisticatedCraftingTest {
     }
     @Test void successfulTakeFlowsEvenWhenServerHasNotConsumedTheGridYet() {
         var uses = take().observe(snapshot(1, 1, ingredient, item("cursor", Items.OAK_PLANKS, 4)));
-        assertEquals(1, uses.size()); assertEquals(1, uses.getFirst().ingredient().getCount());
+        assertEquals(1, uses.size()); assertEquals(1, uses.get(0).ingredient().getCount());
     }
     @Test void failedTakeAndPreviewRefreshDoNotCraft() { assertTrue(take().observe(snapshot(1, 1, ingredient, result)).isEmpty()); }
     @Test void existingCursorQuantityIsNotCountedAgain() {
         var uses = take(item("cursor", Items.OAK_PLANKS, 12)).observe(snapshot(1, 1, ingredient, result, item("cursor", Items.OAK_PLANKS, 16)));
-        assertEquals(1, uses.getFirst().ingredient().getCount());
+        assertEquals(1, uses.get(0).ingredient().getCount());
     }
     @Test void SplitOutputGainsCountActualBatches() {
         var uses = take().observe(snapshot(1, 1, ingredient, result, item("a", Items.OAK_PLANKS, 4), item("b", Items.OAK_PLANKS, 8)));
-        assertEquals(3, uses.getFirst().ingredient().getCount());
+        assertEquals(3, uses.get(0).ingredient().getCount());
     }
     @Test void MovingExistingProductDoesNotCreateFalseCrafting() {
         assertTrue(take(item("a", Items.OAK_PLANKS, 4)).observe(snapshot(1, 1, ingredient, result, item("a", Items.OAK_PLANKS, 0), item("b", Items.OAK_PLANKS, 4))).isEmpty());

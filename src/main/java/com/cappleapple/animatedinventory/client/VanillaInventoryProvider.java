@@ -35,11 +35,11 @@ public final class VanillaInventoryProvider implements InventoryViewProvider {
         for (Slot slot : slots(container)) if (eligible(screen, slot)) hash = hash * 31 + stackHash(slot.getItem());
         return (hash * 31 + stackHash(container.getMenu().getCarried())) * 31 + BundledCompatibility.contentsRevision();
     }
-    private static long stackHash(ItemStack stack) { return (long)ItemStack.hashItemAndComponents(stack) * 31 + stack.getCount(); }
+    private static long stackHash(ItemStack stack) { return (long)Objects.hash(stack.getItem(), stack.getTag()) * 31 + stack.getCount(); }
     public static long layout(AbstractContainerScreen<?> screen) {
         long hash = System.identityHashCode(screen.getMenu());
         hash = hash * 31 + screen.width; hash = hash * 31 + screen.height;
-        hash = hash * 31 + screen.getGuiLeft(); hash = hash * 31 + screen.getGuiTop();
+        hash = hash * 31 + ((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen).animatedinventory$left(); hash = hash * 31 + ((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)screen).animatedinventory$top();
         for (Slot slot : slots(screen)) {
             hash = hash * 31 + System.identityHashCode(slot); hash = hash * 31 + slot.x;
             hash = hash * 31 + slot.y; hash = hash * 31 + (slot.isActive() ? 1 : 0);
@@ -55,7 +55,7 @@ public final class VanillaInventoryProvider implements InventoryViewProvider {
         for (Slot slot : slots(container)) {
             if (!eligible(screen, slot)) continue;
             boolean player = slot.container instanceof Inventory;
-            Bounds bounds = Bounds.item(container.getGuiLeft() + slot.x, container.getGuiTop() + slot.y);
+            Bounds bounds = Bounds.item(((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)container).animatedinventory$left() + slot.x, ((com.cappleapple.animatedinventory.mixin.ContainerScreenAccess)container).animatedinventory$top() + slot.y);
             items.add(new VisualItem(id(slot), slot.getItem(), bounds, player ? "player" : "container",
                     slot.isActive() && viewport.intersects(bounds) && (!(screen instanceof SophisticatedView view) || view.animatedinventory$visible(slot)),
                     !BundledCompatibility.customProjection(slot, projection) && (!(screen instanceof SophisticatedView view) || view.animatedinventory$allows(slot)),

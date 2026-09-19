@@ -1,6 +1,0 @@
-[11:28:45] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.291s)! For help, type "help"
-[11:28:47] [Server thread/INFO] [co.ca.an.va.ServerValidation/]: AI_SERVER_VALIDATION PASSED
-[11:28:47] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
-[11:28:47] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
-[11:28:47] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
-BUILD SUCCESSFUL in 17s

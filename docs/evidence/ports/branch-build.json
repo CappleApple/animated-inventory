@@ -1,0 +1,11 @@
+{
+  "file": "animatedinventory-fabric-1.20.1-1.1.jar",
+  "sha256": "9b4a7300abb42acf09e0c48ed2b3b14ac622b6fe2f842b3681a1d3028e6866e8",
+  "tests": {
+    "tests": 95,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "root_build": "passed"
+}

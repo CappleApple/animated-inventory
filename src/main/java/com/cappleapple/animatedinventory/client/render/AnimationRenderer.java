@@ -8,7 +8,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+
 
 public final class AnimationRenderer {
     public static void render(GuiGraphics graphics, ClientRuntime runtime) {
@@ -24,7 +24,7 @@ public final class AnimationRenderer {
                 try {
                     Bounds b = a.bounds(now);
                     double scale = a.scale(now) * runtime.emphasis.scale(a.transition.destinationId() == null ? "animation:" + a.handle : a.transition.destinationId(), false, now);
-                    graphics.pose().translate(b.centerX(), b.centerY(), Math.clamp(a.options.zOrder(), 110, 200));
+                    graphics.pose().translate(b.centerX(), b.centerY(), com.cappleapple.animatedinventory.api.animation.Clamp.value(a.options.zOrder(), 110, 200));
                     graphics.pose().mulPose(Axis.ZP.rotationDegrees((float)a.rotation(now)));
                     graphics.pose().scale((float)(b.width() / 16 * scale), (float)(b.height() / 16 * scale), 1);
                     graphics.pose().translate(-8, -8, 0);
@@ -48,8 +48,7 @@ public final class AnimationRenderer {
             view.animatedinventory$drawStack(graphics, x, y, stack, false, null); return;
         }
         graphics.renderItem(stack, x, y);
-        var font = IClientItemExtensions.of(stack).getFont(stack, IClientItemExtensions.FontContext.ITEM_COUNT);
-        graphics.renderItemDecorations(font == null ? Minecraft.getInstance().font : font, stack, x, y);
+        graphics.renderItemDecorations(Minecraft.getInstance().font, stack, x, y);
     }
     private AnimationRenderer() { }
 }

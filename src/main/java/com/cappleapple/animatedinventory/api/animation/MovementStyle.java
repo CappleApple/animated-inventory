@@ -13,7 +13,7 @@ public enum MovementStyle {
     }
     public Bounds sample(Bounds from, Bounds to, double time, Easing easing, double arc) {
         Bounds result = from.interpolate(to, progress(time, easing));
-        double t = Math.clamp(time, 0, 1);
+        double t = com.cappleapple.animatedinventory.api.animation.Clamp.value(time, 0, 1);
         return this == ARC ? result.offset(0, -4 * arc * t * (1 - t)) : result;
     }
 }

@@ -17,7 +17,7 @@ class SynchronizedTransferTest {
         assertEquals(SynchronizedTransfer.Decision.WAIT, pending.observe(predicted, 10, 101, 20_000_000));
         assertEquals(SynchronizedTransfer.Decision.WAIT, pending.observe(finalState, 11, 102, 50_000_000));
         assertEquals(SynchronizedTransfer.Decision.READY, pending.observe(finalState, 11, 102, 100_000_000));
-        var move = compare(pending.before, finalState).transitions().getFirst();
+        var move = compare(pending.before, finalState).transitions().get(0);
         assertEquals("storage", move.sourceId()); assertEquals("hotbar", move.destinationId());
     }
     @Test void reverseTransferWaitsForSeparatelyDeliveredMenuPacket() {

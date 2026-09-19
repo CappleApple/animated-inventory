@@ -12,7 +12,7 @@ import org.joml.Matrix4f;
 public final class TextureCompositor {
     public static void draw(GuiGraphics graphics, RenderTarget target, double x, double y, double width, double height, float alpha, float z) {
         graphics.flush();
-        float a = Math.clamp(alpha, 0, 1);
+        float a = com.cappleapple.animatedinventory.api.animation.Clamp.value(alpha, 0, 1);
         boolean depth = org.lwjgl.opengl.GL11.glIsEnabled(org.lwjgl.opengl.GL11.GL_DEPTH_TEST);
         boolean blend = org.lwjgl.opengl.GL11.glIsEnabled(org.lwjgl.opengl.GL11.GL_BLEND);
         RenderSystem.disableDepthTest(); RenderSystem.depthMask(false);
@@ -22,12 +22,13 @@ public final class TextureCompositor {
         RenderSystem.setShaderTexture(0, target.getColorTextureId());
         RenderSystem.setShaderColor(1, 1, 1, 1);
         Matrix4f matrix = graphics.pose().last().pose();
-        BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-        buffer.addVertex(matrix, (float)x, (float)(y + height), z).setUv(0, 0).setColor(a, a, a, a);
-        buffer.addVertex(matrix, (float)(x + width), (float)(y + height), z).setUv(1, 0).setColor(a, a, a, a);
-        buffer.addVertex(matrix, (float)(x + width), (float)y, z).setUv(1, 1).setColor(a, a, a, a);
-        buffer.addVertex(matrix, (float)x, (float)y, z).setUv(0, 1).setColor(a, a, a, a);
-        BufferUploader.drawWithShader(buffer.buildOrThrow());
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        buffer.vertex(matrix, (float)x, (float)(y + height), z).uv(0, 0).color(a, a, a, a).endVertex();
+        buffer.vertex(matrix, (float)(x + width), (float)(y + height), z).uv(1, 0).color(a, a, a, a).endVertex();
+        buffer.vertex(matrix, (float)(x + width), (float)y, z).uv(1, 1).color(a, a, a, a).endVertex();
+        buffer.vertex(matrix, (float)x, (float)y, z).uv(0, 1).color(a, a, a, a).endVertex();
+        BufferUploader.drawWithShader(buffer.end());
         RenderSystem.defaultBlendFunc(); RenderSystem.depthMask(true);
         if (depth) RenderSystem.enableDepthTest();
         if (!blend) RenderSystem.disableBlend();

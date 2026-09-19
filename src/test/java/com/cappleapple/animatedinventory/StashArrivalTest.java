@@ -30,10 +30,10 @@ class StashArrivalTest {
     }
     @Test void partialStashWithdrawalKeepsRemainder() {
         var moves=compare(snapshot(hidden("a",64)),snapshot(hidden("a",60),item("grid",Items.OAK_PLANKS,4,50))).transitions();
-        assertEquals(1,moves.size()); assertEquals(4,moves.getFirst().stack().getCount());
+        assertEquals(1,moves.size()); assertEquals(4,moves.get(0).stack().getCount());
     }
     @Test void stashArrivalFadesInAndFinishesAtVisibleCell() {
-        var t=compare(snapshot(hidden("a",4)),snapshot(item("grid",Items.OAK_PLANKS,4,50))).transitions().getFirst();
+        var t=compare(snapshot(hidden("a",4)),snapshot(item("grid",Items.OAK_PLANKS,4,50))).transitions().get(0);
         var a=new ItemAnimation(1,1,"tx",t,AnimationOptions.move(100,Easing.LINEAR,MovementStyle.LINEAR),t.source(),0,100,false);
         assertEquals(0,a.alpha(0)); assertTrue(a.alpha(10)>0 && a.alpha(10)<1); assertEquals(1,a.alpha(50));
         assertEquals(t.destination(),a.bounds(100));

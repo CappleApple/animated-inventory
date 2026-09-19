@@ -50,7 +50,7 @@ public final class AnimationManager {
     public ItemStack normalStack(String id, ItemStack stack, long now) {
         long withheld = 0;
         for (ItemAnimation a : active) if (a.transition.type() != TransitionType.CRAFT && !a.inline && !a.finished(now) && id.equals(a.transition.destinationId())
-                && ItemStack.isSameItemSameComponents(stack, a.transition.stack())) withheld += a.transition.stack().getCount();
+                && ItemStack.isSameItemSameTags(stack, a.transition.stack())) withheld += a.transition.stack().getCount();
         return withheld == 0 ? stack : stack.copyWithCount((int)Math.max(0, stack.getCount() - withheld));
     }
     public void cancel(long handle) { if (active.removeIf(a -> a.handle == handle)) cancelled++; }

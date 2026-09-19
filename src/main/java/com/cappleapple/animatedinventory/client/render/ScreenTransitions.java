@@ -18,7 +18,7 @@ public final class ScreenTransitions {
     public void begin(AbstractContainerScreen<?> screen, GuiGraphics graphics) {
         if (capturing || !ClientConfig.ENABLED.get() || Minecraft.getInstance().level == null
                 || InventoryParticlesCompatibility.inlineOnly() || BundledCompatibility.active()
-                || !screen.getClass().getPackageName().equals("net.minecraft.client.gui.screens.inventory")) return;
+                || !screen.getClass().getName().startsWith("net.minecraft.")) return;
         long now = System.nanoTime();
         boolean opening = ClientConfig.OPEN.get() != ClientConfig.ScreenEffect.NONE && now - opened < ClientConfig.nanos(ClientConfig.OPEN_MS.get());
         if (!opening && ClientConfig.CLOSE.get() == ClientConfig.ScreenEffect.NONE) return;

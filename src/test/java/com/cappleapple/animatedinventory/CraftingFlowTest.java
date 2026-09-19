@@ -61,8 +61,8 @@ class CraftingFlowTest {
                 use("a", Items.OAK_LOG, 1, Items.OAK_PLANKS), use("a", Items.OAK_LOG, 1, Items.OAK_PLANKS));
         var flow = tx.stream().filter(t -> t.type() == TransitionType.CRAFT).toList();
         assertEquals(1, flow.size());
-        assertEquals(2, flow.getFirst().stack().getCount());
-        assertEquals("bag", flow.getFirst().destinationId());
+        assertEquals(2, flow.get(0).stack().getCount());
+        assertEquals("bag", flow.get(0).destinationId());
         assertTrue(tx.stream().anyMatch(t -> "result".equals(t.sourceId()) && "bag".equals(t.destinationId()) && t.stack().getCount() == 8));
     }
     @Test void shiftCraftFollowsTheLargestOutputDestination() {
