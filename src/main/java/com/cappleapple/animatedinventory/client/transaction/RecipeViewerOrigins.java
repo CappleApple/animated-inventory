@@ -32,7 +32,7 @@ public final class RecipeViewerOrigins {
     public boolean request(double mouseX, double mouseY) {
         var mc = Minecraft.getInstance();
         AbstractContainerScreen<?> original = screen.get();
-        if (!viewer(mc.screen) || original == null || before == null || mc.player == null
+        if (!viewer(mc.gui.screen()) || original == null || before == null || mc.player == null
                 || original.getMenu() != mc.player.containerMenu) { clear(); return false; }
         // Refresh quantities at the actual request, preserving the last displayed origin coordinates.
         InventoryVisualSnapshot fresh = new VanillaInventoryProvider().capture(original, before.owner(), mouseX, mouseY);

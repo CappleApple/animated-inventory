@@ -15,7 +15,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StowedTransferTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { com.cappleapple.animatedinventory.TestBootstrap.initialize(); }
     private static final Bounds EDGE = Bounds.item(46, 84);
     private static VisualItem visible(int count) {
         return new VisualItem("source", new ItemStack(Items.APPLE, count), Bounds.item(10, 10), "container");

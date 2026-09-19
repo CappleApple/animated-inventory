@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SophisticatedCraftingTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { com.cappleapple.animatedinventory.TestBootstrap.initialize(); }
     private static VisualItem item(String id, Item item, int count) { return new VisualItem(id, new ItemStack(item, count), Bounds.item(0, 0), "test"); }
     private static InventoryVisualSnapshot snapshot(long owner, long layout, VisualItem... items) { return InventoryVisualSnapshot.of(owner, "test", layout, true, List.of(items)); }
     private final VisualItem ingredient = item("input", Items.OAK_LOG, 3), result = item("result", Items.OAK_PLANKS, 4);

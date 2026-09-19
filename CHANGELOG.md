@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1 - 2026-09-19
+
+### Added
+
+- Ported Animated Inventory to Minecraft 26.2 Fabric.
+- Added a Fabric configuration editor opened with F8.
+
 ## 1.0.7 - 2026-09-18
 
 ### Fixed

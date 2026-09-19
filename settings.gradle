@@ -1,7 +1,2 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven { url = 'https://maven.neoforged.net/releases' }
-    }
-}
-rootProject.name = 'animated-inventory'
+pluginManagement { repositories { maven { url = 'https://maven.fabricmc.net/' }; gradlePluginPortal() } }
+rootProject.name = 'animated-inventory-fabric-26.2'

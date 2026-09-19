@@ -16,14 +16,12 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.common.NeoForge;
 import java.util.*;
 
 public final class ClientRuntime implements AnimatedInventoryApi.Backend {
@@ -50,14 +48,6 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
 
     public void initialize() {
         AnimatedInventoryApi.install(this);
-        NeoForge.EVENT_BUS.addListener(this::tick);
-        NeoForge.EVENT_BUS.addListener(this::init);
-        NeoForge.EVENT_BUS.addListener(this::opening);
-        NeoForge.EVENT_BUS.addListener(this::closing);
-        NeoForge.EVENT_BUS.addListener(this::renderPre);
-        NeoForge.EVENT_BUS.addListener(this::foreground);
-        NeoForge.EVENT_BUS.addListener(this::hud);
-        NeoForge.EVENT_BUS.addListener(this::clickPre);
     }
     @Override public boolean enabled() { return ClientConfig.ENABLED.get() && !failed; }
     @Override public AutoCloseable register(InventoryViewProvider value) {
@@ -68,17 +58,17 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
         return () -> { providers.remove(value); if (activeScreen != null) reset(activeScreen); };
     }
     @Override public long owner(Screen screen) { ensure(screen); return owner; }
-    private void init(ScreenEvent.Init.Post event) { reset(event.getScreen()); }
-    private void opening(ScreenEvent.Opening event) {
-        viewerOrigins.opening(event.getCurrentScreen(), event.getNewScreen(), provider == vanilla ? snapshot : null);
+    public void init(Screen screen) { reset(screen); }
+    public void opening(Screen current, Screen next) {
+        viewerOrigins.opening(current, next, provider == vanilla ? snapshot : null);
     }
-    private void closing(ScreenEvent.Closing event) {
-        if (event.getScreen() == activeScreen) {
+    public void closing(Screen screen) {
+        if (screen == activeScreen) {
             screens.close(); crafting.clear(); sophisticatedTake = null; pendingTransfer = null; animations.clear(); emphasis.clear(); snapshot = null; provider = null; activeScreen = null; owner++;
         }
     }
-    private void tick(ClientTickEvent.Post event) {
-        Screen screen = Minecraft.getInstance().screen;
+    public void tick() {
+        Screen screen = Minecraft.getInstance().gui.screen();
         if (screen != activeScreen) reset(screen);
         boolean enabled = enabled();
         if (enabled != enabledLast) { viewerOrigins.clear(); crafting.clear(); sophisticatedTake = null; pendingTransfer = null; animations.clear(); emphasis.clear(); snapshot = null; screens.discard(); enabledLast = enabled; }
@@ -116,11 +106,11 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             throw new IllegalArgumentException("Provider returned invalid ownership, identity, or excessive view size");
         return captured;
     }
-    public void beforeInteraction(AbstractContainerScreen<?> screen, Slot slot, ClickType type) {
+    public void beforeInteraction(AbstractContainerScreen<?> screen, Slot slot, ContainerInput type) {
         ensure(screen);
         if (!enabled() || provider == null) return;
         readMouse(); poll(false);
-        if (pendingTransfer != null && type != ClickType.QUICK_MOVE) {
+        if (pendingTransfer != null && type != ContainerInput.QUICK_MOVE) {
             pendingTransfer = null; snapshot = null; poll(true);
         }
         if (pendingTransfer == null) { crafting.clear(); sophisticatedTake = null; }
@@ -131,7 +121,7 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             }
         } catch (RuntimeException | LinkageError error) { fail(error); return; }
         lastInteraction = System.nanoTime(); transactionId = "input-" + (++txSequence);
-        quickMove = type == ClickType.QUICK_MOVE;
+        quickMove = type == ContainerInput.QUICK_MOVE;
         long serverRevision = BundledCompatibility.serverRevision();
         if (pendingTransfer == null && provider == vanilla && quickMove && slot != null && slot.hasItem()
                 && serverRevision >= 0 && !(screen instanceof net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen)) {
@@ -144,8 +134,8 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
         var mc = Minecraft.getInstance();
         if (!mc.isSameThread() || !enabled()) return;
         try {
-            if (recipe && RecipeViewerOrigins.viewer(mc.screen)) { viewerOrigins.request(mouseX, mouseY); return; }
-            if (mc.screen != activeScreen || provider != vanilla || snapshot == null
+            if (recipe && RecipeViewerOrigins.viewer(mc.gui.screen())) { viewerOrigins.request(mouseX, mouseY); return; }
+            if (mc.gui.screen() != activeScreen || provider != vanilla || snapshot == null
                     || !recipe && BundledCompatibility.serverRevision() < 0 || pendingTransfer != null) return;
             readMouse(); poll(false);
             snapshot = capture();
@@ -169,7 +159,7 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
     /** Called once per menu after its first complete server content update has been applied. */
     public void initialContents(net.minecraft.world.inventory.AbstractContainerMenu menu) {
         var mc = Minecraft.getInstance();
-        if (!mc.isSameThread() || !enabled() || provider != vanilla || mc.screen != activeScreen
+        if (!mc.isSameThread() || !enabled() || provider != vanilla || mc.gui.screen() != activeScreen
                 || !(activeScreen instanceof AbstractContainerScreen<?> screen) || screen.getMenu() != menu
                 || pendingTransfer != null || lastInteraction != 0) return;
         // Keep the screen opening effect, but never infer item arrivals from the empty opening menu.
@@ -177,9 +167,9 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
         invalidate(screen, false);
     }
     public void afterInteraction() { if (enabled() && provider != null) poll(true); }
-    private void clickPre(ScreenEvent.MouseButtonPressed.Pre event) {
-        if (event.getScreen() == activeScreen) {
-            mouseX = event.getMouseX(); mouseY = event.getMouseY();
+    public void clickPre(Screen screen, double x, double y) {
+        if (screen == activeScreen) {
+            mouseX = x; mouseY = y;
             if (snapshot != null && enabled()) snapshot.items().values().stream().filter(i -> i.mayAnimate() && i.bounds().contains(mouseX, mouseY))
                     .forEach(i -> emphasis.click(i.id(), System.nanoTime()));
         }
@@ -224,12 +214,12 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             revision = nextRevision;
         } catch (RuntimeException | LinkageError error) { fail(error); }
     }
-    private void renderPre(ScreenEvent.Render.Pre event) {
-        if (event.getScreen() != Minecraft.getInstance().screen) return;
-        ensure(event.getScreen()); mouseX = event.getMouseX(); mouseY = event.getMouseY();
+    public void renderPre(Screen screen, int x, int y) {
+        if (screen != Minecraft.getInstance().gui.screen()) return;
+        ensure(screen); mouseX = x; mouseY = y;
         if (!enabled()) { animations.clear(); return; }
         // Slot coordinates are cheap to validate every frame; snapshots remain event/change driven.
-        if (provider == vanilla && snapshot != null && event.getScreen() instanceof AbstractContainerScreen<?> container
+        if (provider == vanilla && snapshot != null && screen instanceof AbstractContainerScreen<?> container
                 && VanillaInventoryProvider.layout(container) != snapshot.layoutRevision()) {
             animations.clear(); emphasis.clear(); screens.discardLive(); poll(true);
         }
@@ -237,21 +227,10 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
             if (a.transition.type() == TransitionType.MERGE) emphasis.merge(a.transition.destinationId(), System.nanoTime());
         });
     }
-    private void foreground(ContainerScreenEvent.Render.Foreground event) {
-        if (event.getContainerScreen() != activeScreen) return;
-        GuiGraphics graphics = event.getGuiGraphics();
-        if (enabled()) {
-            var screen = event.getContainerScreen();
-            graphics.pose().pushPose();
-            try {
-                graphics.pose().translate(-screen.getGuiLeft(), -screen.getGuiTop(), 0);
-                AnimationRenderer.render(graphics, this);
-            } finally { graphics.pose().popPose(); }
-        }
-        // The base screen pose is translated by left/top here; composite in absolute GUI pixels.
-        screens.finish(graphics, event.getContainerScreen().getGuiLeft(), event.getContainerScreen().getGuiTop());
+    public void foreground(GuiGraphicsExtractor graphics, AbstractContainerScreen<?> screen) {
+        if (screen == activeScreen && enabled()) AnimationRenderer.render(graphics, this);
     }
-    private void hud(RenderGuiEvent.Post event) { screens.renderExit(event.getGuiGraphics()); }
+    public void hud(GuiGraphicsExtractor graphics) { screens.renderExit(graphics); }
     @Override public List<Long> submit(Screen screen, InventoryVisualTransaction transaction) {
         ensure(screen);
         if (!enabled() || transaction.owner() != owner || provider == null) return List.of();
@@ -297,7 +276,7 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
                     && target.stack().getCount() == t.stack().getCount()
                     && destinationCounts.getOrDefault(t.destinationId(), 0L) == 1
                     && t.type() != TransitionType.APPEAR;
-            // Known-source split/merge copies bypass GuiGraphics item hooks, so every donor can travel
+            // Known-source split/merge copies bypass GuiGraphicsExtractor item hooks, so every donor can travel
             // without adding duplicate Inventory Particles effects.
             if (inline && !nativeTransform && !offscreen && !craft && (t.sourceId() == null || t.destinationId() == null)) {
                 emphasis.merge(t.destinationId(), now); continue;
@@ -355,7 +334,7 @@ public final class ClientRuntime implements AnimatedInventoryApi.Backend {
         if (screen != activeScreen || provider == null) return;
         crafting.clear(); sophisticatedTake = null; pendingTransfer = null; animations.clear(); emphasis.clear(); if (!reflow) snapshot = null; poll(true);
     }
-    @Override public void render(Screen screen, GuiGraphics graphics) {
+    @Override public void render(Screen screen, GuiGraphicsExtractor graphics) {
         if (enabled() && screen == activeScreen && provider != null) AnimationRenderer.render(graphics, this);
     }
     @Override public void cancel(long handle) { animations.cancel(handle); }

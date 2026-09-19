@@ -22,7 +22,7 @@ abstract class CraftingResultMixin {
             target = "Lnet/minecraft/world/inventory/CraftingContainer;removeItem(II)Lnet/minecraft/world/item/ItemStack;"))
     private ItemStack animatedinventory$consumed(CraftingContainer grid, int index, int count, Operation<ItemStack> original) {
         ItemStack removed = original.call(grid, index, count);
-        if (player.level().isClientSide) {
+        if (player.level().isClientSide()) {
             try { ClientRuntime.INSTANCE.craftedIngredient(player, (Slot)(Object)this, grid, index, removed); }
             catch (RuntimeException | LinkageError error) { ClientRuntime.INSTANCE.fail(error); }
         }

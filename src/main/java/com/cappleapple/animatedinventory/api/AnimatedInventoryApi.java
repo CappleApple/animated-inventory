@@ -3,7 +3,7 @@ package com.cappleapple.animatedinventory.api;
 import com.cappleapple.animatedinventory.api.animation.*;
 import com.cappleapple.animatedinventory.api.inventory.*;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.ItemStack;
 import java.util.*;
 
@@ -19,7 +19,7 @@ public final class AnimatedInventoryApi {
         ItemStack normalStack(Screen screen, String id, ItemStack real);
         void invalidate(Screen screen, boolean reflow);
         void cancel(long handle);
-        void render(Screen screen, GuiGraphics graphics);
+        void render(Screen screen, GuiGraphicsExtractor graphics);
     }
     private static Backend backend;
     /** Implementation bootstrap; integrations should not replace the backend. */
@@ -64,7 +64,7 @@ public final class AnimatedInventoryApi {
     }
     public static void notifyLayoutChanged(Screen screen, boolean animateReflow) { if (backend != null) backend.invalidate(screen, animateReflow); }
     /** Custom non-container screens call this once after items and before cursor/tooltips. */
-    public static void renderAnimations(Screen screen, GuiGraphics graphics) { if (isEnabled()) backend.render(screen, graphics); }
+    public static void renderAnimations(Screen screen, GuiGraphicsExtractor graphics) { if (isEnabled()) backend.render(screen, graphics); }
     public static void cancel(long handle) { if (backend != null) backend.cancel(handle); }
     private static Backend require() { return Objects.requireNonNull(backend, "Animated Inventory client has not initialized"); }
     private AnimatedInventoryApi() { }
