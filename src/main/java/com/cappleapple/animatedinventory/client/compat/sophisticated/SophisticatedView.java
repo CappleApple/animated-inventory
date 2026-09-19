@@ -1,6 +1,6 @@
 package com.cappleapple.animatedinventory.client.compat.sophisticated;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -8,5 +8,5 @@ import net.minecraft.world.item.ItemStack;
 public interface SophisticatedView {
     boolean animatedinventory$visible(Slot slot);
     boolean animatedinventory$allows(Slot slot);
-    void animatedinventory$drawStack(GuiGraphics graphics, int x, int y, ItemStack stack, boolean preview, String count);
+    void animatedinventory$drawStack(GuiGraphicsExtractor graphics, int x, int y, ItemStack stack, boolean preview, String count);
 }

@@ -34,9 +34,9 @@ public final class SophisticatedCrafting {
             return uses;
         }
     }
-    public static Take prepare(AbstractContainerScreen<?> screen, Slot result, ClickType type, InventoryVisualSnapshot before) {
+    public static Take prepare(AbstractContainerScreen<?> screen, Slot result, ContainerInput type, InventoryVisualSnapshot before) {
         if (!(screen instanceof SophisticatedView) || !(result instanceof ResultSlot)
-                || type != ClickType.PICKUP && type != ClickType.QUICK_MOVE && type != ClickType.SWAP) return null;
+                || type != ContainerInput.PICKUP && type != ContainerInput.QUICK_MOVE && type != ContainerInput.SWAP) return null;
         try {
             Object container = ((Optional<?>)screen.getMenu().getClass().getMethod("getSlotUpgradeContainer", Slot.class)
                     .invoke(screen.getMenu(), result)).orElse(null);

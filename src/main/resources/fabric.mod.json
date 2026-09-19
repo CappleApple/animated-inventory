@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "animatedinventory",
+  "version": "${version}",
+  "name": "Animated Inventory",
+  "description": "Client-side inventory movement animations.",
+  "authors": [
+    "CappleApple"
+  ],
+  "license": "CC-BY-NC-SA-4.0 with Modpack/Server Exception",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.cappleapple.animatedinventory.AnimatedInventory"
+    ]
+  },
+  "mixins": [
+    "animatedinventory.mixins.json",
+    "animatedinventory.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=25"
+  }
+}

@@ -1,9 +1,0 @@
-		Sophisticated Backpacks 3.26.2 (sophisticatedbackpacks)
-		Sophisticated Core 1.5.1 (sophisticatedcore)
-		Sophisticated Storage 1.5.91 (sophisticatedstorage)
-[12:02:38] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.345s)! For help, type "help"
-[12:02:40] [Server thread/INFO] [co.ca.an.va.ServerValidation/]: AI_SERVER_VALIDATION PASSED
-[12:02:40] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
-[12:02:40] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
-[12:02:40] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
-BUILD SUCCESSFUL in 18s

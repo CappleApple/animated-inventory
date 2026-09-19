@@ -1,0 +1,84 @@
+{
+  "date": "2026-09-19",
+  "projects": [
+    {
+      "target": "fabric-26.3",
+      "tests": 100,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": [
+        {
+          "name": "com.cappleapple.animatedinventory.AnimationMathTest",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.AnimationOwnershipTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.client.render.RenderCompositionTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.CraftingFlowTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.NativeSlotRendererTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.SophisticatedCraftingTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.StashArrivalTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.StowedTransferTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.SynchronizedTransferTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.TransactionInferenceTest",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    }
+  ]
+}

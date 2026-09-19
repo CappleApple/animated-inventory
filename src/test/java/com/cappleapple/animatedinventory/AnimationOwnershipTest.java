@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnimationOwnershipTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { com.cappleapple.animatedinventory.TestBootstrap.initialize(); }
     static ItemTransition transition(int count, Bounds clip) {
         return new ItemTransition(TransitionType.MERGE, "a", "b", new ItemStack(Items.IRON_INGOT, count), Bounds.item(0, 0), Bounds.item(50, 0), clip, null);
     }

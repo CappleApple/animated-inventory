@@ -12,7 +12,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CraftingFlowTest {
-    @BeforeAll static void bootstrap() { SharedConstants.tryDetectVersion(); Bootstrap.bootStrap(); }
+    @BeforeAll static void bootstrap() { com.cappleapple.animatedinventory.TestBootstrap.initialize(); }
     private static VisualItem item(String id, Item item, int count, int x) {
         return new VisualItem(id, new ItemStack(item, count), Bounds.item(x, 20), "test");
     }

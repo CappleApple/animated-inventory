@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "animatedinventory_validation",
+  "version": "1",
+  "name": "Animated Inventory validation fixture",
+  "environment": "*",
+  "mixins": [
+    "animatedinventory.validation.mixins.json"
+  ]
+}
