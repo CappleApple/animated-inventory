@@ -1,38 +1,72 @@
 # Validation: Minecraft 1.20.1 Forge
 
-Validated on **September 19, 2026** with **Forge 47.4.23** and **Java 17**. Loader and build versions are pinned; see the [README](../README.md).
+Validated on **September 20, 2026** with **Animated Inventory 1.1.1**, **Forge 47.4.10**, and **Java 17**. Forge 47.4.10 was the [official recommended 1.20.1 release](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html) at validation time.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Unit tests | 95 passed; no failures, errors or skips | [Suite counts](evidence/ports/unit-tests.json) |
-| Client fixture | Passed | [Report](evidence/ports/forge-1.20.1-client.txt) |
-| Dedicated server | Passed | [Report](evidence/ports/forge-1.20.1-server.txt) |
-| Release build | Passed | Loader metadata, bytecode target and fixture exclusion checked |
+| Unit tests | 97 passed; no failures, errors or skips | [Suite counts](evidence/ports/unit-tests.json) |
+| Packaged client | Passed against the installable release jar | [Client report](evidence/ports/forge-1.20.1-client.txt) |
+| Packaged dedicated server | Fresh startup and restart passed | [Server report](evidence/ports/forge-1.20.1-server.txt) |
+| Language resolution | 169 keys resolve in English and French fallback | [English](evidence/ports/forge-1.20.1/language-en_us.txt), [French fallback](evidence/ports/forge-1.20.1/language-fr_fr-fallback.txt) |
+| Configuration rendering | All 15 pages captured and inspected at 960×600, GUI scale 2 | [Captures](evidence/ports/forge-1.20.1/) |
+| Release packaging | Java 17 bytecode, Forge minimum, version, bundled MixinExtras and fixture exclusion checked | [Artifact checks](evidence/ports/forge-1.20.1-artifact.json) |
 
 ## Runtime coverage
 
-A disposable integrated world exercised initial synchronization, real pickup, partial merge quantities, quick move, native rendering, resize ownership and the configuration screen. It passed both with and without Sophisticated Core 1.20.1-1.5.1.2335 installed; both optional adapter mixins applied.
+The client runs through the official Forge `forgeclient` launch target. The installable jar supplies production classes; a separate validation mod supplies input, assertions and screenshots. The fixture verifies the loaded class source and Forge version. This is automated in-game testing, not manual gameplay.
 
-Fresh dedicated-server startup and restart reached 40 ticks with the mod present and saved all dimensions before clean shutdown. This checks server loading behavior, not multiplayer gameplay.
+A real integrated server opens native menus and synchronizes contents. The first pickup uses the screen's actual mouse press/release methods. Subsequent inventory actions enter the native screen click handler, including the production mixin and the normal client prediction and server packet paths. The suite checks client quantities immediately and authoritative server quantities after processing, waiting up to 100 server ticks for native packets to arrive.
 
-Test clients used hidden native windows, muted master volume and disabled mouse capture.
+| Area | Exercised behavior |
+| --- | --- |
+| Inventory transactions | Pickup, partial merge with cursor remainder, single/full placement, right-click split, dissimilar-stack swap, number-key slot swap, quick move, pickup-all, drag distribution, throw and creative clone |
+| Crafting | Actual recipe-computed 2×2 log-to-planks output, normal and shift crafting, and 3×3 wheat-to-bread shift crafting; ingredient consumption and resulting server quantities |
+| Equipment | Quick move into the native helmet slot and server equipment confirmation |
+| Rendering | Initial synchronization without arrivals, cursor/slot and craft transitions, hover emphasis, highlight draw order, native hotbar selector movement, captured opening/closing render targets and release after closing |
+| Lifecycle | Disable preserves normal menu input, re-enable, reduced-motion stationary fades and snapped hotbar, resize ownership reset, screen close and resource reload |
+| Configuration | Every page, translated button text, invalid numeric input blocking save/navigation, valid input restoring them, Done persisting TOML, Forge reload reading disk edits, and Cancel discarding a draft |
 
-Unit coverage includes transaction inference, animation ownership, crafting flow and JEI's legacy packet discriminator. The release jar includes Java 17 classes, its refmap, both mixin configurations and MixinExtras. Sophisticated Core is excluded.
+All 57 setting labels and tooltips, section names, selectable enum choices, navigation and validation messages resolve through the actual client language manager. French selection resolves vanilla controls in French and uses the bundled English strings for mod-specific text. A French translation is not bundled. Captures include [general settings](evidence/ports/forge-1.20.1/config-00.png), [enum choices](evidence/ports/forge-1.20.1/config-01.png), [help text](evidence/ports/forge-1.20.1/config-tooltip.png), [unavailable adapter](evidence/ports/forge-1.20.1/config-13.png), and [French fallback](evidence/ports/forge-1.20.1/config-french-fallback.png).
 
-Manual gameplay, a full modpack and all optional integrations remain untested. Automated optional class loading and packet tests do not establish complete third-party crafting or storage-menu behavior. See [integration limits](../README.md#optional-integrations).
+The official dedicated server loads the same installable jar and reaches 40 ticks before saving all dimensions and exiting. Both a fresh world and a restart pass. The development server gate also passes. These checks establish server loading behavior, not remote multiplayer gameplay.
+
+Clients use hidden native windows, muted master volume and disabled mouse capture. The fixture checks hidden-window and released-mouse state while running. Screenshots come from Minecraft's framebuffer.
+
+## Limits
+
+The current production suite uses vanilla inventories and recipes. Full modpacks, remote multiplayer, every item renderer and every optional integration combination have not been tested. The Sophisticated Core adapter previously passed a class-loading check; actual Sophisticated storage-menu workflows are not covered here. JEI's legacy packet discriminator is unit-tested without consuming its outgoing buffer, but this does not establish a complete recipe-viewer workflow. Bundled Not Siloed's NeoForge attachment API is unavailable on Forge. See [optional integrations](../README.md#optional-integrations).
 
 ## Reproducing the checks
 
-Run from the repository root:
+Use JDK 17 from the repository root:
 
 ```powershell
-.\gradlew.bat test build
-.\gradlew.bat -PclientValidation runClient
+.\gradlew.bat test build validationJar downloadAssets
 .\gradlew.bat -PserverValidation runServer
 ```
 
-Client reports are written to `run-validation-client/client-validation.txt`; dedicated-server reports are written to `run-validation-server/server-validation.txt`. Add `-PsophisticatedValidation` to a client run to load Sophisticated Core 1.20.1-1.5.1.2335 and assert that both adapter mixins apply.
+The development client fixture is also available through `.\gradlew.bat -PclientValidation runClient`. The documented production evidence uses the separate launcher below instead.
 
-The runtime fixtures create disposable worlds in ignored run directories and exit automatically. Validation source sets are excluded from binary and source jars. The evidence above records the completed port validation before the project was placed at this branch's root.
+On Windows, download the official Forge 1.20.1-47.4.10 installer and save it as `logs/forge-1.20.1-47.4.10-installer.jar`. Prepare an empty client installation:
 
-The standalone branch-root layout was then rebuilt with `test build`: 95 tests passed, with no failures, errors or skips. Production and validation sources match the corresponding port sources apart from trailing blank-line cleanup; modern shared sources are included locally. The rebuilt jar was checked for bytecode level and fixture exclusion.
+```powershell
+New-Item -ItemType Directory -Force run-production-client
+'{"profiles":{}}' | Set-Content run-production-client/launcher_profiles.json
+java -jar logs/forge-1.20.1-47.4.10-installer.jar --installClient run-production-client
+python tools/launch-production-client.py
+```
+
+The Python launcher reads the official installed Forge and Mojang version metadata, verifies downloaded library hashes, uses assets from the default Gradle cache, copies the built release and validation jars, and checks the final report. Set `JAVA_HOME` to JDK 17. It creates a disposable integrated world and exits automatically. Reports and screenshots are written beneath `run-production-client`.
+
+For packaged server validation:
+
+```powershell
+New-Item -ItemType Directory -Force run-production-server
+java -jar logs/forge-1.20.1-47.4.10-installer.jar --installServer run-production-server
+python tools/launch-production-server.py
+python tools/launch-production-server.py
+```
+
+The second invocation tests a restart. The server fixture accepts the Minecraft EULA for this disposable test installation and binds to localhost port 25912. Its report is `run-production-server/server-validation.txt`.
+
+Run directories and logs are ignored. Validation and production-validation source sets are excluded from release and source jars. The build also checks that neither fixture classes nor its refmap leak into either artifact. The `-validation.jar` is a local test fixture, not a release artifact.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 - 2026-09-20
+
+### Fixed
+
+- Use the recommended Forge 47.4.10 release for Minecraft 1.20.1.
+- Translate configuration values and section headings, show help for every setting, and keep invalid numeric edits from being saved.
+- Identify the unavailable Bundled Not Siloed adapter in the Forge configuration screen.
+
 ## 1.1 - 2026-09-19
 
 ### Added

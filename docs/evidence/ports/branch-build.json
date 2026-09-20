@@ -1,11 +1,14 @@
 {
-  "file": "animatedinventory-forge-1.20.1-1.1.jar",
-  "sha256": "657e38cf9fca51479b673f9881ff92de875c95ac61c158c7a33fff9acea5fd5a",
+  "date": "2026-09-20",
+  "file": "animatedinventory-forge-1.20.1-1.1.1.jar",
+  "sha256": "b2a2f30483be7439d03c434f2491f8afcbdb4d55153d5a0d4ceb65396542b00f",
   "tests": {
-    "tests": 95,
+    "tests": 97,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
-  "root_build": "passed"
+  "root_build": "passed",
+  "packaged_jar_client": "passed",
+  "packaged_jar_server_start_and_restart": "passed"
 }

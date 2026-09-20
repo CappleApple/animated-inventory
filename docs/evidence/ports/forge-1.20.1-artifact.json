@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-20",
+  "minecraft": "1.20.1",
+  "forge": "47.4.10",
+  "version": "1.1.1",
+  "file": "animatedinventory-forge-1.20.1-1.1.1.jar",
+  "bytes": 772793,
+  "sha256": "b2a2f30483be7439d03c434f2491f8afcbdb4d55153d5a0d4ceb65396542b00f",
+  "java_class_major": 61,
+  "bundled_mixinextras": true,
+  "release_and_sources_exclude_validation": true,
+  "production_loaded_sha256": {
+    "run-production-client": "b2a2f30483be7439d03c434f2491f8afcbdb4d55153d5a0d4ceb65396542b00f",
+    "run-production-server": "b2a2f30483be7439d03c434f2491f8afcbdb4d55153d5a0d4ceb65396542b00f"
+  },
+  "tests": {
+    "tests": 97,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "client": "passed",
+  "production_server_fresh": "passed",
+  "production_server_restart": "passed",
+  "config_pages_captured_and_inspected": 15,
+  "runtime_language_keys_per_locale": 169,
+  "locales": [
+    "en_us",
+    "fr_fr (English fallback for mod strings)"
+  ],
+  "sources_sha256": "bbcf56f67fcd8fa09879e6199215d2d5a0089eae58f2b500da9d52559d15109a",
+  "mechanical_cleanup_recheck": "Official production client full suite and dedicated-server restart passed after UTF-8/EOF cleanup.",
+  "previous_full_validation_sha256": "afe7bda82e06f21ed9694a8e68ac0a81e44dc219ee2059d1a65d4be8f13a3e1b"
+}

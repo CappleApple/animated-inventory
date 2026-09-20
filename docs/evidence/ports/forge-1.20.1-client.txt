@@ -1,15 +1,435 @@
-PASS validation window stays hidden
-PASS Sophisticated screen adapter applies
-PASS Sophisticated menu adapter applies
-PASS initial synchronized contents do not animate arrivals
-PASS initial snapshot captures synchronized stack
-PASS pickup state remains immediate
-PASS pickup creates cursor animation
-PASS partial merge preserves vanilla quantities
-PASS native slot rendering and compositor remain enabled
-PASS quick move preserves vanilla transfer
-PASS quick move creates visual transition
-PASS resize renews animation ownership
-PASS resize clears stale visual ownership
-PASS Forge config screen opens and renders
+PASS native window remains hidden
+PASS mouse remains released
+PASS recommended Forge 47.4.10 is loaded
+SOURCE union:/C:/Users/astra/Documents/ChatGPT/Animated%20Inventory/.dev/branch-projects/forge-1.20.1/run-production-client/mods/animatedinventory-forge-1.20.1-1.1.1.jar%23159!/
+PASS production release jar supplies mod classes
+PASS language key exists: animatedinventory.configuration.animate_hotbar_selector
+PASS language key resolves: animatedinventory.configuration.animate_hotbar_selector
+PASS language key exists: animatedinventory.configuration.animate_hotbar_selector.tooltip
+PASS language key resolves: animatedinventory.configuration.animate_hotbar_selector.tooltip
+PASS language key exists: animatedinventory.configuration.animate_layout_reflow
+PASS language key resolves: animatedinventory.configuration.animate_layout_reflow
+PASS language key exists: animatedinventory.configuration.animate_layout_reflow.tooltip
+PASS language key resolves: animatedinventory.configuration.animate_layout_reflow.tooltip
+PASS language key exists: animatedinventory.configuration.animation_interruption_mode
+PASS language key resolves: animatedinventory.configuration.animation_interruption_mode
+PASS language key exists: animatedinventory.configuration.animation_interruption_mode.tooltip
+PASS language key resolves: animatedinventory.configuration.animation_interruption_mode.tooltip
+PASS language key exists: animatedinventory.configuration.animation_speed_multiplier
+PASS language key resolves: animatedinventory.configuration.animation_speed_multiplier
+PASS language key exists: animatedinventory.configuration.animation_speed_multiplier.tooltip
+PASS language key resolves: animatedinventory.configuration.animation_speed_multiplier.tooltip
+PASS language key exists: animatedinventory.configuration.animations_enabled
+PASS language key resolves: animatedinventory.configuration.animations_enabled
+PASS language key exists: animatedinventory.configuration.animations_enabled.tooltip
+PASS language key resolves: animatedinventory.configuration.animations_enabled.tooltip
+PASS language key exists: animatedinventory.configuration.bns_integration
+PASS language key resolves: animatedinventory.configuration.bns_integration
+PASS language key exists: animatedinventory.configuration.bns_integration.tooltip
+PASS language key resolves: animatedinventory.configuration.bns_integration.tooltip
+PASS language key exists: animatedinventory.configuration.click
+PASS language key resolves: animatedinventory.configuration.click
+PASS language key exists: animatedinventory.configuration.click_duration_ms
+PASS language key resolves: animatedinventory.configuration.click_duration_ms
+PASS language key exists: animatedinventory.configuration.click_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.click_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.click_feedback_enabled
+PASS language key resolves: animatedinventory.configuration.click_feedback_enabled
+PASS language key exists: animatedinventory.configuration.click_feedback_enabled.tooltip
+PASS language key resolves: animatedinventory.configuration.click_feedback_enabled.tooltip
+PASS language key exists: animatedinventory.configuration.click_scale
+PASS language key resolves: animatedinventory.configuration.click_scale
+PASS language key exists: animatedinventory.configuration.click_scale.tooltip
+PASS language key resolves: animatedinventory.configuration.click_scale.tooltip
+PASS language key exists: animatedinventory.configuration.compatibility
+PASS language key resolves: animatedinventory.configuration.compatibility
+PASS language key exists: animatedinventory.configuration.crafting
+PASS language key resolves: animatedinventory.configuration.crafting
+PASS language key exists: animatedinventory.configuration.crafting_animation_duration_ms
+PASS language key resolves: animatedinventory.configuration.crafting_animation_duration_ms
+PASS language key exists: animatedinventory.configuration.crafting_animation_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.crafting_animation_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.crafting_ingredient_animation
+PASS language key resolves: animatedinventory.configuration.crafting_ingredient_animation
+PASS language key exists: animatedinventory.configuration.crafting_ingredient_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.crafting_ingredient_animation.tooltip
+PASS language key exists: animatedinventory.configuration.cursor
+PASS language key resolves: animatedinventory.configuration.cursor
+PASS language key exists: animatedinventory.configuration.cursor_pickup_animation
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_animation
+PASS language key exists: animatedinventory.configuration.cursor_pickup_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_animation.tooltip
+PASS language key exists: animatedinventory.configuration.cursor_pickup_duration_ms
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_duration_ms
+PASS language key exists: animatedinventory.configuration.cursor_pickup_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.cursor_pickup_easing
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_easing
+PASS language key exists: animatedinventory.configuration.cursor_pickup_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_easing.tooltip
+PASS language key exists: animatedinventory.configuration.cursor_pickup_mode
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_mode
+PASS language key exists: animatedinventory.configuration.cursor_pickup_mode.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_pickup_mode.tooltip
+PASS language key exists: animatedinventory.configuration.cursor_placement_animation
+PASS language key resolves: animatedinventory.configuration.cursor_placement_animation
+PASS language key exists: animatedinventory.configuration.cursor_placement_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_placement_animation.tooltip
+PASS language key exists: animatedinventory.configuration.cursor_placement_duration_ms
+PASS language key resolves: animatedinventory.configuration.cursor_placement_duration_ms
+PASS language key exists: animatedinventory.configuration.cursor_placement_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_placement_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.cursor_placement_easing
+PASS language key resolves: animatedinventory.configuration.cursor_placement_easing
+PASS language key exists: animatedinventory.configuration.cursor_placement_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.cursor_placement_easing.tooltip
+PASS language key exists: animatedinventory.configuration.debug
+PASS language key resolves: animatedinventory.configuration.debug
+PASS language key exists: animatedinventory.configuration.debug_logging
+PASS language key resolves: animatedinventory.configuration.debug_logging
+PASS language key exists: animatedinventory.configuration.debug_logging.tooltip
+PASS language key resolves: animatedinventory.configuration.debug_logging.tooltip
+PASS language key exists: animatedinventory.configuration.debug_overlay
+PASS language key resolves: animatedinventory.configuration.debug_overlay
+PASS language key exists: animatedinventory.configuration.debug_overlay.tooltip
+PASS language key resolves: animatedinventory.configuration.debug_overlay.tooltip
+PASS language key exists: animatedinventory.configuration.enum.cursormode.fixed
+PASS language key resolves: animatedinventory.configuration.enum.cursormode.fixed
+PASS language key exists: animatedinventory.configuration.enum.cursormode.follow_cursor
+PASS language key resolves: animatedinventory.configuration.enum.cursormode.follow_cursor
+PASS language key exists: animatedinventory.configuration.enum.easing.back_out
+PASS language key resolves: animatedinventory.configuration.enum.easing.back_out
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_in_out_cubic
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_in_out_cubic
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_in_out_quad
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_in_out_quad
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_in_quad
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_in_quad
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_out_cubic
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_out_cubic
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_out_quad
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_out_quad
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_out_quart
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_out_quart
+PASS language key exists: animatedinventory.configuration.enum.easing.ease_out_quint
+PASS language key resolves: animatedinventory.configuration.enum.easing.ease_out_quint
+PASS language key exists: animatedinventory.configuration.enum.easing.linear
+PASS language key resolves: animatedinventory.configuration.enum.easing.linear
+PASS language key exists: animatedinventory.configuration.enum.easing.smootherstep
+PASS language key resolves: animatedinventory.configuration.enum.easing.smootherstep
+PASS language key exists: animatedinventory.configuration.enum.easing.smoothstep
+PASS language key resolves: animatedinventory.configuration.enum.easing.smoothstep
+PASS language key exists: animatedinventory.configuration.enum.interruption.cancel
+PASS language key resolves: animatedinventory.configuration.enum.interruption.cancel
+PASS language key exists: animatedinventory.configuration.enum.interruption.finish_fast
+PASS language key resolves: animatedinventory.configuration.enum.interruption.finish_fast
+PASS language key exists: animatedinventory.configuration.enum.interruption.retarget
+PASS language key resolves: animatedinventory.configuration.enum.interruption.retarget
+PASS language key exists: animatedinventory.configuration.enum.itemeffect.fade
+PASS language key resolves: animatedinventory.configuration.enum.itemeffect.fade
+PASS language key exists: animatedinventory.configuration.enum.itemeffect.fade_scale
+PASS language key resolves: animatedinventory.configuration.enum.itemeffect.fade_scale
+PASS language key exists: animatedinventory.configuration.enum.itemeffect.none
+PASS language key resolves: animatedinventory.configuration.enum.itemeffect.none
+PASS language key exists: animatedinventory.configuration.enum.itemeffect.pop
+PASS language key resolves: animatedinventory.configuration.enum.itemeffect.pop
+PASS language key exists: animatedinventory.configuration.enum.itemeffect.scale
+PASS language key resolves: animatedinventory.configuration.enum.itemeffect.scale
+PASS language key exists: animatedinventory.configuration.enum.movementstyle.arc
+PASS language key resolves: animatedinventory.configuration.enum.movementstyle.arc
+PASS language key exists: animatedinventory.configuration.enum.movementstyle.linear
+PASS language key resolves: animatedinventory.configuration.enum.movementstyle.linear
+PASS language key exists: animatedinventory.configuration.enum.movementstyle.smooth
+PASS language key resolves: animatedinventory.configuration.enum.movementstyle.smooth
+PASS language key exists: animatedinventory.configuration.enum.movementstyle.snap_smooth
+PASS language key resolves: animatedinventory.configuration.enum.movementstyle.snap_smooth
+PASS language key exists: animatedinventory.configuration.enum.movementstyle.spring
+PASS language key resolves: animatedinventory.configuration.enum.movementstyle.spring
+PASS language key exists: animatedinventory.configuration.enum.screeneffect.fade
+PASS language key resolves: animatedinventory.configuration.enum.screeneffect.fade
+PASS language key exists: animatedinventory.configuration.enum.screeneffect.fade_scale
+PASS language key resolves: animatedinventory.configuration.enum.screeneffect.fade_scale
+PASS language key exists: animatedinventory.configuration.enum.screeneffect.none
+PASS language key resolves: animatedinventory.configuration.enum.screeneffect.none
+PASS language key exists: animatedinventory.configuration.enum.screeneffect.scale
+PASS language key resolves: animatedinventory.configuration.enum.screeneffect.scale
+PASS language key exists: animatedinventory.configuration.enum.screeneffect.slide
+PASS language key resolves: animatedinventory.configuration.enum.screeneffect.slide
+PASS language key exists: animatedinventory.configuration.general
+PASS language key resolves: animatedinventory.configuration.general
+PASS language key exists: animatedinventory.configuration.hotbar
+PASS language key resolves: animatedinventory.configuration.hotbar
+PASS language key exists: animatedinventory.configuration.hotbar_animation_duration_ms
+PASS language key resolves: animatedinventory.configuration.hotbar_animation_duration_ms
+PASS language key exists: animatedinventory.configuration.hotbar_animation_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.hotbar_animation_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.hotbar_easing
+PASS language key resolves: animatedinventory.configuration.hotbar_easing
+PASS language key exists: animatedinventory.configuration.hotbar_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.hotbar_easing.tooltip
+PASS language key exists: animatedinventory.configuration.hotbar_spring_strength
+PASS language key resolves: animatedinventory.configuration.hotbar_spring_strength
+PASS language key exists: animatedinventory.configuration.hotbar_spring_strength.tooltip
+PASS language key resolves: animatedinventory.configuration.hotbar_spring_strength.tooltip
+PASS language key exists: animatedinventory.configuration.hover
+PASS language key resolves: animatedinventory.configuration.hover
+PASS language key exists: animatedinventory.configuration.invalid_number
+PASS language key resolves: animatedinventory.configuration.invalid_number
+PASS language key exists: animatedinventory.configuration.inventory_particles_integration
+PASS language key resolves: animatedinventory.configuration.inventory_particles_integration
+PASS language key exists: animatedinventory.configuration.inventory_particles_integration.tooltip
+PASS language key resolves: animatedinventory.configuration.inventory_particles_integration.tooltip
+PASS language key exists: animatedinventory.configuration.item_appear_animation
+PASS language key resolves: animatedinventory.configuration.item_appear_animation
+PASS language key exists: animatedinventory.configuration.item_appear_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.item_appear_animation.tooltip
+PASS language key exists: animatedinventory.configuration.item_disappear_animation
+PASS language key resolves: animatedinventory.configuration.item_disappear_animation
+PASS language key exists: animatedinventory.configuration.item_disappear_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.item_disappear_animation.tooltip
+PASS language key exists: animatedinventory.configuration.item_movement_enabled
+PASS language key resolves: animatedinventory.configuration.item_movement_enabled
+PASS language key exists: animatedinventory.configuration.item_movement_enabled.tooltip
+PASS language key resolves: animatedinventory.configuration.item_movement_enabled.tooltip
+PASS language key exists: animatedinventory.configuration.items
+PASS language key resolves: animatedinventory.configuration.items
+PASS language key exists: animatedinventory.configuration.layout_reflow
+PASS language key resolves: animatedinventory.configuration.layout_reflow
+PASS language key exists: animatedinventory.configuration.layout_reflow_duration_ms
+PASS language key resolves: animatedinventory.configuration.layout_reflow_duration_ms
+PASS language key exists: animatedinventory.configuration.layout_reflow_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.layout_reflow_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.layout_reflow_easing
+PASS language key resolves: animatedinventory.configuration.layout_reflow_easing
+PASS language key exists: animatedinventory.configuration.layout_reflow_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.layout_reflow_easing.tooltip
+PASS language key exists: animatedinventory.configuration.max_simultaneous_item_animations
+PASS language key resolves: animatedinventory.configuration.max_simultaneous_item_animations
+PASS language key exists: animatedinventory.configuration.max_simultaneous_item_animations.tooltip
+PASS language key resolves: animatedinventory.configuration.max_simultaneous_item_animations.tooltip
+PASS language key exists: animatedinventory.configuration.merge
+PASS language key resolves: animatedinventory.configuration.merge
+PASS language key exists: animatedinventory.configuration.merge_pulse_duration_ms
+PASS language key resolves: animatedinventory.configuration.merge_pulse_duration_ms
+PASS language key exists: animatedinventory.configuration.merge_pulse_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.merge_pulse_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.merge_pulse_enabled
+PASS language key resolves: animatedinventory.configuration.merge_pulse_enabled
+PASS language key exists: animatedinventory.configuration.merge_pulse_enabled.tooltip
+PASS language key resolves: animatedinventory.configuration.merge_pulse_enabled.tooltip
+PASS language key exists: animatedinventory.configuration.merge_pulse_scale
+PASS language key resolves: animatedinventory.configuration.merge_pulse_scale
+PASS language key exists: animatedinventory.configuration.merge_pulse_scale.tooltip
+PASS language key resolves: animatedinventory.configuration.merge_pulse_scale.tooltip
+PASS language key exists: animatedinventory.configuration.movement
+PASS language key resolves: animatedinventory.configuration.movement
+PASS language key exists: animatedinventory.configuration.movement_arc_height
+PASS language key resolves: animatedinventory.configuration.movement_arc_height
+PASS language key exists: animatedinventory.configuration.movement_arc_height.tooltip
+PASS language key resolves: animatedinventory.configuration.movement_arc_height.tooltip
+PASS language key exists: animatedinventory.configuration.movement_duration_ms
+PASS language key resolves: animatedinventory.configuration.movement_duration_ms
+PASS language key exists: animatedinventory.configuration.movement_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.movement_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.movement_easing
+PASS language key resolves: animatedinventory.configuration.movement_easing
+PASS language key exists: animatedinventory.configuration.movement_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.movement_easing.tooltip
+PASS language key exists: animatedinventory.configuration.movement_style
+PASS language key resolves: animatedinventory.configuration.movement_style
+PASS language key exists: animatedinventory.configuration.movement_style.tooltip
+PASS language key resolves: animatedinventory.configuration.movement_style.tooltip
+PASS language key exists: animatedinventory.configuration.next
+PASS language key resolves: animatedinventory.configuration.next
+PASS language key exists: animatedinventory.configuration.page
+PASS language key resolves: animatedinventory.configuration.page
+PASS language key exists: animatedinventory.configuration.previous
+PASS language key resolves: animatedinventory.configuration.previous
+PASS language key exists: animatedinventory.configuration.quick_move
+PASS language key resolves: animatedinventory.configuration.quick_move
+PASS language key exists: animatedinventory.configuration.quick_move_duration_ms
+PASS language key resolves: animatedinventory.configuration.quick_move_duration_ms
+PASS language key exists: animatedinventory.configuration.quick_move_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.quick_move_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.quick_move_enabled
+PASS language key resolves: animatedinventory.configuration.quick_move_enabled
+PASS language key exists: animatedinventory.configuration.quick_move_enabled.tooltip
+PASS language key resolves: animatedinventory.configuration.quick_move_enabled.tooltip
+PASS language key exists: animatedinventory.configuration.reduce_motion
+PASS language key resolves: animatedinventory.configuration.reduce_motion
+PASS language key exists: animatedinventory.configuration.reduce_motion.tooltip
+PASS language key resolves: animatedinventory.configuration.reduce_motion.tooltip
+PASS language key exists: animatedinventory.configuration.screen_close_animation
+PASS language key resolves: animatedinventory.configuration.screen_close_animation
+PASS language key exists: animatedinventory.configuration.screen_close_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_close_animation.tooltip
+PASS language key exists: animatedinventory.configuration.screen_close_duration_ms
+PASS language key resolves: animatedinventory.configuration.screen_close_duration_ms
+PASS language key exists: animatedinventory.configuration.screen_close_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_close_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.screen_close_easing
+PASS language key resolves: animatedinventory.configuration.screen_close_easing
+PASS language key exists: animatedinventory.configuration.screen_close_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_close_easing.tooltip
+PASS language key exists: animatedinventory.configuration.screen_close_scale_end
+PASS language key resolves: animatedinventory.configuration.screen_close_scale_end
+PASS language key exists: animatedinventory.configuration.screen_close_scale_end.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_close_scale_end.tooltip
+PASS language key exists: animatedinventory.configuration.screen_close_slide_distance
+PASS language key resolves: animatedinventory.configuration.screen_close_slide_distance
+PASS language key exists: animatedinventory.configuration.screen_close_slide_distance.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_close_slide_distance.tooltip
+PASS language key exists: animatedinventory.configuration.screen_open_animation
+PASS language key resolves: animatedinventory.configuration.screen_open_animation
+PASS language key exists: animatedinventory.configuration.screen_open_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_open_animation.tooltip
+PASS language key exists: animatedinventory.configuration.screen_open_duration_ms
+PASS language key resolves: animatedinventory.configuration.screen_open_duration_ms
+PASS language key exists: animatedinventory.configuration.screen_open_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_open_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.screen_open_easing
+PASS language key resolves: animatedinventory.configuration.screen_open_easing
+PASS language key exists: animatedinventory.configuration.screen_open_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_open_easing.tooltip
+PASS language key exists: animatedinventory.configuration.screen_open_scale_start
+PASS language key resolves: animatedinventory.configuration.screen_open_scale_start
+PASS language key exists: animatedinventory.configuration.screen_open_scale_start.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_open_scale_start.tooltip
+PASS language key exists: animatedinventory.configuration.screen_open_slide_distance
+PASS language key resolves: animatedinventory.configuration.screen_open_slide_distance
+PASS language key exists: animatedinventory.configuration.screen_open_slide_distance.tooltip
+PASS language key resolves: animatedinventory.configuration.screen_open_slide_distance.tooltip
+PASS language key exists: animatedinventory.configuration.screens
+PASS language key resolves: animatedinventory.configuration.screens
+PASS language key exists: animatedinventory.configuration.slot_hover_animation
+PASS language key resolves: animatedinventory.configuration.slot_hover_animation
+PASS language key exists: animatedinventory.configuration.slot_hover_animation.tooltip
+PASS language key resolves: animatedinventory.configuration.slot_hover_animation.tooltip
+PASS language key exists: animatedinventory.configuration.slot_hover_duration_ms
+PASS language key resolves: animatedinventory.configuration.slot_hover_duration_ms
+PASS language key exists: animatedinventory.configuration.slot_hover_duration_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.slot_hover_duration_ms.tooltip
+PASS language key exists: animatedinventory.configuration.slot_hover_easing
+PASS language key resolves: animatedinventory.configuration.slot_hover_easing
+PASS language key exists: animatedinventory.configuration.slot_hover_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.slot_hover_easing.tooltip
+PASS language key exists: animatedinventory.configuration.slot_hover_raise_z
+PASS language key resolves: animatedinventory.configuration.slot_hover_raise_z
+PASS language key exists: animatedinventory.configuration.slot_hover_raise_z.tooltip
+PASS language key resolves: animatedinventory.configuration.slot_hover_raise_z.tooltip
+PASS language key exists: animatedinventory.configuration.slot_hover_scale
+PASS language key resolves: animatedinventory.configuration.slot_hover_scale
+PASS language key exists: animatedinventory.configuration.slot_hover_scale.tooltip
+PASS language key resolves: animatedinventory.configuration.slot_hover_scale.tooltip
+PASS language key exists: animatedinventory.configuration.swap_easing
+PASS language key resolves: animatedinventory.configuration.swap_easing
+PASS language key exists: animatedinventory.configuration.swap_easing.tooltip
+PASS language key resolves: animatedinventory.configuration.swap_easing.tooltip
+PASS language key exists: animatedinventory.configuration.title
+PASS language key resolves: animatedinventory.configuration.title
+PASS language key exists: animatedinventory.configuration.transaction_correlation_window_ms
+PASS language key resolves: animatedinventory.configuration.transaction_correlation_window_ms
+PASS language key exists: animatedinventory.configuration.transaction_correlation_window_ms.tooltip
+PASS language key resolves: animatedinventory.configuration.transaction_correlation_window_ms.tooltip
+PASS language key exists: animatedinventory.configuration.unavailable
+PASS language key resolves: animatedinventory.configuration.unavailable
+PASS language key exists: gui.cancel
+PASS language key resolves: gui.cancel
+PASS language key exists: gui.done
+PASS language key resolves: gui.done
+PASS language key exists: options.off
+PASS language key resolves: options.off
+PASS language key exists: options.on
+PASS language key resolves: options.on
+PASS all 57 config settings have resolved labels and tooltips in en_us
+LANGUAGE en_us 169 resolved keys
+PASS server opens native chest screen
+PASS server contents synchronize into native slots
+PASS initial synchronization creates no arrival animations
+PASS opening screen captures a real render target
+CAPTURE 01-open-inventory.png
+PASS native hover highlight renders before the item
+PASS native hovered item receives emphasis
+CAPTURE 02-hover-highlight.png
+PASS real mouse pickup predicts immediately
+PASS real mouse pickup creates a cursor animation
+PASS integrated server confirms mouse pickup
+PASS partial merge preserves client quantities
+PASS integrated server confirms partial merge
+PASS right placement moves one item
+PASS left placement moves remaining cursor stack
+PASS server confirms single and full placement
+PASS right pickup splits a stack in half
+PASS cursor swap preserves both item types
+PASS server confirms split and swap
+PASS number-key swap moves into hotbar
+PASS server confirms hotbar swap
+PASS native quick move transfers and animates
+PASS server confirms quick move
+PASS double-click collection fills the cursor stack
+PASS server confirms collect-all
+PASS server cursor update reaches client
+PASS drag distribution splits the cursor evenly
+PASS server confirms drag distribution
+PASS throw removes one item through native input
+PASS server confirms throw
+PASS actual hotbar selector renders between old and new slots
+CAPTURE 03-hotbar-in-motion.png
+PASS creative clone preserves native full-stack behavior
+PASS server confirms creative clone
+PASS server recipe computes actual 2x2 crafting output
+PASS native 2x2 crafting consumes exactly one ingredient
+PASS native 2x2 result creates ingredient-flow animation
+CAPTURE 04-crafting-flow.png
+PASS server confirms 2x2 craft quantities
+PASS shift crafting consumes remaining ingredient and animates
+PASS server confirms shift-craft output
+PASS server opens native crafting-table screen
+PASS server computes the real three-wide bread recipe
+PASS 3x3 shift crafting creates ingredient-flow animation
+PASS server confirms 3x3 recipe consumption and output
+PASS native quick move equips matching armor
+PASS server confirms equipment transfer
+PASS disabling animation clears visual ownership
+PASS disabled mode preserves real input without visual copies
+PASS server confirms input while animations are disabled
+PASS re-enabled reduced-motion input remains native
+PASS reduced motion uses short stationary item fades
+PASS reduced motion removes hotbar travel
+PASS native compositor remains enabled after transaction coverage
+PASS resize replaces ownership and clears stale animations
+PASS screen transition captures refreshed viewport
+PASS closing transfers a GPU image into exit animation
+CAPTURE 05-closing-transition.png
+PASS closing image is released after its duration
+LANGUAGE en_us 169 resolved keys
+PASS translated config screen remains open
+PASS config buttons resolve translated text
+CAPTURE config-00.png
+CAPTURE config-tooltip.png
+CAPTURE config-01.png
+CAPTURE config-02.png
+CAPTURE config-03.png
+CAPTURE config-04.png
+CAPTURE config-05.png
+CAPTURE config-06.png
+CAPTURE config-07.png
+CAPTURE config-08.png
+CAPTURE config-09.png
+CAPTURE config-10.png
+CAPTURE config-11.png
+CAPTURE config-12.png
+CAPTURE config-13.png
+CAPTURE config-14.png
+PASS all configuration sections render
+PASS invalid numeric input blocks save and navigation
+PASS valid numeric input re-enables save
+PASS Done applies edited config value
+PASS Done persists config value to TOML
+PASS Forge config reload reads the changed disk value
+PASS Cancel discards the edited draft
+PASS all 57 config settings have resolved labels and tooltips in fr_fr fallback
+LANGUAGE fr_fr fallback 169 resolved keys
+CAPTURE config-french-fallback.png
+PASS client remains healthy after language reloads and config edits
 PASS validation completed

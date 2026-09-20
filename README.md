@@ -2,11 +2,11 @@
 
 Animated Inventory animates item pickup, placement, quick move, merging, splitting and crafting while Minecraft's real menu state updates normally. It also animates hotbar selection, item emphasis and container screen transitions, with adjustable timing and reduced motion.
 
-This branch builds **version 1.1 for Minecraft 1.20.1 Forge**. The original NeoForge 1.21.1 version remains on `main`.
+This branch builds **version 1.1.1 for Minecraft 1.20.1 Forge**. The original NeoForge 1.21.1 version remains on `main`.
 
 ## Installation
 
-Minecraft **1.20.1**, **Forge 47.4.23**, and **Java 17**. Install `animatedinventory-forge-1.20.1-1.1.jar` in the client's `mods` directory. A server installation is not required.
+Minecraft **1.20.1**, **Forge 47.4.10**, and **Java 17**. Install `animatedinventory-forge-1.20.1-1.1.1.jar` in the client's `mods` directory. A server installation is not required.
 
 ## Configuration
 
@@ -18,9 +18,9 @@ Stack matching uses Minecraft 1.20.1 item tags. Item rendering uses the native G
 
 ## Optional integrations
 
-The Sophisticated adapter targets Sophisticated Core **1.20.1-1.5.1.2335**. Client startup and the inventory fixture passed with Core installed and both adapter mixins applied; actual Sophisticated storage-menu gameplay remains untested.
+The Sophisticated adapter targets Sophisticated Core **1.20.1-1.5.1.2335**. Its mixins passed the earlier port's class-loading check; the current Forge 47.4.10 production suite does not install Core or exercise Sophisticated storage menus.
 
-Bundled Not Siloed's NeoForge attachment adapter is unavailable on Forge; its configuration switch has no effect here. Recipe-viewer request observation and Inventory Particles detection remain guarded optional code and require version-specific gameplay testing.
+Bundled Not Siloed's NeoForge attachment adapter is unavailable on Forge; its disabled configuration control says **Unavailable**. Recipe-viewer request observation and Inventory Particles detection remain guarded optional code and require version-specific gameplay testing.
 
 The JEI 1.20.1 packet discriminator is unit-tested without consuming the outgoing buffer. This checks request recognition, not a complete JEI crafting workflow.
 
@@ -32,7 +32,7 @@ Use **JDK 17** to run the build. The wrapper pins **Gradle 8.8** and the build u
 .\gradlew.bat test build
 ```
 
-The installable jar is `build/libs/animatedinventory-forge-1.20.1-1.1.jar`. Source jars are for development. The `-slim.jar` omits the bundled MixinExtras dependency and is not the normal installation artifact.
+The installable jar is `build/libs/animatedinventory-forge-1.20.1-1.1.1.jar`. Source jars are for development. The `-slim.jar` omits the bundled MixinExtras dependency and is not the normal installation artifact.
 
 ## Validation
 

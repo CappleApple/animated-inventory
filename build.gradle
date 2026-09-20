@@ -89,7 +89,7 @@ if (project.hasProperty('clientValidation')) {
             def directory = file('run-validation-client')
             new File(directory, 'config').mkdirs()
             new File(directory, 'config/fml.toml').text = 'earlyWindowControl=false\n'
-            new File(directory, 'options.txt').text = 'soundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nrenderDistance:2\nsimulationDistance:5\n'
+            new File(directory, 'options.txt').text = 'soundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nrenderDistance:2\nsimulationDistance:5\nguiScale:2\nonboardAccessibility:true\n'
             new File(directory, 'client-validation.txt').delete()
         }
         doLast {
@@ -122,3 +122,41 @@ if (project.hasProperty('sophisticatedValidation')) {
     dependencies { runtimeOnly fg.deobf('maven.modrinth:sophisticated-core:1Xl7lP0L') }
     minecraft.runs.client.property 'animatedinventory.sophisticatedValidation', 'true'
 }
+
+mixin { add sourceSets.validation, 'animatedinventory.validation.refmap.json' }
+sourceSets {
+    productionValidation {
+        compileClasspath += sourceSets.validation.output + sourceSets.validation.compileClasspath
+    }
+}
+tasks.register('validationJar', Jar) {
+    dependsOn 'validationClasses', 'productionValidationClasses'
+    archiveClassifier = 'validation'
+    from sourceSets.validation.output
+    from sourceSets.productionValidation.output
+    manifest.attributes('MixinConfigs': 'animatedinventory.validation.mixins.json')
+}
+reobf { validationJar {} }
+tasks.named('validationJar').configure { finalizedBy 'reobfValidationJar' }
+tasks.named('test', Test).configure { jvmArgs '-XX:ActiveProcessorCount=2'; maxHeapSize = '1G' }
+
+// MixinGradle adds every registered refmap to every Jar task unless explicitly scoped.
+['jar', 'jarJar', 'sourcesJar'].each { taskName ->
+    tasks.named(taskName, Jar).configure {
+        exclude 'animatedinventory.validation.*'
+        exclude 'com/cappleapple/animatedinventory/validation/**'
+    }
+}
+tasks.named('validationJar', Jar).configure { exclude 'animatedinventory.refmap.json' }
+tasks.register('verifyReleaseArtifacts') {
+    dependsOn 'jarJar', 'sourcesJar'
+    doLast {
+        ['jarJar', 'sourcesJar'].each { taskName ->
+            def leaked = zipTree(tasks.named(taskName, Jar).get().archiveFile.get().asFile).matching {
+                include 'animatedinventory.validation.*', 'com/cappleapple/animatedinventory/validation/**'
+            }.files
+            if (!leaked.isEmpty()) throw new GradleException("Validation fixture leaked into ${taskName}: ${leaked}")
+        }
+    }
+}
+tasks.named('build').configure { dependsOn 'verifyReleaseArtifacts' }

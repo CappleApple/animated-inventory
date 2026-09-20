@@ -1,10 +1,10 @@
 # Client configuration
 
-File: `config/animatedinventory-client.toml`. Open **Mods → Animated Inventory → Config** for the built-in Forge configuration screen. It uses native Minecraft controls and exposes all registered fields.
+File: `config/animatedinventory-client.toml`. Open **Mods → Animated Inventory → Config** for the built-in Forge configuration screen. Settings are grouped into translated sections. Hover a label or control for help. Done saves the current draft; Cancel discards it. Invalid numeric values block saving and page navigation.
 
 Durations are in milliseconds. Every duration is divided by `animation_speed_multiplier`: 0.5 is half speed and 2.0 is double speed. Reduced motion removes movement/overshoot and uses short fades (up to 60 ms); hover and emphasis scaling are reduced. The particle-safe inline path uses emphasis instead of additional fades.
 
-The following are the actual generated defaults, including supported enum values and ranges. The names below are the canonical config keys; similarly worded aliases in the project brief are not extra settings.
+The following are the actual generated defaults, including supported enum values and ranges. The names below are the canonical TOML keys; the screen displays translated names and enum choices.
 
 ```toml
 [general]
@@ -161,4 +161,6 @@ The following are the actual generated defaults, including supported enum values
 
 Changes apply to new animations. Disabling the master toggle releases active rendering ownership. Hover hitboxes and selected hotbar slots never change. Setting screen close to NONE avoids retaining/capturing a screen image after its entrance completes.
 
-Labels and tooltips are resource-pack overrideable at `assets/animatedinventory/lang/en_us.json`.
+The Bundled Not Siloed control is disabled because its NeoForge attachment adapter is unavailable on this Forge version. Its TOML key is retained for configuration parity.
+
+Labels, section headings, enum choices and tooltips can be overridden through `assets/animatedinventory/lang/en_us.json`. English is bundled; other selected languages use the normal English fallback unless a resource pack supplies translations.

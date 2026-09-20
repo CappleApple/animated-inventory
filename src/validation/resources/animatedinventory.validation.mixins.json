@@ -5,9 +5,14 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "HiddenWindowMixin",
-    "UncapturedMouseMixin"
+    "UncapturedMouseMixin",
+    "ContainerInputAccess",
+    "MousePositionAccess",
+    "ContainerTraceMixin",
+    "GuiTraceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "refmap": "animatedinventory.validation.refmap.json"
 }

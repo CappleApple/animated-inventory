@@ -1,9 +1,9 @@
 {
-  "date": "2026-09-19",
+  "date": "2026-09-20",
   "projects": [
     {
       "target": "forge-1.20.1",
-      "tests": 95,
+      "tests": 97,
       "failures": 0,
       "errors": 0,
       "skipped": 0,
@@ -18,6 +18,13 @@
         {
           "name": "com.cappleapple.animatedinventory.AnimationOwnershipTest",
           "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.ConfigLocalizationTest",
+          "tests": 2,
           "failures": 0,
           "errors": 0,
           "skipped": 0

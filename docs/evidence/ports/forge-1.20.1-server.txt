@@ -1,1 +1,15 @@
+Forge 47.4.10 / Minecraft 1.20.1 / Animated Inventory 1.1.1 / Java 17
+
+production-server-clean-fresh.log
+Production server exit code: 0
+PASS dedicated server reached 40 ticks with client-side mod installed.
+
+production-server-clean-restart.log
+Production server exit code: 0
+PASS dedicated server reached 40 ticks with client-side mod installed.
+
+Development server gate also passed: logs/audit-server-tests.log.
+
+Final mechanical rebuild recheck: production-server-mechanical.log
+Production server exit code: 0
 PASS dedicated server reached 40 ticks with client-side mod installed.

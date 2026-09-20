@@ -15,7 +15,7 @@ description="Client-side inventory animations."
 [[dependencies.animatedinventory]]
 modId="forge"
 mandatory=true
-versionRange="[47.4.23,48)"
+versionRange="[47.4.10,48)"
 ordering="NONE"
 side="CLIENT"
 
