@@ -25,7 +25,7 @@ public final class ClientValidation {
         try {
             mc.options.getSoundSourceOptionInstance(net.minecraft.sounds.SoundSource.MASTER).set(0.0);
             mc.mouseHandler.releaseMouse();
-            if (System.nanoTime() - STARTED > 240_000_000_000L) throw new AssertionError("Client validation timeout");
+            if (System.nanoTime() - STARTED > 360_000_000_000L) throw new AssertionError("Client validation timeout");
             if (stage == 0 && mc.gui.screen() instanceof TitleScreen && mc.gui.overlay() == null) {
                 mc.options.pauseOnLostFocus = false;
                 mc.createWorldOpenFlows().createFreshLevel("animatedinventory-port-" + System.currentTimeMillis(),
@@ -37,6 +37,8 @@ public final class ClientValidation {
                 stage = 1; age = 0; return;
             }
             if (mc.level == null || mc.player == null || mc.gui.overlay() != null) return;
+            if (stage == 8) { if (ConfigurationValidation.tick()) { pass("complete"); stage = 99; mc.stop(); } return; }
+            if (stage == 7) { if (GameplayValidation.tick()) stage = 8; return; }
             if (++age < 10) return;
             age = 0;
             if (Boolean.getBoolean("animatedinventory.captureValidation") && stage >= 2 && stage <= 5) net.minecraft.client.Screenshot.grab(mc, false);
@@ -77,7 +79,7 @@ public final class ClientValidation {
                 mc.gui.setScreen(new InventoryScreen(mc.player)); stage = 6;
             } else if (stage == 6) {
                 require(runtime.enabled(), "screen reopen rendered without failure");
-                pass("complete"); stage = 99; mc.stop();
+                stage = 7;
             }
         } catch (Throwable error) {
             error.printStackTrace();

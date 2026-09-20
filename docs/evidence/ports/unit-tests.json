@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-19",
+  "date": "2026-09-20",
   "projects": [
     {
       "target": "neoforge-26.3",
-      "tests": 100,
-      "failures": 0,
-      "errors": 0,
-      "skipped": 0,
+      "tests": 102.0,
+      "failures": 0.0,
+      "errors": 0.0,
+      "skipped": 0.0,
       "suites": [
         {
           "name": "com.cappleapple.animatedinventory.AnimationMathTest",
@@ -32,6 +32,13 @@
         {
           "name": "com.cappleapple.animatedinventory.CraftingFlowTest",
           "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.LocalizationTest",
+          "tests": 2,
           "failures": 0,
           "errors": 0,
           "skipped": 0

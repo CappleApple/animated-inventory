@@ -77,3 +77,14 @@ neoForge.runs.configureEach { jvmArgument '-Xmx2G'; jvmArgument '-XX:ActiveProce
 tasks.withType(Test).configureEach { maxHeapSize = '2G'; jvmArgs '-XX:ActiveProcessorCount=2' }
 
 if (project.hasProperty('captureValidation')) neoForge.runs.client { systemProperty 'animatedinventory.captureValidation', 'true' }
+
+// Keep the fixture separate while exercising exactly the installable production JAR.
+if (project.hasProperty('jarValidation')) {
+    sourceSets.validation.runtimeClasspath = sourceSets.validation.output + configurations.validationRuntimeClasspath + (sourceSets.main.runtimeClasspath - sourceSets.main.output) + files(tasks.named('jar'))
+    neoForge.runs.configureEach {
+        loadedMods = [neoForge.mods.animatedinventory_validation]
+        sourceSet = sourceSets.validation
+        systemProperty 'animatedinventory.validateJar', 'true'
+        taskBefore tasks.named('jar')
+    }
+}

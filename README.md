@@ -2,15 +2,17 @@
 
 Animated Inventory animates item pickup, placement, quick move, merging, splitting and crafting while Minecraft's real menu state updates normally. It also animates hotbar selection, item emphasis and container screen transitions, with adjustable timing and reduced motion.
 
-This branch builds **version 1.1 for Minecraft 26.3 NeoForge**. The original NeoForge 1.21.1 version remains on `main`.
+This branch builds **version 1.1.1 for Minecraft 26.3 NeoForge**. The original NeoForge 1.21.1 version remains on `main`.
 
 ## Installation
 
-Minecraft **26.3**, **NeoForge 26.3.0.6-beta**, and **Java 25**. This branch uses a beta NeoForge release. Install `animatedinventory-neoforge-26.3-1.1.jar` in the client's `mods` directory. A server installation is not required.
+Minecraft **26.3**, **NeoForge 26.3.0.7-beta**, and **Java 25**. This branch uses a beta NeoForge release. Install `animatedinventory-neoforge-26.3-1.1.1.jar` in the client's `mods` directory. A server installation is not required.
 
 ## Configuration
 
 Open **Mods → Animated Inventory → Config**, or edit `config/animatedinventory-client.toml`.
+
+Setting labels, descriptions and enum choices use language resources. English is bundled and provides the fallback for languages without a mod translation.
 
 See the [configuration reference](docs/CONFIG.md) for setting names, defaults and ranges. Animations change presentation; click targets and inventory logic retain their normal positions.
 
@@ -30,13 +32,13 @@ Use **JDK 25** to run the build. The wrapper pins **Gradle 9.5.1** and the build
 .\gradlew.bat test build
 ```
 
-The installable jar is `build/libs/animatedinventory-neoforge-26.3-1.1.jar`. Source jars are for development.
+The installable jar is `build/libs/animatedinventory-neoforge-26.3-1.1.1.jar`. Source jars are for development.
 
 ## Validation
 
 ```powershell
-.\gradlew.bat -PclientValidation runClient
-.\gradlew.bat -PserverValidation runServer
+.\gradlew.bat -PclientValidation -PjarValidation -PcaptureValidation runClient
+.\gradlew.bat -PserverValidation -PjarValidation runServer
 ```
 
 The opt-in runtime fixtures run hidden, mute master volume, disable mouse capture and exit automatically. They are excluded from release and source jars. See [completed validation and limits](docs/PORT_VALIDATION.md).

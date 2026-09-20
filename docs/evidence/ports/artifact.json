@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-20",
+  "minecraft": "26.3",
+  "loader": "26.3.0.7-beta",
+  "modVersion": "1.1.1",
+  "jar": "animatedinventory-neoforge-26.3-1.1.1.jar",
+  "bytes": 145689,
+  "sha256": "6C3C961885321A3637CE36050035516F4E12449646379124B4E50B5FCD874B44",
+  "javaClassVersion": 69,
+  "binaryFixtures": 0,
+  "sourceFixtures": 0
+}

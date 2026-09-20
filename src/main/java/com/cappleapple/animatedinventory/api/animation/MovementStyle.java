@@ -1,6 +1,6 @@
 package com.cappleapple.animatedinventory.api.animation;
 
-public enum MovementStyle {
+public enum MovementStyle implements net.neoforged.neoforge.common.TranslatableEnum {
     LINEAR, SMOOTH, ARC, SPRING, SNAP_SMOOTH;
 
     public double progress(double time, Easing easing) {
@@ -16,4 +16,5 @@ public enum MovementStyle {
         double t = Math.clamp(time, 0, 1);
         return this == ARC ? result.offset(0, -4 * arc * t * (1 - t)) : result;
     }
+    @Override public net.minecraft.network.chat.Component getTranslatedName() { return net.minecraft.network.chat.Component.translatable("animatedinventory.configuration.value." + name().toLowerCase(java.util.Locale.ROOT)); }
 }
