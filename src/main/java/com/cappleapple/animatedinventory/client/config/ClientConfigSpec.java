@@ -12,10 +12,11 @@ import java.util.function.Function;
 public final class ClientConfigSpec {
     private static final Gson JSON = new GsonBuilder().setPrettyPrinting().create();
     private final Map<String, Value<?>> values;
-    private final Path path = FabricLoader.getInstance().getConfigDir().resolve("animatedinventory-client.json");
-    private ClientConfigSpec(Map<String, Value<?>> values) { this.values = Map.copyOf(values); }
-    public Collection<Value<?>> values() { return values.values().stream().sorted(Comparator.comparing(Value::key)).toList(); }
+    private final Path path;
+    private ClientConfigSpec(Map<String, Value<?>> values, Path path) { this.values = Collections.unmodifiableMap(new LinkedHashMap<>(values)); this.path = path; }
+    public Collection<Value<?>> values() { return values.values(); }
     public void load() {
+        values.values().forEach(Value::reset);
         if (!Files.exists(path)) { save(); return; }
         try (var reader = Files.newBufferedReader(path)) {
             JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
@@ -50,7 +51,15 @@ public final class ClientConfigSpec {
         private final T defaultValue;
         private T value;
         private final Function<String, T> parser;
-        private Value(String key, T value, Function<String,T> parser) { this.key = key; this.value = value; this.defaultValue = value; this.parser = parser; }
+        private final String minimum, maximum;
+        private Value(String key, T value, Function<String,T> parser) { this(key, value, parser, null, null); }
+        private Value(String key, T value, Function<String,T> parser, String minimum, String maximum) {
+            this.key = key; this.value = value; this.defaultValue = value; this.parser = parser;
+            this.minimum = minimum; this.maximum = maximum;
+        }
+        public T defaultValue() { return defaultValue; }
+        public String minimum() { return minimum; }
+        public String maximum() { return maximum; }
         public T get() { return value; }
         public void set(T value) { this.value = parser.apply(String.valueOf(value)); }
         public String key() { return key; }
@@ -61,10 +70,10 @@ public final class ClientConfigSpec {
         private BooleanValue(String key, boolean value) { super(key, value, input -> { if (!input.equalsIgnoreCase("true") && !input.equalsIgnoreCase("false")) throw new IllegalArgumentException(input); return Boolean.parseBoolean(input); }); }
     }
     public static final class IntValue extends Value<Integer> {
-        private IntValue(String key, int value, int min, int max) { super(key, value, input -> { int result = Integer.parseInt(input); if (result < min || result > max) throw new IllegalArgumentException(input); return result; }); }
+        private IntValue(String key, int value, int min, int max) { super(key, value, input -> { int result = Integer.parseInt(input); if (result < min || result > max) throw new IllegalArgumentException(input); return result; }, Integer.toString(min), Integer.toString(max)); }
     }
     public static final class DoubleValue extends Value<Double> {
-        private DoubleValue(String key, double value, double min, double max) { super(key, value, input -> { double result = Double.parseDouble(input); if (!Double.isFinite(result) || result < min || result > max) throw new IllegalArgumentException(input); return result; }); }
+        private DoubleValue(String key, double value, double min, double max) { super(key, value, input -> { double result = Double.parseDouble(input); if (!Double.isFinite(result) || result < min || result > max) throw new IllegalArgumentException(input); return result; }, Double.toString(min), Double.toString(max)); }
     }
     public static final class EnumValue<T extends Enum<T>> extends Value<T> {
         private EnumValue(String key, T value) { super(key, value, input -> Enum.valueOf(value.getDeclaringClass(), input.toUpperCase(Locale.ROOT))); }
@@ -80,6 +89,7 @@ public final class ClientConfigSpec {
         public IntValue defineInRange(String name, int value, int min, int max) { return add(new IntValue(key(name), value, min, max)); }
         public DoubleValue defineInRange(String name, double value, double min, double max) { return add(new DoubleValue(key(name), value, min, max)); }
         public <T extends Enum<T>> EnumValue<T> defineEnum(String name, T value) { return add(new EnumValue<>(key(name), value)); }
-        public ClientConfigSpec build() { return new ClientConfigSpec(values); }
+        public ClientConfigSpec build() { return build(FabricLoader.getInstance().getConfigDir().resolve("animatedinventory-client.json")); }
+        ClientConfigSpec build(Path path) { return new ClientConfigSpec(values, Objects.requireNonNull(path)); }
     }
 }

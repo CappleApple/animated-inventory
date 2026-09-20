@@ -1,0 +1,250 @@
+PASS native window stays hidden
+PASS integrated world and real inventory screen opened
+PASS native slot rendering owns inventory items
+PASS pickup immediate quantities: slot=0 air, cursor=12 apple
+PASS pickup creates a visual transition
+PASS pickup server synchronized quantities: slot=0 air, cursor=12 apple
+PASS pickup authoritative integrated server quantities: slot=0 air, cursor=12 apple
+PASS placement immediate quantities: slot=12 apple, cursor=0 air
+PASS placement creates a visual transition
+PASS placement server synchronized quantities: slot=12 apple, cursor=0 air
+PASS placement authoritative integrated server quantities: slot=12 apple, cursor=0 air
+PASS split immediate quantities: slot=6 apple, cursor=7 apple
+PASS split creates a visual transition
+PASS split server synchronized quantities: slot=6 apple, cursor=7 apple
+PASS split authoritative integrated server quantities: slot=6 apple, cursor=7 apple
+PASS single-placement immediate quantities: slot=6 apple, cursor=11 apple
+PASS single-placement creates a visual transition
+PASS single-placement server synchronized quantities: slot=6 apple, cursor=11 apple
+PASS single-placement authoritative integrated server quantities: slot=6 apple, cursor=11 apple
+PASS partial-merge immediate quantities: slot=64 apple, cursor=8 apple
+PASS partial-merge creates a visual transition
+PASS partial-merge server synchronized quantities: slot=64 apple, cursor=8 apple
+PASS partial-merge authoritative integrated server quantities: slot=64 apple, cursor=8 apple
+PASS swap immediate quantities: slot=12 apple, cursor=4 diamond
+PASS swap creates a visual transition
+PASS swap server synchronized quantities: slot=12 apple, cursor=4 diamond
+PASS swap authoritative integrated server quantities: slot=12 apple, cursor=4 diamond
+PASS quick-move immediate quantities: slot=0 air, cursor=0 air
+PASS quick-move creates a visual transition
+PASS quick-move server synchronized quantities: slot=0 air, cursor=0 air
+PASS quick-move authoritative integrated server quantities: slot=0 air, cursor=0 air
+PASS hotbar-swap immediate quantities: slot=4 diamond, cursor=0 air
+PASS hotbar-swap creates a visual transition
+PASS hotbar-swap server synchronized quantities: slot=4 diamond, cursor=0 air
+PASS hotbar-swap authoritative integrated server quantities: slot=4 diamond, cursor=0 air
+PASS crafting immediate quantities: slot=0 air, cursor=4 oak_planks
+PASS crafting creates a visual transition
+PASS crafting consumes ingredients through the result-slot hook
+PASS crafting server synchronized quantities: slot=0 air, cursor=4 oak_planks
+PASS crafting authoritative integrated server quantities: slot=0 air, cursor=4 oak_planks
+PASS disabled immediate quantities: slot=0 air, cursor=12 apple
+PASS disabled mode creates no animation
+PASS disabled server synchronized quantities: slot=0 air, cursor=12 apple
+PASS disabled authoritative integrated server quantities: slot=0 air, cursor=12 apple
+PASS reduced-motion immediate quantities: slot=0 air, cursor=12 apple
+PASS reduced-motion creates a visual transition
+PASS reduced motion uses stationary fades at most 60 ms
+PASS reduced-motion server synchronized quantities: slot=0 air, cursor=12 apple
+PASS reduced-motion authoritative integrated server quantities: slot=0 air, cursor=12 apple
+PASS drag preview preserves logical inventory until release
+PASS native drag preview rendered six items while logical destination was empty
+PASS drag-preview immediate quantities: slot=6 apple, cursor=0 air
+PASS drag-preview server synchronized quantities: slot=6 apple, cursor=0 air
+PASS drag-preview authoritative integrated server quantities: slot=6 apple, cursor=0 air
+PASS all inventory frames rendered without runtime failure
+PASS hotbar selector interpolates between logical positions
+PASS reduced motion snaps hotbar selection
+PASS hover emphasis scales the highlighted item
+PASS hover highlight renders exactly once per frame
+PASS native hotbar selection sprite receives animated translation
+PASS screen close retains rendered GPU image
+PASS screen close image rendered without runtime failure
+PASS screen reopen captures the live inventory
+PASS F8 opens the configuration editor
+PASS numeric setting uses an editable control
+PASS boolean control changes value and translated label
+PASS invalid numeric input keeps page open with translated error: before=0, after=0, value=NaN, error=Invalid value for Animation speed
+PASS page change applies valid numeric setting
+PASS resolved UI text: Enable animations
+PASS resolved UI text: General
+PASS resolved UI text: Enable animations Enable inventory, cursor, hover, hotbar and screen animations. Actual item transfers stay immediate. Default: ON
+PASS resolved UI text: ON
+PASS resolved UI text: Animation speed
+PASS resolved UI text: Animation speed 0.5 is slower; 1 is normal; 2 is twice as fast. Default: 1.0 Range: 0.1 to 10.0
+PASS resolved UI text: Reduce motion
+PASS resolved UI text: Reduce motion Replace movement and overshoot with short fades and smaller emphasis effects. Default: OFF
+PASS resolved UI text: OFF
+PASS resolved UI text: Animation limit
+PASS resolved UI text: Animation limit Limit active visual copies. Items that exceed this budget remain normally rendered. Default: 128 Range: 1 to 512
+PASS resolved UI text: Interrupted animations
+PASS resolved UI text: Interrupted animations Retarget from the current position, finish the replacement quickly, or cancel touched animations. Default: Retarget
+PASS resolved UI text: Retarget
+PASS resolved UI text: Finish quickly
+PASS resolved UI text: Cancel
+PASS enum button advances general.animation_interruption_mode
+PASS resolved UI text: Animate item movement
+PASS resolved UI text: Item Movement
+PASS resolved UI text: Animate item movement Animate item movement between slots while keeping normal inventory rules. Default: ON
+PASS resolved UI text: Movement duration
+PASS resolved UI text: Movement duration Duration in milliseconds before the global animation speed multiplier. Default: 140 Range: 10 to 2000
+PASS resolved UI text: Movement style
+PASS resolved UI text: Movement style Choose a straight, eased, curved, spring or quick-settling movement path. Default: Smooth
+PASS resolved UI text: Smooth
+PASS resolved UI text: Linear
+PASS resolved UI text: Arc
+PASS resolved UI text: Spring
+PASS resolved UI text: Quick settle
+PASS enum button advances movement.movement_style
+PASS resolved UI text: Movement easing
+PASS resolved UI text: Movement easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS resolved UI text: Ease out (cubic)
+PASS resolved UI text: Ease in (quadratic)
+PASS resolved UI text: Ease out (quadratic)
+PASS resolved UI text: Ease in/out (quadratic)
+PASS resolved UI text: Ease in/out (cubic)
+PASS resolved UI text: Ease out (quartic)
+PASS resolved UI text: Ease out (quintic)
+PASS resolved UI text: Gentle overshoot
+PASS resolved UI text: Smooth step
+PASS resolved UI text: Smoother step
+PASS enum button advances movement.movement_easing
+PASS resolved UI text: Arc height
+PASS resolved UI text: Arc height Height of the curved movement path in GUI pixels. Used by the Arc movement style. Default: 8.0 Range: 0.0 to 64.0
+PASS resolved UI text: Swap easing
+PASS resolved UI text: Swap easing Choose how the animation accelerates and settles. Default: Ease in/out (cubic)
+PASS enum button advances movement.swap_easing
+PASS resolved UI text: Animate consumed ingredients
+PASS resolved UI text: Crafting
+PASS resolved UI text: Animate consumed ingredients Consumed ingredients flow into the crafted item when you take a 2x2 or 3x3 crafting result. Default: ON
+PASS resolved UI text: Crafting animation duration
+PASS resolved UI text: Crafting animation duration Ingredient travel duration in milliseconds before the global speed multiplier. Default: 160 Range: 10 to 2000
+PASS resolved UI text: Animate quick moves
+PASS resolved UI text: Quick Move
+PASS resolved UI text: Animate quick moves Animate transfers made with shift-click. Default: ON
+PASS resolved UI text: Quick-move duration
+PASS resolved UI text: Quick-move duration Duration in milliseconds before the global animation speed multiplier. Default: 160 Range: 10 to 2000
+PASS resolved UI text: Update correlation window
+PASS resolved UI text: Update correlation window Correlate adjacent inventory updates without delaying gameplay. Measured in milliseconds. Default: 80 Range: 0 to 250
+PASS resolved UI text: Animate cursor pickup
+PASS resolved UI text: Cursor
+PASS resolved UI text: Animate cursor pickup Animate items travelling from a slot to the cursor after pickup. Default: ON
+PASS resolved UI text: Cursor destination
+PASS resolved UI text: Cursor destination Fixed uses the pointer position at pickup. Follow cursor keeps updating the destination. Default: Follow cursor
+PASS resolved UI text: Follow cursor
+PASS resolved UI text: Fixed
+PASS enum button advances cursor.cursor_pickup_mode
+PASS resolved UI text: Pickup duration
+PASS resolved UI text: Pickup duration Duration in milliseconds before the global animation speed multiplier. Default: 90 Range: 10 to 2000
+PASS resolved UI text: Pickup easing
+PASS resolved UI text: Pickup easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS enum button advances cursor.cursor_pickup_easing
+PASS resolved UI text: Animate placement
+PASS resolved UI text: Animate placement Animate items travelling from the cursor into destination slots. Default: ON
+PASS resolved UI text: Placement duration
+PASS resolved UI text: Placement duration Duration in milliseconds before the global animation speed multiplier. Default: 100 Range: 10 to 2000
+PASS resolved UI text: Placement easing
+PASS resolved UI text: Placement easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS enum button advances cursor.cursor_placement_easing
+PASS resolved UI text: Animate slot hover
+PASS resolved UI text: Slot Hover
+PASS resolved UI text: Animate slot hover Enlarge the item under the pointer without changing its clickable area. Default: ON
+PASS resolved UI text: Hover scale
+PASS resolved UI text: Hover scale Visual size multiplier. 1.0 is the normal item or screen size. Default: 1.08 Range: 1.0 to 1.5
+PASS resolved UI text: Hover duration
+PASS resolved UI text: Hover duration Duration in milliseconds before the global animation speed multiplier. Default: 80 Range: 10 to 2000
+PASS resolved UI text: Hover easing
+PASS resolved UI text: Hover easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS enum button advances hover.slot_hover_easing
+PASS resolved UI text: Hover depth offset
+PASS resolved UI text: Hover depth offset Raise hovered items slightly above neighbors without changing their hitboxes. Default: 10.0 Range: 0.0 to 50.0
+PASS resolved UI text: Enable press feedback
+PASS resolved UI text: Click Feedback
+PASS resolved UI text: Enable press feedback Briefly shrink a pressed item as visual click feedback. Default: ON
+PASS resolved UI text: Pressed scale
+PASS resolved UI text: Pressed scale Visual size multiplier. 1.0 is the normal item or screen size. Default: 0.92 Range: 0.7 to 1.0
+PASS resolved UI text: Press duration
+PASS resolved UI text: Press duration Duration in milliseconds before the global animation speed multiplier. Default: 70 Range: 10 to 2000
+PASS resolved UI text: Pulse after merging
+PASS resolved UI text: Stack Merging
+PASS resolved UI text: Pulse after merging Briefly enlarge a stack after items merge into it. Default: ON
+PASS resolved UI text: Merge pulse scale
+PASS resolved UI text: Merge pulse scale Visual size multiplier. 1.0 is the normal item or screen size. Default: 1.12 Range: 1.0 to 1.5
+PASS resolved UI text: Merge pulse duration
+PASS resolved UI text: Merge pulse duration Duration in milliseconds before the global animation speed multiplier. Default: 100 Range: 10 to 2000
+PASS resolved UI text: Animate selection
+PASS resolved UI text: Hotbar
+PASS resolved UI text: Animate selection Animate the hotbar selection outline when the selected slot changes. Default: ON
+PASS resolved UI text: Selection duration
+PASS resolved UI text: Selection duration Duration in milliseconds before the global animation speed multiplier. Default: 110 Range: 10 to 2000
+PASS resolved UI text: Selection easing
+PASS resolved UI text: Selection easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS enum button advances hotbar.hotbar_easing
+PASS resolved UI text: Spring strength
+PASS resolved UI text: Spring strength Blend gentle overshoot into the selector movement. Zero uses only the selected easing. Default: 0.0 Range: 0.0 to 1.0
+PASS resolved UI text: Opening effect
+PASS resolved UI text: Screen Transitions
+PASS resolved UI text: Opening effect Choose how container screens enter. None turns off the opening transition. Default: Fade and scale
+PASS resolved UI text: Fade and scale
+PASS resolved UI text: None
+PASS resolved UI text: Fade
+PASS resolved UI text: Scale
+PASS resolved UI text: Slide
+PASS enum button advances screens.screen_open_animation
+PASS resolved UI text: Opening duration
+PASS resolved UI text: Opening duration Duration in milliseconds before the global animation speed multiplier. Default: 120 Range: 10 to 2000
+PASS resolved UI text: Opening easing
+PASS resolved UI text: Opening easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS enum button advances screens.screen_open_easing
+PASS resolved UI text: Opening start scale
+PASS resolved UI text: Opening start scale Visual size multiplier. 1.0 is the normal item or screen size. Default: 0.96 Range: 0.8 to 1.0
+PASS resolved UI text: Opening slide distance
+PASS resolved UI text: Opening slide distance Starting vertical offset in GUI pixels for the Slide opening effect. Default: 8.0 Range: -64.0 to 64.0
+PASS resolved UI text: Closing effect
+PASS resolved UI text: Closing effect Choose how container screens leave. None turns off the closing transition. Default: Fade and scale
+PASS enum button advances screens.screen_close_animation
+PASS resolved UI text: Closing duration
+PASS resolved UI text: Closing duration Duration in milliseconds before the global animation speed multiplier. Default: 100 Range: 10 to 2000
+PASS resolved UI text: Closing easing
+PASS resolved UI text: Closing easing Choose how the animation accelerates and settles. Default: Ease out (cubic)
+PASS enum button advances screens.screen_close_easing
+PASS resolved UI text: Closing end scale
+PASS resolved UI text: Closing end scale Visual size multiplier. 1.0 is the normal item or screen size. Default: 0.96 Range: 0.8 to 1.0
+PASS resolved UI text: Closing slide distance
+PASS resolved UI text: Closing slide distance Ending vertical offset in GUI pixels for the Slide closing effect. Default: 8.0 Range: -64.0 to 64.0
+PASS resolved UI text: Item appearance
+PASS resolved UI text: Appearing Items
+PASS resolved UI text: Item appearance Choose the visual effect for newly appearing items. Default: Fade and scale
+PASS resolved UI text: Pop
+PASS enum button advances items.item_appear_animation
+PASS resolved UI text: Item disappearance
+PASS resolved UI text: Item disappearance Choose the visual effect for disappearing items. Default: Fade and scale
+PASS enum button advances items.item_disappear_animation
+PASS resolved UI text: Animate layout changes
+PASS resolved UI text: Layout Reflow
+PASS resolved UI text: Animate layout changes Animate stable items when their layout positions change. Page and filter replacements are reset. Default: ON
+PASS resolved UI text: Reflow duration
+PASS resolved UI text: Reflow duration Duration in milliseconds before the global animation speed multiplier. Default: 140 Range: 10 to 2000
+PASS resolved UI text: Reflow easing
+PASS resolved UI text: Reflow easing Choose how the animation accelerates and settles. Default: Ease in/out (cubic)
+PASS enum button advances layout_reflow.layout_reflow_easing
+PASS resolved UI text: Bundled Not Siloed
+PASS resolved UI text: Compatibility
+PASS resolved UI text: Bundled Not Siloed The NeoForge attachment adapter is unavailable on this Fabric version. Standard inventory menus use native slot rendering. Default: ON
+PASS resolved UI text: Unavailable
+PASS unsupported BNS control is disabled, translated and ignores mouse clicks
+PASS resolved UI text: Inventory Particles
+PASS resolved UI text: Inventory Particles Use one native render for complete moves and pulses for partial transfers. Disable screen-image transforms. Default: ON
+PASS resolved UI text: Show visual diagnostics
+PASS resolved UI text: Debugging
+PASS resolved UI text: Show visual diagnostics Show logical and visual bounds, source/destination paths, clipping, transaction IDs and animation metrics. Default: OFF
+PASS resolved UI text: Log transactions
+PASS resolved UI text: Log transactions Write inferred transaction information to the debug log. Default: OFF
+PASS all 57 settings display translated labels, sections, tooltips and enum choices
+PASS saved configuration reloads numeric values
+PASS invalid and missing settings reset to defaults on reload
+PASS language resource reload updates translated title
+PASS language resource reload updates translated section
+PASS missing selected-language entry falls back to English
+PASS English resource reload restores original labels
+PASS complete

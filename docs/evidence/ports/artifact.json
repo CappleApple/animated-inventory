@@ -1,0 +1,12 @@
+{
+  "file": "animatedinventory-fabric-1.20.1-1.1.1.jar",
+  "sha256": "25b62c4239b00f4f1a937c91251b60f3988425740a34e2bfa772b92d27449758",
+  "minecraft": "1.20.1",
+  "loader": "fabric",
+  "loaderVersion": "0.19.5",
+  "java": 17,
+  "resourceLoader": "0.11.12+fb82e9d777",
+  "resourceLoaderApiRelease": "0.92.12+1.20.1",
+  "validation": "production loader, official Minecraft client jar, separate remapped fixture",
+  "classVersion": 61
+}

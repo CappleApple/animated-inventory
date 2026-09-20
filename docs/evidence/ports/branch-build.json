@@ -1,11 +1,13 @@
 {
-  "file": "animatedinventory-fabric-1.20.1-1.1.jar",
-  "sha256": "9b4a7300abb42acf09e0c48ed2b3b14ac622b6fe2f842b3681a1d3028e6866e8",
+  "date": "2026-09-20",
+  "file": "animatedinventory-fabric-1.20.1-1.1.1.jar",
+  "sha256": "25b62c4239b00f4f1a937c91251b60f3988425740a34e2bfa772b92d27449758",
   "tests": {
-    "tests": 95,
+    "tests": 100,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
-  "root_build": "passed"
+  "root_build": "passed",
+  "packaged_jar_client": "passed"
 }
