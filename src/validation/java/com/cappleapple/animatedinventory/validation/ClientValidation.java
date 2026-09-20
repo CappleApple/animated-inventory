@@ -16,17 +16,22 @@ import java.nio.file.*;
 /** Exercises a disposable local world; no production classes or artifacts include this fixture. */
 public final class ClientValidation {
     private static final long STARTED = System.nanoTime();
-    private static int stage, age;
+    private static int stage, age, heartbeat;
     private static InventoryScreen screen;
     private static Slot source, target;
     public static void tick() {
         var mc = Minecraft.getInstance();
         if (stage == 99) return;
+        if (stage == 0 && ++heartbeat % 200 == 0) System.out.println("Validation waiting: screen=" + mc.gui.screen() + ", overlay=" + mc.gui.overlay());
         try {
             mc.options.getSoundSourceOptionInstance(net.minecraft.sounds.SoundSource.MASTER).set(0.0);
             mc.mouseHandler.releaseMouse();
-            if (System.nanoTime() - STARTED > 240_000_000_000L) throw new AssertionError("Client validation timeout");
+            if (System.nanoTime() - STARTED > 480_000_000_000L) throw new AssertionError("Client validation timeout");
             if (stage == 0 && mc.gui.screen() instanceof TitleScreen && mc.gui.overlay() == null) {
+                if (Boolean.getBoolean("animatedinventory.productionValidation")) {
+                    String origin = ClientRuntime.class.getProtectionDomain().getCodeSource().getLocation().toString();
+                    require(origin.endsWith(".jar"), "production classes loaded from release JAR: " + origin);
+                }
                 mc.options.pauseOnLostFocus = false;
                 mc.createWorldOpenFlows().createFreshLevel("animatedinventory-port-" + System.currentTimeMillis(),
                     new LevelSettings("Animated Inventory port validation", GameType.SURVIVAL,
@@ -37,6 +42,8 @@ public final class ClientValidation {
                 stage = 1; age = 0; return;
             }
             if (mc.level == null || mc.player == null || mc.gui.overlay() != null) return;
+            if (stage == 7) { if (GameplayValidation.tick()) stage = 8; return; }
+            if (stage == 8) { if (ConfigValidation.tick()) { pass("complete"); stage = 99; mc.stop(); } return; }
             if (++age < 10) return;
             age = 0;
             if (Boolean.getBoolean("animatedinventory.captureValidation") && stage >= 2 && stage <= 5) net.minecraft.client.Screenshot.grab(mc, false);
@@ -77,7 +84,7 @@ public final class ClientValidation {
                 mc.gui.setScreen(new InventoryScreen(mc.player)); stage = 6;
             } else if (stage == 6) {
                 require(runtime.enabled(), "screen reopen rendered without failure");
-                pass("complete"); stage = 99; mc.stop();
+                stage = 7;
             }
         } catch (Throwable error) {
             error.printStackTrace();

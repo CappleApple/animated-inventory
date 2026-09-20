@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.1 - 2026-09-20
+
+### Fixed
+
+- Load the mod's language resources on Fabric without requiring a separate Fabric API installation.
+- Show translated configuration labels, choices, tooltips and validation errors.
+- Restore defaults for missing or invalid JSON settings instead of retaining stale values.
+
+### Added
+
+- Boolean toggles, named choice buttons and a reset button for each configuration page.
+
 ## 1.1 - 2026-09-19
 
 ### Added

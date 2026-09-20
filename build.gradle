@@ -11,6 +11,8 @@ repositories { mavenCentral() }
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${loader_version}"
+    implementation include("net.fabricmc.fabric-api:fabric-api-base:2.0.4+ece063239e")
+    implementation include("net.fabricmc.fabric-api:fabric-resource-loader-v1:2.0.13+9edec1269e")
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -41,7 +43,7 @@ if (project.hasProperty('clientValidation')) {
     tasks.named('runClient') {
         doFirst {
             file('run-validation').mkdirs()
-            file('run-validation/options.txt').text = 'soundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nmaxFps:30\n'
+            file('run-validation/options.txt').text = 'onboardAccessibility:true\ntutorialStep:none\nsoundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nmaxFps:30\nrenderDistance:2\nsimulationDistance:2\n'
             file('run-validation/validation.txt').delete()
         }
         doLast {
