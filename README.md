@@ -2,15 +2,15 @@
 
 Animated Inventory animates item pickup, placement, quick move, merging, splitting and crafting while Minecraft's real menu state updates normally. It also animates hotbar selection, item emphasis and container screen transitions, with adjustable timing and reduced motion.
 
-This branch builds **version 1.1 for Minecraft 26.3 Fabric**. The original NeoForge 1.21.1 version remains on `main`.
+This branch builds **version 1.1.1 for Minecraft 26.3 Fabric**. The original NeoForge 1.21.1 version remains on `main`.
 
 ## Installation
 
-Minecraft **26.3**, **Fabric 0.19.5**, and **Java 25**. Fabric API is not required. Install `animatedinventory-fabric-26.3-1.1.jar` in the client's `mods` directory. A server installation is not required.
+Minecraft **26.3**, **Fabric 0.19.5**, and **Java 25**. The required Fabric resource-loader modules are bundled; a separate Fabric API installation is not required. Install `animatedinventory-fabric-26.3-1.1.1.jar` in the client's `mods` directory. A server installation is not required.
 
 ## Configuration
 
-Press **F8** to open the configuration editor, or edit `config/animatedinventory-client.json`. The JSON file uses nested objects for the same sections and keys as the original configuration. The NeoForge TOML file is not imported.
+Press **F8** to open the localized configuration editor, or edit `config/animatedinventory-client.json`. The JSON file uses nested objects for the same sections and keys as the original configuration. The NeoForge TOML file is not imported.
 
 See the [configuration reference](docs/CONFIG.md) for setting names, defaults and ranges. Animations change presentation; click targets and inventory logic retain their normal positions.
 
@@ -30,7 +30,7 @@ Use **JDK 25** to run the build. The wrapper pins **Gradle 9.7.1** and the build
 .\gradlew.bat test build
 ```
 
-The installable jar is `build/libs/animatedinventory-fabric-26.3-1.1.jar`. Source jars are for development.
+The installable jar is `build/libs/animatedinventory-fabric-26.3-1.1.1.jar`. Source jars are for development.
 
 ## Validation
 

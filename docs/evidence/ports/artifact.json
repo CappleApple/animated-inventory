@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-20",
+  "minecraft": "26.3",
+  "loader": "0.19.5",
+  "modVersion": "1.1.1",
+  "jar": "animatedinventory-fabric-26.3-1.1.1.jar",
+  "bytes": 301609,
+  "sha256": "693f8cdf81f1798a929a99c43a6477401e0dbb36deaa38ffd63d0de500e5e17f",
+  "javaClassVersion": 69,
+  "binaryFixtures": 0,
+  "sourceFixtures": 0
+}

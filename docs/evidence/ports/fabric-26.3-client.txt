@@ -1,3 +1,4 @@
+PASS production classes loaded from release JAR: file:/C:/Users/astra/Documents/ChatGPT/Animated%20Inventory/.dev/branch-projects/fabric-26.3/run-production-validation/mods/animatedinventory-fabric-26.3-1.1.1.jar
 PASS integrated server and inventory screen opened
 PASS native slot ownership observed
 PASS pickup state remains immediate
@@ -8,4 +9,676 @@ PASS merge animation created
 PASS merge and item-opacity frames rendered without failure
 PASS screen close replay rendered without failure
 PASS screen reopen rendered without failure
+PASS expanded native slot ownership
+PASS right pickup splits odd stack 6/7 immediately
+PASS split pickup creates animation
+PASS right placement moves one item immediately
+PASS single placement creates animation
+PASS cursor swap preserves both identities and counts
+PASS cursor swap creates animation
+PASS quick move transfers inventory stack into hotbar
+PASS quick move creates animation
+PASS hotbar-key swap preserves both stacks
+PASS hotbar swap creates animation
+PASS preview fixture has an active destination ownership claim
+PASS rendered quick-craft previews leave real slots and cursor unchanged
+PASS quick-craft preview rendering preserves existing destination claim
+PASS native quick-craft commit distributes 5/5 and preserves remainder
+PASS quick-craft distribution creates animation
+PASS native crafting consumes four inputs and takes one result
+PASS native result take creates four ingredient-to-product animations
+PASS shift crafting sends product to inventory with immediate counts
+PASS shift crafting animates ingredient consumption
+PASS disabled mode leaves native pickup functional
+PASS disabled mode creates no animation or suppression claims
+PASS reduced-motion pickup creates animation
+PASS reduced motion uses stationary fades at most 60ms
+PASS hover enlarges native item without changing stack state
+PASS elevated hover and behind-item highlight render without runtime failure
+PASS zero hover depth renders without runtime failure
+PASS hotbar selector starts between old and new logical selection
+PASS animated hotbar selection rendered in-world
+PASS reduced motion snaps hotbar selector to logical slot
+PASS resize invalidates presentation ownership and active claims
+PASS inventory rendered after resize
+PASS integrated server inventory seed synchronized before quick move
+PASS real shift-click predicts quick-move counts immediately
+PASS real shift-click creates animation
+PASS integrated server confirmed real shift-click result
+PASS server recipe manager computed crafting-table output
+PASS real crafting output synchronized from server recipe
+PASS real result-slot click immediately consumes ingredients
+PASS real recipe pickup routes four consumed ingredients into animations
+PASS integrated server confirmed real crafting pickup
+PASS second real recipe synchronized for shift crafting
+PASS real shift-click crafting predicts inventory result
+PASS real shift crafting creates ingredient animations
+PASS integrated server confirmed real shift crafting
+PASS expanded gameplay complete
+PASS actual F8 key handler opens config editor
+PASS config title uses a translation component
+PASS runtime localization covers general.animations_enabled
+PASS localized label and tooltip resolve for general.animations_enabled
+PASS runtime localization covers general.animation_speed_multiplier
+PASS localized label and tooltip resolve for general.animation_speed_multiplier
+PASS runtime localization covers general.reduce_motion
+PASS localized label and tooltip resolve for general.reduce_motion
+PASS runtime localization covers general.max_simultaneous_item_animations
+PASS localized label and tooltip resolve for general.max_simultaneous_item_animations
+PASS runtime localization covers general.animation_interruption_mode
+PASS localized label and tooltip resolve for general.animation_interruption_mode
+PASS localized enum RETARGET
+PASS localized enum FINISH_FAST
+PASS localized enum CANCEL
+PASS runtime localization covers movement.item_movement_enabled
+PASS localized label and tooltip resolve for movement.item_movement_enabled
+PASS runtime localization covers movement.movement_duration_ms
+PASS localized label and tooltip resolve for movement.movement_duration_ms
+PASS runtime localization covers movement.movement_style
+PASS localized label and tooltip resolve for movement.movement_style
+PASS localized enum LINEAR
+PASS localized enum SMOOTH
+PASS localized enum ARC
+PASS localized enum SPRING
+PASS localized enum SNAP_SMOOTH
+PASS runtime localization covers movement.movement_easing
+PASS localized label and tooltip resolve for movement.movement_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers movement.movement_arc_height
+PASS localized label and tooltip resolve for movement.movement_arc_height
+PASS runtime localization covers movement.swap_easing
+PASS localized label and tooltip resolve for movement.swap_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers crafting.crafting_ingredient_animation
+PASS localized label and tooltip resolve for crafting.crafting_ingredient_animation
+PASS runtime localization covers crafting.crafting_animation_duration_ms
+PASS localized label and tooltip resolve for crafting.crafting_animation_duration_ms
+PASS runtime localization covers quick_move.quick_move_enabled
+PASS localized label and tooltip resolve for quick_move.quick_move_enabled
+PASS runtime localization covers quick_move.quick_move_duration_ms
+PASS localized label and tooltip resolve for quick_move.quick_move_duration_ms
+PASS runtime localization covers quick_move.transaction_correlation_window_ms
+PASS localized label and tooltip resolve for quick_move.transaction_correlation_window_ms
+PASS runtime localization covers cursor.cursor_pickup_animation
+PASS localized label and tooltip resolve for cursor.cursor_pickup_animation
+PASS runtime localization covers cursor.cursor_pickup_mode
+PASS localized label and tooltip resolve for cursor.cursor_pickup_mode
+PASS localized enum FIXED
+PASS localized enum FOLLOW_CURSOR
+PASS runtime localization covers cursor.cursor_pickup_duration_ms
+PASS localized label and tooltip resolve for cursor.cursor_pickup_duration_ms
+PASS runtime localization covers cursor.cursor_pickup_easing
+PASS localized label and tooltip resolve for cursor.cursor_pickup_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers cursor.cursor_placement_animation
+PASS localized label and tooltip resolve for cursor.cursor_placement_animation
+PASS runtime localization covers cursor.cursor_placement_duration_ms
+PASS localized label and tooltip resolve for cursor.cursor_placement_duration_ms
+PASS runtime localization covers cursor.cursor_placement_easing
+PASS localized label and tooltip resolve for cursor.cursor_placement_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers hover.slot_hover_animation
+PASS localized label and tooltip resolve for hover.slot_hover_animation
+PASS runtime localization covers hover.slot_hover_scale
+PASS localized label and tooltip resolve for hover.slot_hover_scale
+PASS runtime localization covers hover.slot_hover_duration_ms
+PASS localized label and tooltip resolve for hover.slot_hover_duration_ms
+PASS runtime localization covers hover.slot_hover_easing
+PASS localized label and tooltip resolve for hover.slot_hover_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers hover.slot_hover_raise_z
+PASS localized label and tooltip resolve for hover.slot_hover_raise_z
+PASS runtime localization covers click.click_feedback_enabled
+PASS localized label and tooltip resolve for click.click_feedback_enabled
+PASS runtime localization covers click.click_scale
+PASS localized label and tooltip resolve for click.click_scale
+PASS runtime localization covers click.click_duration_ms
+PASS localized label and tooltip resolve for click.click_duration_ms
+PASS runtime localization covers merge.merge_pulse_enabled
+PASS localized label and tooltip resolve for merge.merge_pulse_enabled
+PASS runtime localization covers merge.merge_pulse_scale
+PASS localized label and tooltip resolve for merge.merge_pulse_scale
+PASS runtime localization covers merge.merge_pulse_duration_ms
+PASS localized label and tooltip resolve for merge.merge_pulse_duration_ms
+PASS runtime localization covers hotbar.animate_hotbar_selector
+PASS localized label and tooltip resolve for hotbar.animate_hotbar_selector
+PASS runtime localization covers hotbar.hotbar_animation_duration_ms
+PASS localized label and tooltip resolve for hotbar.hotbar_animation_duration_ms
+PASS runtime localization covers hotbar.hotbar_easing
+PASS localized label and tooltip resolve for hotbar.hotbar_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers hotbar.hotbar_spring_strength
+PASS localized label and tooltip resolve for hotbar.hotbar_spring_strength
+PASS runtime localization covers screens.screen_open_animation
+PASS localized label and tooltip resolve for screens.screen_open_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum SLIDE
+PASS runtime localization covers screens.screen_open_duration_ms
+PASS localized label and tooltip resolve for screens.screen_open_duration_ms
+PASS runtime localization covers screens.screen_open_easing
+PASS localized label and tooltip resolve for screens.screen_open_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers screens.screen_open_scale_start
+PASS localized label and tooltip resolve for screens.screen_open_scale_start
+PASS runtime localization covers screens.screen_open_slide_distance
+PASS localized label and tooltip resolve for screens.screen_open_slide_distance
+PASS runtime localization covers screens.screen_close_animation
+PASS localized label and tooltip resolve for screens.screen_close_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum SLIDE
+PASS runtime localization covers screens.screen_close_duration_ms
+PASS localized label and tooltip resolve for screens.screen_close_duration_ms
+PASS runtime localization covers screens.screen_close_easing
+PASS localized label and tooltip resolve for screens.screen_close_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers screens.screen_close_scale_end
+PASS localized label and tooltip resolve for screens.screen_close_scale_end
+PASS runtime localization covers screens.screen_close_slide_distance
+PASS localized label and tooltip resolve for screens.screen_close_slide_distance
+PASS runtime localization covers items.item_appear_animation
+PASS localized label and tooltip resolve for items.item_appear_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum POP
+PASS runtime localization covers items.item_disappear_animation
+PASS localized label and tooltip resolve for items.item_disappear_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum POP
+PASS runtime localization covers layout_reflow.animate_layout_reflow
+PASS localized label and tooltip resolve for layout_reflow.animate_layout_reflow
+PASS runtime localization covers layout_reflow.layout_reflow_duration_ms
+PASS localized label and tooltip resolve for layout_reflow.layout_reflow_duration_ms
+PASS runtime localization covers layout_reflow.layout_reflow_easing
+PASS localized label and tooltip resolve for layout_reflow.layout_reflow_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers compatibility.bns_integration
+PASS localized label and tooltip resolve for compatibility.bns_integration
+PASS runtime localization covers compatibility.inventory_particles_integration
+PASS localized label and tooltip resolve for compatibility.inventory_particles_integration
+PASS runtime localization covers debug.debug_overlay
+PASS localized label and tooltip resolve for debug.debug_overlay
+PASS runtime localization covers debug.debug_logging
+PASS localized label and tooltip resolve for debug.debug_logging
+PASS localized config rendered after actual F8 keyboard dispatch
+PASS localized boolean control changes actual config value
+PASS Done commits numeric input and closes editor
+PASS saved numeric configuration reloads from JSON
+PASS actual F8 key handler opens config editor
+PASS invalid numeric input stays in editor without corrupting config
+PASS invalid-input error resolves its translation
+PASS page navigation saves valid numeric edits
+PASS localized enum button cycles real enum value
+PASS enum widget displays localized choice
+PASS reset-page control restores default enum
+PASS config control fits viewport general.animations_enabled
+PASS visible widget label resolves general.animations_enabled
+PASS config control fits viewport general.animation_speed_multiplier
+PASS visible widget label resolves general.animation_speed_multiplier
+PASS config control fits viewport general.reduce_motion
+PASS visible widget label resolves general.reduce_motion
+PASS config control fits viewport general.max_simultaneous_item_animations
+PASS visible widget label resolves general.max_simultaneous_item_animations
+PASS config control fits viewport general.animation_interruption_mode
+PASS visible widget label resolves general.animation_interruption_mode
+PASS config control fits viewport movement.item_movement_enabled
+PASS visible widget label resolves movement.item_movement_enabled
+PASS config control fits viewport movement.movement_duration_ms
+PASS visible widget label resolves movement.movement_duration_ms
+PASS config control fits viewport movement.movement_style
+PASS visible widget label resolves movement.movement_style
+PASS config control fits viewport movement.movement_easing
+PASS visible widget label resolves movement.movement_easing
+PASS config control fits viewport movement.movement_arc_height
+PASS visible widget label resolves movement.movement_arc_height
+PASS config control fits viewport movement.swap_easing
+PASS visible widget label resolves movement.swap_easing
+PASS config control fits viewport crafting.crafting_ingredient_animation
+PASS visible widget label resolves crafting.crafting_ingredient_animation
+PASS config control fits viewport crafting.crafting_animation_duration_ms
+PASS visible widget label resolves crafting.crafting_animation_duration_ms
+PASS config control fits viewport quick_move.quick_move_enabled
+PASS visible widget label resolves quick_move.quick_move_enabled
+PASS config control fits viewport quick_move.quick_move_duration_ms
+PASS visible widget label resolves quick_move.quick_move_duration_ms
+PASS config control fits viewport quick_move.transaction_correlation_window_ms
+PASS visible widget label resolves quick_move.transaction_correlation_window_ms
+PASS config control fits viewport cursor.cursor_pickup_animation
+PASS visible widget label resolves cursor.cursor_pickup_animation
+PASS config control fits viewport cursor.cursor_pickup_mode
+PASS visible widget label resolves cursor.cursor_pickup_mode
+PASS config control fits viewport cursor.cursor_pickup_duration_ms
+PASS visible widget label resolves cursor.cursor_pickup_duration_ms
+PASS config control fits viewport cursor.cursor_pickup_easing
+PASS visible widget label resolves cursor.cursor_pickup_easing
+PASS config control fits viewport cursor.cursor_placement_animation
+PASS visible widget label resolves cursor.cursor_placement_animation
+PASS config control fits viewport cursor.cursor_placement_duration_ms
+PASS visible widget label resolves cursor.cursor_placement_duration_ms
+PASS config control fits viewport cursor.cursor_placement_easing
+PASS visible widget label resolves cursor.cursor_placement_easing
+PASS config control fits viewport hover.slot_hover_animation
+PASS visible widget label resolves hover.slot_hover_animation
+PASS config control fits viewport hover.slot_hover_scale
+PASS visible widget label resolves hover.slot_hover_scale
+PASS config control fits viewport hover.slot_hover_duration_ms
+PASS visible widget label resolves hover.slot_hover_duration_ms
+PASS config control fits viewport hover.slot_hover_easing
+PASS visible widget label resolves hover.slot_hover_easing
+PASS config control fits viewport hover.slot_hover_raise_z
+PASS visible widget label resolves hover.slot_hover_raise_z
+PASS config control fits viewport click.click_feedback_enabled
+PASS visible widget label resolves click.click_feedback_enabled
+PASS config control fits viewport click.click_scale
+PASS visible widget label resolves click.click_scale
+PASS config control fits viewport click.click_duration_ms
+PASS visible widget label resolves click.click_duration_ms
+PASS config control fits viewport merge.merge_pulse_enabled
+PASS visible widget label resolves merge.merge_pulse_enabled
+PASS config control fits viewport merge.merge_pulse_scale
+PASS visible widget label resolves merge.merge_pulse_scale
+PASS config control fits viewport merge.merge_pulse_duration_ms
+PASS visible widget label resolves merge.merge_pulse_duration_ms
+PASS config control fits viewport hotbar.animate_hotbar_selector
+PASS visible widget label resolves hotbar.animate_hotbar_selector
+PASS config control fits viewport hotbar.hotbar_animation_duration_ms
+PASS visible widget label resolves hotbar.hotbar_animation_duration_ms
+PASS config control fits viewport hotbar.hotbar_easing
+PASS visible widget label resolves hotbar.hotbar_easing
+PASS config control fits viewport hotbar.hotbar_spring_strength
+PASS visible widget label resolves hotbar.hotbar_spring_strength
+PASS config control fits viewport screens.screen_open_animation
+PASS visible widget label resolves screens.screen_open_animation
+PASS config control fits viewport screens.screen_open_duration_ms
+PASS visible widget label resolves screens.screen_open_duration_ms
+PASS config control fits viewport screens.screen_open_easing
+PASS visible widget label resolves screens.screen_open_easing
+PASS config control fits viewport screens.screen_open_scale_start
+PASS visible widget label resolves screens.screen_open_scale_start
+PASS config control fits viewport screens.screen_open_slide_distance
+PASS visible widget label resolves screens.screen_open_slide_distance
+PASS config control fits viewport screens.screen_close_animation
+PASS visible widget label resolves screens.screen_close_animation
+PASS config control fits viewport screens.screen_close_duration_ms
+PASS visible widget label resolves screens.screen_close_duration_ms
+PASS config control fits viewport screens.screen_close_easing
+PASS visible widget label resolves screens.screen_close_easing
+PASS config control fits viewport screens.screen_close_scale_end
+PASS visible widget label resolves screens.screen_close_scale_end
+PASS config control fits viewport screens.screen_close_slide_distance
+PASS visible widget label resolves screens.screen_close_slide_distance
+PASS config control fits viewport items.item_appear_animation
+PASS visible widget label resolves items.item_appear_animation
+PASS config control fits viewport items.item_disappear_animation
+PASS visible widget label resolves items.item_disappear_animation
+PASS config control fits viewport layout_reflow.animate_layout_reflow
+PASS visible widget label resolves layout_reflow.animate_layout_reflow
+PASS config control fits viewport layout_reflow.layout_reflow_duration_ms
+PASS visible widget label resolves layout_reflow.layout_reflow_duration_ms
+PASS config control fits viewport layout_reflow.layout_reflow_easing
+PASS visible widget label resolves layout_reflow.layout_reflow_easing
+PASS config control fits viewport compatibility.bns_integration
+PASS visible widget label resolves compatibility.bns_integration
+PASS config control fits viewport compatibility.inventory_particles_integration
+PASS visible widget label resolves compatibility.inventory_particles_integration
+PASS config control fits viewport debug.debug_overlay
+PASS visible widget label resolves debug.debug_overlay
+PASS config control fits viewport debug.debug_logging
+PASS visible widget label resolves debug.debug_logging
+PASS all 19 config pages rendered with translated labels, controls and tooltips
+PASS French is available for language-reload coverage
+PASS vanilla controls switch language after resource reload
+PASS runtime localization covers general.animations_enabled
+PASS localized label and tooltip resolve for general.animations_enabled
+PASS runtime localization covers general.animation_speed_multiplier
+PASS localized label and tooltip resolve for general.animation_speed_multiplier
+PASS runtime localization covers general.reduce_motion
+PASS localized label and tooltip resolve for general.reduce_motion
+PASS runtime localization covers general.max_simultaneous_item_animations
+PASS localized label and tooltip resolve for general.max_simultaneous_item_animations
+PASS runtime localization covers general.animation_interruption_mode
+PASS localized label and tooltip resolve for general.animation_interruption_mode
+PASS localized enum RETARGET
+PASS localized enum FINISH_FAST
+PASS localized enum CANCEL
+PASS runtime localization covers movement.item_movement_enabled
+PASS localized label and tooltip resolve for movement.item_movement_enabled
+PASS runtime localization covers movement.movement_duration_ms
+PASS localized label and tooltip resolve for movement.movement_duration_ms
+PASS runtime localization covers movement.movement_style
+PASS localized label and tooltip resolve for movement.movement_style
+PASS localized enum LINEAR
+PASS localized enum SMOOTH
+PASS localized enum ARC
+PASS localized enum SPRING
+PASS localized enum SNAP_SMOOTH
+PASS runtime localization covers movement.movement_easing
+PASS localized label and tooltip resolve for movement.movement_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers movement.movement_arc_height
+PASS localized label and tooltip resolve for movement.movement_arc_height
+PASS runtime localization covers movement.swap_easing
+PASS localized label and tooltip resolve for movement.swap_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers crafting.crafting_ingredient_animation
+PASS localized label and tooltip resolve for crafting.crafting_ingredient_animation
+PASS runtime localization covers crafting.crafting_animation_duration_ms
+PASS localized label and tooltip resolve for crafting.crafting_animation_duration_ms
+PASS runtime localization covers quick_move.quick_move_enabled
+PASS localized label and tooltip resolve for quick_move.quick_move_enabled
+PASS runtime localization covers quick_move.quick_move_duration_ms
+PASS localized label and tooltip resolve for quick_move.quick_move_duration_ms
+PASS runtime localization covers quick_move.transaction_correlation_window_ms
+PASS localized label and tooltip resolve for quick_move.transaction_correlation_window_ms
+PASS runtime localization covers cursor.cursor_pickup_animation
+PASS localized label and tooltip resolve for cursor.cursor_pickup_animation
+PASS runtime localization covers cursor.cursor_pickup_mode
+PASS localized label and tooltip resolve for cursor.cursor_pickup_mode
+PASS localized enum FIXED
+PASS localized enum FOLLOW_CURSOR
+PASS runtime localization covers cursor.cursor_pickup_duration_ms
+PASS localized label and tooltip resolve for cursor.cursor_pickup_duration_ms
+PASS runtime localization covers cursor.cursor_pickup_easing
+PASS localized label and tooltip resolve for cursor.cursor_pickup_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers cursor.cursor_placement_animation
+PASS localized label and tooltip resolve for cursor.cursor_placement_animation
+PASS runtime localization covers cursor.cursor_placement_duration_ms
+PASS localized label and tooltip resolve for cursor.cursor_placement_duration_ms
+PASS runtime localization covers cursor.cursor_placement_easing
+PASS localized label and tooltip resolve for cursor.cursor_placement_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers hover.slot_hover_animation
+PASS localized label and tooltip resolve for hover.slot_hover_animation
+PASS runtime localization covers hover.slot_hover_scale
+PASS localized label and tooltip resolve for hover.slot_hover_scale
+PASS runtime localization covers hover.slot_hover_duration_ms
+PASS localized label and tooltip resolve for hover.slot_hover_duration_ms
+PASS runtime localization covers hover.slot_hover_easing
+PASS localized label and tooltip resolve for hover.slot_hover_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers hover.slot_hover_raise_z
+PASS localized label and tooltip resolve for hover.slot_hover_raise_z
+PASS runtime localization covers click.click_feedback_enabled
+PASS localized label and tooltip resolve for click.click_feedback_enabled
+PASS runtime localization covers click.click_scale
+PASS localized label and tooltip resolve for click.click_scale
+PASS runtime localization covers click.click_duration_ms
+PASS localized label and tooltip resolve for click.click_duration_ms
+PASS runtime localization covers merge.merge_pulse_enabled
+PASS localized label and tooltip resolve for merge.merge_pulse_enabled
+PASS runtime localization covers merge.merge_pulse_scale
+PASS localized label and tooltip resolve for merge.merge_pulse_scale
+PASS runtime localization covers merge.merge_pulse_duration_ms
+PASS localized label and tooltip resolve for merge.merge_pulse_duration_ms
+PASS runtime localization covers hotbar.animate_hotbar_selector
+PASS localized label and tooltip resolve for hotbar.animate_hotbar_selector
+PASS runtime localization covers hotbar.hotbar_animation_duration_ms
+PASS localized label and tooltip resolve for hotbar.hotbar_animation_duration_ms
+PASS runtime localization covers hotbar.hotbar_easing
+PASS localized label and tooltip resolve for hotbar.hotbar_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers hotbar.hotbar_spring_strength
+PASS localized label and tooltip resolve for hotbar.hotbar_spring_strength
+PASS runtime localization covers screens.screen_open_animation
+PASS localized label and tooltip resolve for screens.screen_open_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum SLIDE
+PASS runtime localization covers screens.screen_open_duration_ms
+PASS localized label and tooltip resolve for screens.screen_open_duration_ms
+PASS runtime localization covers screens.screen_open_easing
+PASS localized label and tooltip resolve for screens.screen_open_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers screens.screen_open_scale_start
+PASS localized label and tooltip resolve for screens.screen_open_scale_start
+PASS runtime localization covers screens.screen_open_slide_distance
+PASS localized label and tooltip resolve for screens.screen_open_slide_distance
+PASS runtime localization covers screens.screen_close_animation
+PASS localized label and tooltip resolve for screens.screen_close_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum SLIDE
+PASS runtime localization covers screens.screen_close_duration_ms
+PASS localized label and tooltip resolve for screens.screen_close_duration_ms
+PASS runtime localization covers screens.screen_close_easing
+PASS localized label and tooltip resolve for screens.screen_close_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers screens.screen_close_scale_end
+PASS localized label and tooltip resolve for screens.screen_close_scale_end
+PASS runtime localization covers screens.screen_close_slide_distance
+PASS localized label and tooltip resolve for screens.screen_close_slide_distance
+PASS runtime localization covers items.item_appear_animation
+PASS localized label and tooltip resolve for items.item_appear_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum POP
+PASS runtime localization covers items.item_disappear_animation
+PASS localized label and tooltip resolve for items.item_disappear_animation
+PASS localized enum NONE
+PASS localized enum FADE
+PASS localized enum SCALE
+PASS localized enum FADE_SCALE
+PASS localized enum POP
+PASS runtime localization covers layout_reflow.animate_layout_reflow
+PASS localized label and tooltip resolve for layout_reflow.animate_layout_reflow
+PASS runtime localization covers layout_reflow.layout_reflow_duration_ms
+PASS localized label and tooltip resolve for layout_reflow.layout_reflow_duration_ms
+PASS runtime localization covers layout_reflow.layout_reflow_easing
+PASS localized label and tooltip resolve for layout_reflow.layout_reflow_easing
+PASS localized enum LINEAR
+PASS localized enum EASE_IN_QUAD
+PASS localized enum EASE_OUT_QUAD
+PASS localized enum EASE_IN_OUT_QUAD
+PASS localized enum EASE_OUT_CUBIC
+PASS localized enum EASE_IN_OUT_CUBIC
+PASS localized enum EASE_OUT_QUART
+PASS localized enum EASE_OUT_QUINT
+PASS localized enum BACK_OUT
+PASS localized enum SMOOTHSTEP
+PASS localized enum SMOOTHERSTEP
+PASS runtime localization covers compatibility.bns_integration
+PASS localized label and tooltip resolve for compatibility.bns_integration
+PASS runtime localization covers compatibility.inventory_particles_integration
+PASS localized label and tooltip resolve for compatibility.inventory_particles_integration
+PASS runtime localization covers debug.debug_overlay
+PASS localized label and tooltip resolve for debug.debug_overlay
+PASS runtime localization covers debug.debug_logging
+PASS localized label and tooltip resolve for debug.debug_logging
+PASS config control fits viewport general.animations_enabled
+PASS visible widget label resolves general.animations_enabled
+PASS config control fits viewport general.animation_speed_multiplier
+PASS visible widget label resolves general.animation_speed_multiplier
+PASS config control fits viewport general.reduce_motion
+PASS visible widget label resolves general.reduce_motion
+PASS untranslated mod strings fall back to supplied English catalog
+PASS live language switch retains localized mod fallback and translated native controls
+PASS missing and invalid JSON values reset to defaults on reload
+PASS configuration and localization complete
 PASS complete

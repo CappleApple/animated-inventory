@@ -1,6 +1,8 @@
 # Client configuration
 
-File: `config/animatedinventory-client.json`. Press **F8** to open the configuration editor. The editor validates numeric and enum values before saving and applies accepted changes immediately. Missing or invalid entries retain their defaults; invalid entries produce a log warning. The NeoForge TOML file is not imported.
+File: `config/animatedinventory-client.json`. Press **F8** to open the configuration editor. Toggle boolean buttons, cycle named choices, and type numeric values. Tooltips show descriptions, defaults and numeric ranges. **Previous**, **Next** and **Done** save valid edits; an invalid numeric value keeps the page open. **Reset page** restores the visible settings to their defaults.
+
+Saved changes apply without restarting the game. Missing or invalid JSON entries use their defaults on each load; invalid entries produce a log warning. The NeoForge TOML file is not imported. English labels and tooltips are included and serve as the fallback for other languages.
 
 Durations are in milliseconds. Every duration is divided by `animation_speed_multiplier`: 0.5 is half speed and 2.0 is double speed. Reduced motion removes movement/overshoot and uses short fades (up to 60 ms); hover and emphasis scaling are reduced. The particle-safe inline path uses emphasis instead of additional fades.
 
