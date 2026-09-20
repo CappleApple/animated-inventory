@@ -1,11 +1,13 @@
 {
-  "file": "animatedinventory-neoforge-26.2-1.1.jar",
-  "sha256": "ecd063cefe76705f894c6d228d5a8a26b7ce289d099a0b5998e90fe5be67addd",
+  "date": "2026-09-20",
+  "file": "animatedinventory-neoforge-26.2-1.1.1.jar",
+  "sha256": "704e419c89642bf09a2dc65600c8ca20a0d6d188844e9955448231dd665f5435",
   "tests": {
-    "tests": 100,
+    "tests": 102,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
-  "root_build": "passed"
+  "root_build": "passed",
+  "packaged_jar_client": "passed"
 }

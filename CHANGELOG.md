@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 - 2026-09-20
+
+### Fixed
+
+- Show readable, translatable animation modes and easing names in the configuration screen.
+- Supply descriptions for every setting and configuration section, with English fallback when a language has no mod translation.
 ## 1.1 - 2026-09-19
 
 ### Added

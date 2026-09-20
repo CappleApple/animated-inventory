@@ -5,10 +5,10 @@ import com.cappleapple.animatedinventory.api.inventory.ItemTransition;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public final class ClientConfig {
-    public enum ScreenEffect { NONE, FADE, SCALE, FADE_SCALE, SLIDE }
-    public enum ItemEffect { NONE, FADE, SCALE, FADE_SCALE, POP }
-    public enum CursorMode { FIXED, FOLLOW_CURSOR }
-    public enum Interruption { RETARGET, FINISH_FAST, CANCEL }
+    public enum ScreenEffect implements net.neoforged.neoforge.common.TranslatableEnum { NONE, FADE, SCALE, FADE_SCALE, SLIDE; public net.minecraft.network.chat.Component getTranslatedName() { return translated(this); } }
+    public enum ItemEffect implements net.neoforged.neoforge.common.TranslatableEnum { NONE, FADE, SCALE, FADE_SCALE, POP; public net.minecraft.network.chat.Component getTranslatedName() { return translated(this); } }
+    public enum CursorMode implements net.neoforged.neoforge.common.TranslatableEnum { FIXED, FOLLOW_CURSOR; public net.minecraft.network.chat.Component getTranslatedName() { return translated(this); } }
+    public enum Interruption implements net.neoforged.neoforge.common.TranslatableEnum { RETARGET, FINISH_FAST, CANCEL; public net.minecraft.network.chat.Component getTranslatedName() { return translated(this); } }
     private static final ModConfigSpec.Builder B = new ModConfigSpec.Builder();
     static { B.push("general"); }
     public static final ModConfigSpec.BooleanValue ENABLED = bool("animations_enabled", true);
@@ -111,5 +111,6 @@ public final class ClientConfig {
         return new AnimationOptions(duration, easing, STYLE.get(), ARC.get(), s0, s1, a0, a1, 0, 0,
                 cursor ? 200 : 150, cursor && CURSOR_MODE.get() == CursorMode.FOLLOW_CURSOR);
     }
+    private static net.minecraft.network.chat.Component translated(Enum<?> value) { return net.minecraft.network.chat.Component.translatable("animatedinventory.configuration.value." + value.name().toLowerCase(java.util.Locale.ROOT)); }
     private ClientConfig() { }
 }

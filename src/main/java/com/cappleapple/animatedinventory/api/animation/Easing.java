@@ -1,7 +1,7 @@
 package com.cappleapple.animatedinventory.api.animation;
 
 /** All easing inputs are clamped; only BACK_OUT deliberately overshoots. */
-public enum Easing {
+public enum Easing implements net.neoforged.neoforge.common.TranslatableEnum {
     LINEAR, EASE_IN_QUAD, EASE_OUT_QUAD, EASE_IN_OUT_QUAD, EASE_OUT_CUBIC,
     EASE_IN_OUT_CUBIC, EASE_OUT_QUART, EASE_OUT_QUINT, BACK_OUT, SMOOTHSTEP, SMOOTHERSTEP;
 
@@ -22,4 +22,5 @@ public enum Easing {
             case SMOOTHERSTEP -> t * t * t * (t * (6 * t - 15) + 10);
         };
     }
+    @Override public net.minecraft.network.chat.Component getTranslatedName() { return net.minecraft.network.chat.Component.translatable("animatedinventory.configuration.value." + name().toLowerCase(java.util.Locale.ROOT)); }
 }

@@ -8,4 +8,332 @@ PASS merge animation created
 PASS merge and item-opacity frames rendered without failure
 PASS screen close replay rendered without failure
 PASS screen reopen rendered without failure
+PASS expanded native slot ownership
+PASS right pickup splits odd stack 6/7 immediately
+PASS split pickup creates animation
+PASS right placement moves one item immediately
+PASS single placement creates animation
+PASS cursor swap preserves both identities and counts
+PASS cursor swap creates animation
+PASS quick move transfers inventory stack into hotbar
+PASS quick move creates animation
+PASS hotbar-key swap preserves both stacks
+PASS hotbar swap creates animation
+PASS preview fixture has an active destination ownership claim
+PASS rendered quick-craft previews leave real slots and cursor unchanged
+PASS quick-craft preview rendering preserves existing destination claim
+PASS native quick-craft commit distributes 5/5 and preserves remainder
+PASS quick-craft distribution creates animation
+PASS native crafting consumes four inputs and takes one result
+PASS native result take creates four ingredient-to-product animations
+PASS shift crafting sends product to inventory with immediate counts
+PASS shift crafting animates ingredient consumption
+PASS disabled mode leaves native pickup functional
+PASS disabled mode creates no animation or suppression claims
+PASS reduced-motion pickup creates animation
+PASS reduced motion uses stationary fades at most 60ms
+PASS hover enlarges native item without changing stack state
+PASS elevated hover and behind-item highlight render without runtime failure
+PASS zero hover depth renders without runtime failure
+PASS hotbar selector starts between old and new logical selection
+PASS animated hotbar selection rendered in-world
+PASS reduced motion snaps hotbar selector to logical slot
+PASS resize invalidates presentation ownership and active claims
+PASS inventory rendered after resize
+PASS integrated server inventory seed synchronized before quick move
+PASS real shift-click predicts quick-move counts immediately
+PASS real shift-click creates animation
+PASS integrated server confirmed real shift-click result
+PASS server recipe manager computed crafting-table output
+PASS real crafting output synchronized from server recipe
+PASS real result-slot click immediately consumes ingredients
+PASS real recipe pickup routes four consumed ingredients into animations
+PASS integrated server confirmed real crafting pickup
+PASS second real recipe synchronized for shift crafting
+PASS real shift-click crafting predicts inventory result
+PASS real shift crafting creates ingredient animations
+PASS integrated server confirmed real shift crafting
+PASS expanded gameplay complete
+PASS production mod loaded from built JAR: jar:file:<project>/build/libs/animatedinventory-neoforge-26.2-1.1.1.jar!/com/cappleapple/animatedinventory/AnimatedInventory.class
+PASS native enum implements translation contract: RETARGET
+PASS native enum label resolves: RETARGET
+PASS native enum implements translation contract: FINISH_FAST
+PASS native enum label resolves: FINISH_FAST
+PASS native enum implements translation contract: CANCEL
+PASS native enum label resolves: CANCEL
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: SMOOTH
+PASS native enum label resolves: SMOOTH
+PASS native enum implements translation contract: ARC
+PASS native enum label resolves: ARC
+PASS native enum implements translation contract: SPRING
+PASS native enum label resolves: SPRING
+PASS native enum implements translation contract: SNAP_SMOOTH
+PASS native enum label resolves: SNAP_SMOOTH
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: FIXED
+PASS native enum label resolves: FIXED
+PASS native enum implements translation contract: FOLLOW_CURSOR
+PASS native enum label resolves: FOLLOW_CURSOR
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: NONE
+PASS native enum label resolves: NONE
+PASS native enum implements translation contract: FADE
+PASS native enum label resolves: FADE
+PASS native enum implements translation contract: SCALE
+PASS native enum label resolves: SCALE
+PASS native enum implements translation contract: FADE_SCALE
+PASS native enum label resolves: FADE_SCALE
+PASS native enum implements translation contract: SLIDE
+PASS native enum label resolves: SLIDE
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: NONE
+PASS native enum label resolves: NONE
+PASS native enum implements translation contract: FADE
+PASS native enum label resolves: FADE
+PASS native enum implements translation contract: SCALE
+PASS native enum label resolves: SCALE
+PASS native enum implements translation contract: FADE_SCALE
+PASS native enum label resolves: FADE_SCALE
+PASS native enum implements translation contract: SLIDE
+PASS native enum label resolves: SLIDE
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS native enum implements translation contract: NONE
+PASS native enum label resolves: NONE
+PASS native enum implements translation contract: FADE
+PASS native enum label resolves: FADE
+PASS native enum implements translation contract: SCALE
+PASS native enum label resolves: SCALE
+PASS native enum implements translation contract: FADE_SCALE
+PASS native enum label resolves: FADE_SCALE
+PASS native enum implements translation contract: POP
+PASS native enum label resolves: POP
+PASS native enum implements translation contract: NONE
+PASS native enum label resolves: NONE
+PASS native enum implements translation contract: FADE
+PASS native enum label resolves: FADE
+PASS native enum implements translation contract: SCALE
+PASS native enum label resolves: SCALE
+PASS native enum implements translation contract: FADE_SCALE
+PASS native enum label resolves: FADE_SCALE
+PASS native enum implements translation contract: POP
+PASS native enum label resolves: POP
+PASS native enum implements translation contract: LINEAR
+PASS native enum label resolves: LINEAR
+PASS native enum implements translation contract: EASE_IN_QUAD
+PASS native enum label resolves: EASE_IN_QUAD
+PASS native enum implements translation contract: EASE_OUT_QUAD
+PASS native enum label resolves: EASE_OUT_QUAD
+PASS native enum implements translation contract: EASE_IN_OUT_QUAD
+PASS native enum label resolves: EASE_IN_OUT_QUAD
+PASS native enum implements translation contract: EASE_OUT_CUBIC
+PASS native enum label resolves: EASE_OUT_CUBIC
+PASS native enum implements translation contract: EASE_IN_OUT_CUBIC
+PASS native enum label resolves: EASE_IN_OUT_CUBIC
+PASS native enum implements translation contract: EASE_OUT_QUART
+PASS native enum label resolves: EASE_OUT_QUART
+PASS native enum implements translation contract: EASE_OUT_QUINT
+PASS native enum label resolves: EASE_OUT_QUINT
+PASS native enum implements translation contract: BACK_OUT
+PASS native enum label resolves: BACK_OUT
+PASS native enum implements translation contract: SMOOTHSTEP
+PASS native enum label resolves: SMOOTHSTEP
+PASS native enum implements translation contract: SMOOTHERSTEP
+PASS native enum label resolves: SMOOTHERSTEP
+PASS all 57 setting labels/tooltips and 14 sections resolve in live language resources
+PASS all 129 configured enum choices resolve through native labels
+PASS native config editor changes valid speed immediately
+PASS native config editor rejects out-of-range speed
+PASS closing native editor persists setting to TOML
+PASS NeoForge file watcher reloads edited TOML into active settings
+PASS localized native config section rendered: general
+PASS localized native config section rendered: movement
+PASS localized native config section rendered: crafting
+PASS localized native config section rendered: quick_move
+PASS localized native config section rendered: cursor
+PASS localized native config section rendered: hover
+PASS localized native config section rendered: click
+PASS localized native config section rendered: merge
+PASS localized native config section rendered: hotbar
+PASS localized native config section rendered: screens
+PASS localized native config section rendered: items
+PASS localized native config section rendered: layout_reflow
+PASS localized native config section rendered: compatibility
+PASS localized native config section rendered: debug
+PASS untranslated locale uses bundled English fallback
+PASS native configuration rendered with German UI and English mod fallback
+PASS configuration validation complete
 PASS complete
