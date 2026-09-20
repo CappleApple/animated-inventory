@@ -1,6 +1,6 @@
 # Client configuration
 
-File: `config/animatedinventory-client.json`. Press **F8** to open the configuration editor. The editor validates numeric and enum values before saving and applies accepted changes immediately. Missing or invalid entries retain their defaults; invalid entries produce a log warning. The NeoForge TOML file is not imported.
+File: `config/animatedinventory-client.json`. Press **F8** to open the configuration editor. The editor validates numeric and enum values before saving and applies accepted changes immediately. Reloading resets missing or invalid entries to their defaults; invalid entries produce a log warning. The NeoForge TOML file is not imported. The Bundled Not Siloed control displays **Unavailable** because its NeoForge attachment adapter is not supported on this target. Labels, tooltips, sections and enum choices use language resources; canonical JSON keys and enum values remain unchanged. The editor provides **Reset page** and shows each numeric setting's range and default.
 
 Durations are in milliseconds. Every duration is divided by `animation_speed_multiplier`: 0.5 is half speed and 2.0 is double speed. Reduced motion removes movement/overshoot and uses short fades (up to 60 ms); hover and emphasis scaling are reduced. The particle-safe inline path uses emphasis instead of additional fades.
 

@@ -1,9 +1,9 @@
 {
-  "date": "2026-09-19",
+  "date": "2026-09-20",
   "projects": [
     {
       "target": "fabric-1.21.1",
-      "tests": 92,
+      "tests": 97,
       "failures": 0,
       "errors": 0,
       "skipped": 0,
@@ -23,8 +23,22 @@
           "skipped": 0
         },
         {
+          "name": "com.cappleapple.animatedinventory.client.config.ClientConfigSpecTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
           "name": "com.cappleapple.animatedinventory.CraftingFlowTest",
           "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.cappleapple.animatedinventory.LocalizationTest",
+          "tests": 2,
           "failures": 0,
           "errors": 0,
           "skipped": 0

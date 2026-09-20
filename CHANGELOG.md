@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.1 - 2026-09-20
+
+### Added
+
+- Added translated configuration controls, setting descriptions, defaults, numeric ranges and a reset button for each page.
+
+### Fixed
+
+- Load the mod's language resources on Fabric so configuration labels and errors display readable text.
+- Reset missing or invalid configuration entries to their defaults when reloading the file.
+- Display the unsupported Bundled Not Siloed integration as unavailable in the configuration editor.
+
 ## 1.1 - 2026-09-19
 
 ### Added

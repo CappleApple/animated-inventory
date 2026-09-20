@@ -1,38 +1,51 @@
 # Validation: Minecraft 1.21.1 Fabric
 
-Validated on **September 19, 2026** with **Fabric 0.19.5** and **Java 21**. Loader and build versions are pinned; see the [README](../README.md).
+Validated on **September 20, 2026** with Animated Inventory **1.1.1**, Fabric Loader **0.19.5** and **Java 21**. The loader is the stable version recommended by Fabric's metadata for this Minecraft release. The bundled resource loader is `1.3.1+5b5275af19`, from Fabric API `0.116.17+1.21.1`. See the [build configuration](../build.gradle).
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Unit tests | 92 passed; no failures, errors or skips | [Suite counts](evidence/ports/unit-tests.json) |
-| Client fixture | Passed | [Report](evidence/ports/fabric-1.21.1-client.txt) |
+| Unit tests | 97 passed; no failures, errors or skips | [Suite counts](evidence/ports/unit-tests.json) |
+| Production client | Passed with the built release jar | [Assertions](evidence/ports/fabric-1.21.1-production-client.txt) |
 | Dedicated server | Passed | [Report](evidence/ports/fabric-1.21.1-server.txt) |
-| Release build | Passed | Loader metadata, bytecode target and fixture exclusion checked |
+| Release artifact | Metadata, Java bytecode, nested resource loader and fixture exclusion checked | [SHA-256 and build details](evidence/ports/artifact.json) |
 
-## Runtime coverage
+## In-game coverage
 
-A synthetic chest exercised native slot ownership, inferred movement, detached item opacity, the GPU compositor and the configuration editor. This fixture did not enter a world and does not establish gameplay or network synchronization behavior.
+The production client loads the installable jar through Fabric's normal loader with development mode disabled, using Mojang's official client jar. A separate remapped validation mod creates a disposable integrated world. Animation durations are extended to one second to sample moving frames. Every inventory scenario seeds the server's inventory, waits for synchronization, performs screen input, and checks immediate client counts, synchronized client counts and the authoritative server menu.
 
-Fabric excluded the client-only production mod. A fresh dedicated server reached `Done`, ticked once and shut down cleanly. This checks server loading behavior, not multiplayer gameplay.
+| Behavior | Runtime checks |
+| --- | --- |
+| Pickup and placement | Left-click a stack, place the carried stack, and preserve exact quantities |
+| Splitting and merging | Right-click pickup, single-item placement, partial merge into a nearly full stack, and swap unlike items |
+| Quick move and hotbar swap | Shift-modified screen mouse input and the number-key screen input path |
+| Crafting | Take the actual 2×2 oak-log recipe result; consume the ingredient and create a crafting transition |
+| Drag preview | Render six items in each empty destination before release; commit six items per slot on release |
+| Hover and hotbar | Observe native slot ownership, one hover highlight per frame, hovered-item scaling and the selector sprite's animated transform |
+| Screen transitions | Capture the live inventory, retain its GPU image on close, render the exit image and reopen successfully |
+| Disabled and reduced motion | Preserve normal inventory changes; disable visual copies or use stationary fades capped at 60 ms |
+| Configuration | Open with F8; edit booleans, enums and numeric fields; reject invalid input; save, reload and restore defaults; disable the unsupported BNS control |
+| Localization | Resolve all 57 setting labels, sections, tooltips and enum options; reload a selected language and verify English fallback |
 
-Test clients used hidden native windows, muted master volume and disabled mouse capture.
+The shift-click fixture supplies the shift key's polled state; it does not move or capture the operating-system mouse. The language-reload fixture supplies two German translations in the separate validation mod to prove resource-pack overrides and English fallback. Those test translations are excluded from the release jar; the mod ships English text.
 
-Unit coverage includes transaction inference, animation ownership and crafting flow.
+Captured [inventory and drag-preview frames](evidence/ports/screenshots/12-drag-preview.png), [hover behavior](evidence/ports/screenshots/13-hover-highlight.png), [configuration controls](evidence/ports/screenshots/14-translated-config.png), [enum controls](evidence/ports/screenshots/18-translated-enum-controls.png), [language fallback](evidence/ports/screenshots/15-language-reload-fallback.png) and [unavailable integration](evidence/ports/screenshots/19-unavailable-integration.png) were inspected. Test clients ran hidden, with master volume muted and mouse capture disabled.
 
-Manual gameplay, a full modpack and all optional integrations remain untested. Automated optional class loading and packet tests do not establish complete third-party crafting or storage-menu behavior. See [integration limits](../README.md#optional-integrations).
+Fabric excluded the client-only production mod from the dedicated server. A fresh world reached `Done`, ticked and shut down cleanly. This checks server loading behavior, not remote multiplayer gameplay.
+
+## Limits
+
+These are automated game clients and inspected sample frames, not exhaustive manual gameplay. Third-party recipe viewers, Inventory Particles, custom renderers, full modpacks, alternate resource packs and other GPUs remain untested. The original NeoForge adapters do not establish compatibility here; see [integration limits](../README.md#optional-integrations). Only the real 2×2 crafting recipe path is exercised by this client fixture; unit tests also cover inferred crafting flows.
 
 ## Reproducing the checks
 
-Run from the repository root:
+From this branch's repository root:
 
 ```powershell
 .\gradlew.bat test build
-.\gradlew.bat -PclientValidation runClient
+.\gradlew.bat -PclientValidation -PproductionValidation runProductionClient
 .\gradlew.bat -PserverValidation runServer
 ```
 
-Client reports are written to `run-validation/validation.txt`; dedicated-server reports are written to `run-validation-server/validation.txt`.
+The production client writes assertions to `run-production-validation/validation.txt` and frames to `run-production-validation/screenshots/`. Its fixture jars are under `build/validation/`. `-PclientValidation runClient` runs the same fixture in Loom's development environment. The dedicated-server report is `run-validation-server/validation.txt`.
 
-The runtime fixtures create disposable worlds in ignored run directories and exit automatically. Validation source sets are excluded from binary and source jars. The evidence above records the completed port validation before the project was placed at this branch's root.
-
-The standalone branch-root layout was then rebuilt with `test build`: 92 tests passed, with no failures, errors or skips. Production and validation sources match the corresponding port sources apart from trailing blank-line cleanup; modern shared sources are included locally. The rebuilt jar was checked for bytecode level and fixture exclusion.
+Validation source sets and the test language resource are excluded from release and source jars. Disposable worlds and temporary launch files stay in ignored build/run directories. The preserved original NeoForge 1.21.1 branch is unchanged.

@@ -5,9 +5,16 @@
   "client": [
     "ValidationMixin",
     "HiddenWindowMixin",
-    "SyntheticMenuMixin",
     "NoMouseCaptureMixin",
-    "ValidationRenderMixin"
+    "ValidationRenderMixin",
+    "SlotClickAccess",
+    "InputAccess",
+    "MousePositionAccess",
+    "RenderingProbe",
+    "HighlightProbe",
+    "ShiftInputMixin",
+    "HudRenderProbe",
+    "HotbarRenderProbe"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -8,6 +8,7 @@ dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+    modImplementation include('net.fabricmc.fabric-api:fabric-resource-loader-v0:1.3.1+5b5275af19')
     implementation include('io.github.llamalad7:mixinextras-fabric:0.5.0')
     annotationProcessor 'io.github.llamalad7:mixinextras-fabric:0.5.0'
     testImplementation platform('org.junit:junit-bom:5.11.4')
@@ -70,3 +71,68 @@ if (project.hasProperty('serverValidation')) {
 
 // Loom shares downloaded assets across projects; transient lock files are not task outputs.
 tasks.configureEach { if (name == 'downloadAssets') doNotTrackState('The shared asset cache contains transient locks from concurrent Minecraft builds.') }
+
+tasks.withType(JavaExec).configureEach { maxHeapSize = "2G"; jvmArgs "-XX:ActiveProcessorCount=2" }
+
+// Opt-in fixture jars exercise the remapped release artifact with Fabric's production loader.
+if (project.hasProperty('productionValidation')) {
+    def fixture = tasks.register('validationJar', Jar) {
+        dependsOn tasks.named('validationClasses')
+        from sourceSets.validation.output
+        archiveClassifier = 'validation-dev'
+        destinationDirectory = layout.buildDirectory.dir('validation')
+    }
+    def remappedFixture = tasks.register('remapValidationJar', net.fabricmc.loom.task.RemapJarTask) {
+        dependsOn fixture
+        inputFile = fixture.flatMap { it.archiveFile }
+        archiveClassifier = 'validation'
+        destinationDirectory = layout.buildDirectory.dir('validation')
+        addNestedDependencies = false
+    }
+    tasks.register('prepareProductionValidation') {
+        dependsOn remappedFixture, tasks.named('remapJar'), tasks.named('downloadAssets')
+        doLast {
+            def libraries = tasks.named('runClient').get().classpath.files.findAll {
+                it.isFile() && it.name.endsWith('.jar') && !it.name.startsWith('minecraft-') && !it.path.contains('remapped_mods')
+            }
+            def metadata = [minecraft: minecraft_version, java: java.toolchain.languageVersion.get().asInt(),
+                classpath: libraries.collect { it.absolutePath },
+                fixture: remappedFixture.get().archiveFile.get().asFile.absolutePath,
+                production: tasks.named('remapJar').get().archiveFile.get().asFile.absolutePath,
+                cache: new File(gradle.gradleUserHomeDir, 'caches/fabric-loom').absolutePath]
+            file('build/validation/launch.json').text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(metadata))
+        }
+    }
+}
+
+
+if (project.hasProperty('productionValidation')) {
+    tasks.register('runProductionClient', JavaExec) {
+        dependsOn tasks.named('prepareProductionValidation')
+        mainClass = 'net.fabricmc.loader.impl.launch.knot.KnotClient'
+        javaLauncher = javaToolchains.launcherFor { languageVersion = java.toolchain.languageVersion.get() }
+        workingDir = file('run-production-validation')
+        doFirst {
+            def metadata = new groovy.json.JsonSlurper().parse(file('build/validation/launch.json'))
+            def cache = new File(metadata.cache)
+            def mappingJar = file('build/validation/intermediary-mappings.jar')
+            ant.zip(destfile: mappingJar) {
+                zipfileset(file: new File(cache, "${minecraft_version}/intermediary-v2.tiny"), fullpath: 'mappings/mappings.tiny')
+            }
+            classpath = files(metadata.classpath + [new File(cache, "${minecraft_version}/minecraft-client.jar"), mappingJar])
+            def directory = file('run-production-validation'); directory.mkdirs()
+            copy { from metadata.production, metadata.fixture; into new File(directory, 'mods') }
+            new File(directory, 'validation.txt').delete()
+            new File(directory, 'options.txt').text = 'onboardAccessibility:false\ntutorialStep:none\nsoundCategory_master:0.0\npauseOnLostFocus:false\nfullscreen:false\nmaxFps:30\n'
+            def info = new groovy.json.JsonSlurper().parse(new File(cache, "${minecraft_version}/mojang_minecraft_info.json"))
+            jvmArgs '-Dfabric.development=false', "-Dfabric.gameVersion=${minecraft_version}"
+            args '--username', 'PortValidation', '--version', minecraft_version, '--accessToken', '0',
+                '--gameDir', directory.absolutePath, '--assetsDir', new File(cache, 'assets').absolutePath,
+                '--assetIndex', "${minecraft_version}-${info.assetIndex.id}", '--width', '854', '--height', '480'
+        }
+        doLast {
+            def report = file('run-production-validation/validation.txt')
+            if (!report.exists() || !report.text.contains('PASS complete')) throw new GradleException('Production client validation failed; inspect run-production-validation logs.')
+        }
+    }
+}

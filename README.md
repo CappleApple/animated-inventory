@@ -2,15 +2,15 @@
 
 Animated Inventory animates item pickup, placement, quick move, merging, splitting and crafting while Minecraft's real menu state updates normally. It also animates hotbar selection, item emphasis and container screen transitions, with adjustable timing and reduced motion.
 
-This branch builds **version 1.1 for Minecraft 1.21.1 Fabric**. The original NeoForge 1.21.1 version remains on `main`.
+This branch builds **version 1.1.1 for Minecraft 1.21.1 Fabric**. The original NeoForge 1.21.1 version remains on `main`.
 
 ## Installation
 
-Minecraft **1.21.1**, **Fabric 0.19.5**, and **Java 21**. Fabric API is not required. Install `animatedinventory-fabric-1.21.1-1.1.jar` in the client's `mods` directory. A server installation is not required.
+Minecraft **1.21.1**, **Fabric 0.19.5**, and **Java 21**. The required Fabric resource loader module (`1.3.1+5b5275af19`) is bundled. A separate Fabric API installation is optional. Install `animatedinventory-fabric-1.21.1-1.1.1.jar` in the client's `mods` directory. A server installation is not required.
 
 ## Configuration
 
-Press **F8** to open the configuration editor, or edit `config/animatedinventory-client.json`. The JSON file uses nested objects for the same sections and keys as the original configuration. The NeoForge TOML file is not imported.
+Press **F8** to open the translated configuration editor. Boolean and enum settings use buttons; numeric fields show their accepted ranges and defaults in tooltips. **Reset page** restores the visible settings. You can also edit `config/animatedinventory-client.json`. The JSON file uses nested objects for the same sections and keys as the original configuration. The NeoForge TOML file is not imported.
 
 See the [configuration reference](docs/CONFIG.md) for setting names, defaults and ranges. Animations change presentation; click targets and inventory logic retain their normal positions.
 
@@ -18,7 +18,7 @@ Native rendering preserves item decorations and vanilla drag-preview quantities.
 
 ## Optional integrations
 
-The original Bundled Not Siloed adapter requires NeoForge player attachments and is disabled on Fabric. Its configuration switch is retained but cannot enable that adapter. The Sophisticated NeoForge renderer mixins are excluded; no Fabric-specific adapter has been validated. Generic native slots remain eligible for animation.
+The original Bundled Not Siloed adapter requires NeoForge player attachments and is disabled on Fabric. Its configuration key is retained, while the editor shows a disabled **Unavailable** control. The Sophisticated NeoForge renderer mixins are excluded; no Fabric-specific adapter has been validated. Generic native slots remain eligible for animation.
 
 Recipe-viewer request observation and Inventory Particles detection are retained as guarded optional code. Third-party viewer and storage gameplay has not been validated on this target.
 
@@ -30,13 +30,14 @@ Use **JDK 21** to run the build. The wrapper pins **Gradle 8.14.3** and the buil
 .\gradlew.bat test build
 ```
 
-The installable jar is `build/libs/animatedinventory-fabric-1.21.1-1.1.jar`. Source jars are for development.
+The installable jar is `build/libs/animatedinventory-fabric-1.21.1-1.1.1.jar`. Source jars are for development.
 
 ## Validation
 
 ```powershell
 .\gradlew.bat -PclientValidation runClient
 .\gradlew.bat -PserverValidation runServer
+.\gradlew.bat -PclientValidation -PproductionValidation runProductionClient
 ```
 
 The opt-in runtime fixtures run hidden, mute master volume, disable mouse capture and exit automatically. They are excluded from release and source jars. See [completed validation and limits](docs/PORT_VALIDATION.md).
